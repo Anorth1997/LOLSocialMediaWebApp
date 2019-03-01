@@ -18,4 +18,7 @@
     border-color: $signin-button-border-color;
     // background-color: $dark-input-field-bg-color-active;
   }
+
+  @include transition(border-color 0.2s ease-in); 
+  
 }
