@@ -1,0 +1,21 @@
+.dark-input-field {
+  @include border-radius(0);
+
+  color: white;
+  background-color: $dark-input-field-bg-color;
+
+  padding: 7px;
+  width: 100%;
+
+  border: 2px solid $login-input-border-inactive;
+
+  &:hover {
+    border-color: $login-input-border-active;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $signin-button-border-color;
+    // background-color: $dark-input-field-bg-color-active;
+  }
+}

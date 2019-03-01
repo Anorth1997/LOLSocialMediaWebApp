@@ -1,0 +1,12 @@
+@import '../scss-general-modules/whole-dir_scss.module';
+
+.errorMessage {
+    // @extend .sanson-font-style;
+
+    display: block;
+    text-align: center;
+    background: red;
+    color: white;
+    border-radius: 7px;
+    font-size: 12px;
+}

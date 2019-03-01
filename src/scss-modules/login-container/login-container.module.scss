@@ -1,0 +1,97 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.loginPage {
+    // background-image: url('/src/assets/images/login-bg-blended.png');
+    // background: red;
+}
+
+.bg {
+    background: $dark-bg-login url('../../assets/images/login-bg-blended.png') no-repeat center top;
+    min-height: 720px;
+}
+
+
+.formArea {
+    text-align: center;
+
+    .brandImage {
+        margin-top: 50px;
+        width: 240px;
+        height: 100px;
+        overflow: auto;
+    }
+
+    .boxWrapper {
+
+        margin-top: 100px;
+        width: 100%;
+        text-align: left;
+        border: 2px solid $golden-login-border-color;
+        background-color: $dark-bg-login;
+        padding: 25px 20px;
+
+
+        .signInLabel {
+            @extend .sanson-font-style;
+            // font-family: 'Sanson', 'Bebas', sans-serif;
+            letter-spacing: 0.05rem;
+            word-spacing: -0.1rem;
+            margin-bottom: 30px;
+            // padding-bottom: 20px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .formStyle {
+            
+        
+            .inputField {
+                @extend .dark-input-field;
+            }
+
+            .formLabel {
+                margin-top: 30px;
+                display: block;
+                color: $golden-login-border-color;
+                font-size: 12px;
+            }
+
+            .errorLabel {
+                color: red;
+                margin-bottom: 30px;
+            }
+    
+            .buttonWrapper {
+                display: block;
+                text-align: center;
+
+                .btnSignIn {
+                    @extend .general-submit-button;
+                    width: 50%;
+                }
+            }
+            
+        
+        }
+
+    }
+}
+
+
+// bootstrap breakpoints
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+
+    .formArea {
+        max-width: 500px;
+    }
+}

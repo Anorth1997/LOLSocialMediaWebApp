@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Sanson';
+  src: url(../../assets/fonts/sanson/sansony.otf);
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: local('Bebas') url(../../assets/fonts/BebasNeue-Regular.eot); /* IE9 Compat Modes */
+  src: local('Bebas') url(../../assets/fonts/BebasNeue-Regular.otf) format('embedded-opentype'), /* IE6-IE8 */
+       local('Bebas') url(../../assets/fonts/BebasNeue-Regular.woff) format('woff'), /* Modern Browsers */
+       local('Bebas') url(../../assets/fonts/BebasNeue-Regular.ttf)  format('truetype'), /* Safari, Android, iOS */
+        /* Legacy iOS */
+}
+
+
+
+@import "./variables.module.scss";
+@import "./mixins.module.scss";
+@import "./extends/extends-dir.module.scss";

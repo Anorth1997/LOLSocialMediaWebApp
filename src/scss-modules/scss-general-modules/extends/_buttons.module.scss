@@ -1,0 +1,23 @@
+.general-submit-button {
+  @extend .sanson-font-style;
+  @include border-radius(0);
+
+  color: white;
+  background-color: $dark-bg-login;
+
+  border: 1.5px solid $signin-button-border-color;
+
+  line-height: 1.2rem;
+  letter-spacing: 0.05rem;
+  word-spacing: -0.1rem;
+
+  &:hover {
+    border-color: $golden-login-border-color;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $golden-login-border-color;
+  }
+}
