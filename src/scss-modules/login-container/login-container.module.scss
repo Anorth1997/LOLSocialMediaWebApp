@@ -19,11 +19,26 @@
     .boxWrapper {
 
         margin-top: 100px;
+        margin-bottom: 100px;
         width: 100%;
         text-align: left;
         border: 2px solid $golden-login-border-color;
         background-color: $dark-bg-login;
         padding: 25px 20px;
+
+
+        .backButtonIcon {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+
+            @include transition(color 0.2s ease-in);
+
+            &:hover {
+                cursor: pointer;
+                color: $golden-login-border-color;
+            }
+        }   
 
 
         .signInLabel {
@@ -35,6 +50,11 @@
             // padding-bottom: 20px;
             font-size: 2rem;
             color: white;
+        }
+
+        .forgotInfo {
+            font-size: 12px;
+            color: $less-golden-login-border-color;
         }
 
         .formStyle {
@@ -53,16 +73,21 @@
 
             .errorLabel {
                 color: red;
-                margin-bottom: 30px;
+                // margin-bottom: 30px;
             }
     
             .buttonWrapper {
                 display: block;
                 text-align: center;
+                margin-top: 40px;
+                margin-bottom: 20px;
+
+                // outline: none;
 
                 .btnSignIn {
                     @extend .general-submit-button;
                     width: 50%;
+                    // outline: none;
                 }
             }
             
@@ -72,10 +97,70 @@
     }
 }
 
+.checkBox {
+
+    span label {
+        font-size: 12px;
+        color: $less-golden-login-border-color;
+        @include transition(color 0.2s ease-in);
+
+        input {
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        &:hover {
+            cursor:pointer;
+            color: $golden-login-border-color;
+        }
+
+    }
+
+}
+
+.helpSection {
+
+    padding: 0;
+
+    .right {
+        // background: red;
+        text-align: right;
+    }
+
+    p {
+        // padding: 0;
+        display: block;
+        font-size:12px;
+        margin: 0;
+        color: $less-golden-login-border-color;
+        @include transition(color 0.2s ease-in);
+
+        &:hover {
+            cursor:pointer;
+            color: $golden-login-border-color;
+        }
+    }
+}
+
 
 // bootstrap breakpoints
+
+@media (min-width: 0px) {
+
+    .helpSection div div.right {
+        // background: red;
+        text-align: left;
+    }
+}
+
 // Small devices (landscape phones, 576px and up)
-// @media (min-width: 576px) { ... }
+@media (min-width: 576px) { 
+    .helpSection div div.right {
+        // background: red;
+        text-align: right;
+    }
+}
+
 
 // Medium devices (tablets, 768px and up)
 // @media (min-width: 768px) { ... }

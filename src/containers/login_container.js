@@ -4,13 +4,26 @@ import styles from '../scss-modules/login-container/login-container.module.scss'
 import brandImage from '../assets/images/lol-brand-img.png';
 
 import cx from 'classnames';
+import FontAwesome from 'react-fontawesome';
+// import 'font-awesome/css/font-awesome.min.css';
+
 import FormFields from '../widgets/Forms/formfields';
 import ErrorMessage from '../widgets/Errors/ErrorMessage';
+import CheckBox from '../widgets/Checkbox/checkbox';
+import HelpSection from '../Components/LoginPortal/helpSection';
+
 
 class LoginContainer extends Component {
 
     state = {
         showWarning: false,
+        rememberMe: false,
+        mainLoginForm: true,
+        forgotPage: {
+            type: '',
+            message: '',
+            show: false
+        },
         formData: {
             username: {
                 element: 'input',
@@ -21,7 +34,8 @@ class LoginContainer extends Component {
                     name: 'username_input',
                     type: 'text',
                     placeholder: '',
-                    autoComplete: 'off'
+                    autoComplete: 'off',
+                    autoFocus: true
                 },
                 validation: {
                     required: true,
@@ -50,15 +64,156 @@ class LoginContainer extends Component {
                 touched: false,
                 validationMessage: ''
             }
+        },
+        forgotFormData: {
+            forgottenInput: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: '',
+                config: {
+                    name: 'username_forgot_input',
+                    type: 'text',
+                    placeholder: '',
+                    autoComplete: 'off',
+                    autoFocus: true
+                },
+                validation: {
+                    required: true,
+                    minLength: 0
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            }
         }
     }
 
+    renderTemplate = (render) => {
+
+        return render ? 
+            <div>
+                <h1 className={styles.signInLabel}>Sign in</h1>
+
+                <form onSubmit={this.submitLoginForm}
+                    className={styles.formStyle}>
+
+                    <ErrorMessage
+                        show={this.state.showWarning}
+                        message='You must fill in the required boxes with information'
+                    />
+
+                    <FormFields
+                        formData={this.state.formData}
+                        onblur={(newState) => {
+                            this.updateForm(newState);
+                        }}
+                        change={(newState) => {
+                            this.updateForm(newState);
+                        }}
+                        styles={styles}
+                    />
+
+                    <CheckBox
+                        checkBoxStyling={styles}
+                        text='Remember me'
+                        checked={this.state.rememberMe}
+                    />
+
+                    <div className={styles.buttonWrapper}>
+                        <button className={cx('btn', styles.btnSignIn)} action="submit">SIGN IN</button>
+                    </div>
+
+                    <HelpSection
+                        helpSectionStyle={styles}
+                        forgotUsername={this.renderForgotUsername}
+                        forgotPassword={this.renderForgotPassword}
+                        forgotEmail={this.renderForgotEmail}
+                    />
+
+                </form>
+            </div>
+        : 
+            <div>
+
+                <FontAwesome 
+                    className={styles.backButtonIcon}
+                    name='arrow-left'
+                    onClick={() => {
+                        this.setState({
+                            forgotPage: {
+                                type: '',
+                                message: '',
+                                show: false
+                            },
+                            mainLoginForm: true,
+                        });
+                    }}
+                />
+
+                <h1 className={styles.signInLabel}>{this.state.forgotPage.type}</h1>
+
+                <ErrorMessage
+                        show={this.state.showWarning}
+                        message='You must fill in the required boxes with information'
+                    />
+            
+                <p className={styles.forgotInfo}>{this.state.forgotPage.message}</p>
+
+                <form onSubmit={this.submitForgotForm}
+                    className={styles.formStyle}>
+
+                    <FormFields
+                        formData={this.state.forgotFormData}
+                        onblur={(newState) => {
+                            this.updateForgottenForm(newState);
+                        }}
+                        change={(newState) => {
+                            this.updateForgottenForm(newState);
+                        }}
+                        styles={styles}
+                    />
+
+                    <div className={styles.buttonWrapper}>
+                        <button className={cx('btn', styles.btnSignIn)} action="submit">SUBMIT</button>
+                    </div>
+
+                </form>
+            
+            </div>
+        ;
+    }
+
+    updateForgottenForm = (newState) => {
+        this.setState({
+            forgotFormData: newState,
+            showWarning: false
+        })
+    }
+
     updateForm = (newState) => {
-        // console.log(newState);
         this.setState({
             formData: newState,
             showWarning: false
         });
+    }
+
+    submitForgotForm = (event) => {
+        event.preventDefault();
+
+        let dataToSubmit = {};
+
+        for (let key in this.state.forgotFormData) {
+            dataToSubmit[key] = this.state.forgotFormData[key].value;
+        }
+
+        // do error checking first
+        // if there is an error
+        this.setState({
+            showWarning: true
+        })
+
+        // console.log(dataToSubmit);
     }
 
     submitLoginForm = (event) => {
@@ -78,12 +233,10 @@ class LoginContainer extends Component {
         })
 
 
-        console.log(dataToSubmit);
-    }
-
+        // console.log(dataToSubmit);
+    }    
 
     render() {
-
 
         return (
             <div className={styles.bg}>
@@ -96,39 +249,9 @@ class LoginContainer extends Component {
                             <img src={brandImage} alt="Brand" className={styles.brandImage}/>
 
                             <div className={styles.boxWrapper}>
-                            
-                                <h1 className={styles.signInLabel}>Sign in</h1>
-
-                                <form onSubmit={this.submitLoginForm}
-                                    className={styles.formStyle}>
-
-                                    <ErrorMessage
-                                        show={this.state.showWarning}
-                                        message='You must fill in the required boxes with information'
-                                    />
-
-                                    <FormFields 
-                                        formData={this.state.formData}
-                                        onblur={(newState) => {
-                                            this.updateForm(newState);
-                                        }}
-                                        change={(newState) => {
-                                            this.updateForm(newState);
-                                        }}
-                                        styles={styles}
-                                    />
-                                
-                                    <div className={styles.buttonWrapper}>
-                                        <button className={cx('btn', styles.btnSignIn)} action="submit">SIGN IN</button>
-                                    </div>
-                                
-                                </form>
-
-
+                                {this.renderTemplate(this.state.mainLoginForm)}
+                                {/* {this.state.mainLoginForm ? this.template : null} */}
                             </div>
-
-                            
-
                         </div>
                         <div className="col"></div>
                     
@@ -139,6 +262,41 @@ class LoginContainer extends Component {
             </div>
         );
     }
+
+    renderForgotUsername = () => {
+        // console.log('forgot username clicked');
+        this.setState({
+            mainLoginForm: false,
+            forgotPage: {
+                type: 'Forgot Username',
+                message: 'Please enter the email of the account that you forgot the username of',
+                show: true
+            }
+        });
+    }
+
+    renderForgotPassword = () => {
+        this.setState({
+            mainLoginForm: false,
+            forgotPage: {
+                type: 'Forgot Password',
+                message: 'Please enter the email or username of the account that you forgot the password of',
+                show: true
+            }
+        });
+    }
+
+    renderForgotEmail = () => {
+        this.setState({
+            mainLoginForm: false,
+            forgotPage: {
+                type: 'Forgot Email',
+                message: 'Please enter the username of the account that you forgot the email of',
+                show: true
+            }
+        });
+    }
+
 }
 
 export default LoginContainer;

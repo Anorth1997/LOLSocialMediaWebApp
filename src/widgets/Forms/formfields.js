@@ -18,10 +18,7 @@ const FormFields = (props) => {
 
         return formArray.map( (item, i) => {
             return (
-                <div key={i}
-                     style={{
-                         marginBottom: '40px'
-                     }}>
+                <div key={i}>
                     {props.submitted ? '' : ''}
                     {renderTemplates(item)}
                 </div>
@@ -97,7 +94,9 @@ const FormFields = (props) => {
         switch(values.element) {
             case "input":
                 formTemplate = (
-                    <div>
+                    <div style={{
+                        marginTop: '30px'
+                    }}>
                         { showLabel(values.label, values.labelText) }
                         <input 
                             // This will take all of the values in the config object and automatically use them
