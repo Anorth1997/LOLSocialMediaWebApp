@@ -8,15 +8,18 @@ import LoginPage from './Components/LoginPortal/login';
 // import Login from './Components/LoginPage/login';
 
 import './scss-modules/base/base.module.scss';
+import Layout from './hoc/Layout/layout';
 
 class Routes extends Component {
     render() {
         return (
             <div>
-                <Switch>
-                    <Route path="/login" exact component={LoginPage}/>
-                    <Route path="/" exact component={MainLandingPage}/>
-                </Switch>
+                <Layout>
+                    <Switch>
+                        <Route path="/login" exact component={LoginPage}/>
+                        <Route path="/" exact component={MainLandingPage}/>
+                    </Switch>
+                </Layout>
             </div>
         );
     }
