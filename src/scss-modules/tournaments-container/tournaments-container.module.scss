@@ -1,0 +1,66 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.bg {
+    background: $dark-bg-login url('../../assets/images/login-bg-blended.png') no-repeat center top;
+    min-height: 720px;
+}
+
+.container_frame {
+    margin-left: 70px;
+    margin-right: 70px;
+    height: 700px;
+}
+
+.OptionPanel {
+    font-family: 'Sanson', 'Bebas', sans-serif;
+    margin-top: 20px;
+    border: 2px solid #ffc107;
+
+    h3 {
+        color: red;
+        margin: 0 auto;
+        text-align: center
+    }
+
+    button {
+        display: block; 
+        margin: auto;
+    }
+
+    h4 {
+        color: white;
+        margin: auto;
+        text-align: center;
+    }
+}
+
+.tournamentDisplayPannel {
+    margin-top: 20px;
+    font-family: 'Sanson', 'Bebas', sans-serif;
+    border: 2px solid #ffc107;
+    color: white;
+    float: left;
+    width: 630px;
+    margin-left: -2px;
+    min-height: 402px;
+    margin-bottom: 200px;
+
+}
+
+.tournamentBox {
+    border-bottom: 2px solid #ffc107;
+    min-height: 130px;
+    position: relative;
+    list-style-type: none;
+}
+
+.tournamentInfoSection {
+    font-family: fantasy;
+    margin-left: 100px;
+    font-size: 20px;
+
+    p {
+        margin: 0px;
+    }
+}
+
