@@ -1,34 +1,56 @@
 import React, { Component } from 'react';
 
-import styles from '../scss-modules/login-container/login-container.module.scss';
-import brandImage from '../assets/images/lol-brand-img.png';
-import profilePicTest from '../assets/images/profile-pic-1.png'
+import styles from '../scss-modules/profile-page-container/profile-page-container.module.scss';
 
 import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 // import 'font-awesome/css/font-awesome.min.css';
 
-import FormFields from '../widgets/Forms/formfields';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
-import CheckBox from '../widgets/Checkbox/checkbox';
-import HelpSection from '../Components/LoginPortal/helpSection';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
+
 
 
 class ProfilePageContainer extends Component {
 
- 
+    componentWillMount() {
+            
+    }
 
     render() {
-
+    
         return (
-            <div style={{
-                color: 'white'
-            }}> 
-                This is the profile container
+            <div className={styles.profilePageContainer}>
+                
+                {this.props.currUser ? (<div>
+                    <div className={styles.iconAndId}>
+                        <img className={styles.profileIcon} src={require(`../assets/images/${this.props.currUser.profile_pic}`)} />
+                        <p className={styles.userId}>{this.props.currUser.username}</p>
+                    </div>    
+                    <p>Email: {this.props.currUser.email}</p>
+                    <p>League ID: {this.props.currUser.league_name}</p>
+                    <p>Server: {this.props.currUser.server}</p>
+                </div>)
+                : <Redirect to="/login" />}
+                
             </div>
+            
+            
         );
     }
 
 }
 
-export default ProfilePageContainer;
+const mapStateToProps = (state) => {
+    return {
+        currUser: state.currUser.info
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({}, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePageContainer);
