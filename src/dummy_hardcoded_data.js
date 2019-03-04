@@ -7,6 +7,7 @@ const users = [
         date_created: '02/24/19 12:43:38 EST', //date account was created on platform
         league_name: 'Elo over friends', //league of legends display name
         server: 'NA',
+        profile_pic: 'profile-pic-1.png',
         friends: [ //friends
             'fncneknwkjrhwekjhe', //second user after this current user (look at the id of second user)
             '',
@@ -45,6 +46,7 @@ const users = [
         date_created: '02/24/19 12:43:38 EST',
         league_name: 'Rush dog',
         server: 'NA',
+        profile_pic: 'profile-pic-2.png',
         friends: ['jfdsflskgdjlvjlk','',''],
         tournaments_participating: [
             {

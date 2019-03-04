@@ -51,6 +51,20 @@ export function getUserById(id) {
     }
 }
 
+export function tryLoggingIn(username, password) {
+    const user = users.find( (item) => {
+        console.log('in actions');
+        return (item.username === username || item.email === username) && item.password === password;
+    })
+
+    console.log(user);
+
+    return {
+        type: 'GET_USER_BY_USERNAME_AND_PASSWORD',
+        payload: user
+    }
+}
+
 
 
 // ####################### tournament methods #######################

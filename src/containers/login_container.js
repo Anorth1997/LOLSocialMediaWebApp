@@ -12,6 +12,10 @@ import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import CheckBox from '../widgets/Checkbox/checkbox';
 import HelpSection from '../Components/LoginPortal/helpSection';
 
+import { connect } from 'react-redux';
+import { tryLoggingIn } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
 
 class LoginContainer extends Component {
 
@@ -233,10 +237,19 @@ class LoginContainer extends Component {
         })
 
 
-        // console.log(dataToSubmit);
+
+
+        console.log(dataToSubmit);
+
+        this.props.tryLoggingIn(dataToSubmit.username, dataToSubmit.password);
+        
+
     }    
 
+
     render() {
+
+        //console.log(this.props);
 
         return (
             <div className={styles.bg}>
@@ -299,4 +312,17 @@ class LoginContainer extends Component {
 
 }
 
-export default LoginContainer;
+const mapStateToProps = (state) => {
+   // console.log(state.currUser.info)
+    return {
+        currUser: state.currUser.info
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({tryLoggingIn}, dispatch);
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
