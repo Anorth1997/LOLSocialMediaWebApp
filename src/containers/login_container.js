@@ -7,6 +7,9 @@ import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 // import 'font-awesome/css/font-awesome.min.css';
 
+import { Redirect } from 'react-router-dom';
+
+
 import FormFields from '../widgets/Forms/formfields';
 import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import CheckBox from '../widgets/Checkbox/checkbox';
@@ -23,6 +26,7 @@ class LoginContainer extends Component {
         showWarning: false,
         rememberMe: false,
         mainLoginForm: true,
+        loginStatus: false,
         forgotPage: {
             type: '',
             message: '',
@@ -246,10 +250,25 @@ class LoginContainer extends Component {
 
     }    
 
+    componentDidUpdate() {
+        // console.log('updated component');
+        if (this.props.currUser) { 
+            this.setState({
+                loginStatus: true
+            })
+        }
+    }
+    
 
     render() {
 
         //console.log(this.props);
+
+        if (this.state.loginStatus) {
+            return (
+                <Redirect to="/" />
+            );
+        }
 
         return (
             <div className={styles.bg}>
