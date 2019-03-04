@@ -14,11 +14,6 @@ class UserHomePageContainer extends Component {
     renderTemplate = (state) => {
         return (
             <div>
-                <div className = {cx("row", styles.top_row)}>
-                    <div className = {cx("col-2", "border", "border-dark")}>Explore</div>
-                    <div className = {cx("col-8", "border", "border-dark")}>find other tournament</div>
-                    <div className = {cx("col-2", "border", "border-dark")}>profile</div>
-                </div>
                 <div className = {cx("row", styles.middle_chunk)}>
                     <div className = {cx("col-2", "border", "border-dark")}>patch notes</div>
                     <div className = {cx("col-10", "border", "border-dark")}>patch notes details</div>
