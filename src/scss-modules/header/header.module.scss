@@ -1,6 +1,7 @@
+@import "../scss-general-modules/whole-dir_scss.module";
 
 .headerContainer {
-    background: white;
+    background: $header-footer-background-color;
     height: 60px;
     position: fixed;
     top: 0;
@@ -13,9 +14,18 @@
         align-items: center;
 
         .middleNav {
+
+            li {
+                padding: 0 5px;
+            }
             // display: none;
 
             
+        }
+
+        .rightNav {
+            padding: 0;
+            margin: 0;
         }
     }
 }

@@ -1,0 +1,12 @@
+.profileIconContainer {
+//    background: red;
+    display: block;
+    text-align: center;
+
+    .profileIcon {
+        border-radius: 50%;
+        height: 50px; 
+        width: 50px;
+        margin-top: 5px;
+    }
+}
