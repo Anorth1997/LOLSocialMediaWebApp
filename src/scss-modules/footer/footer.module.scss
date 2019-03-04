@@ -1,0 +1,44 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.footerContainer {
+    background: $header-footer-background-color;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    // width: 100%;
+
+    display: flex;
+    flex-direction: row-reverse;
+    // max-height: 100px;
+    border-top: 1px solid $golden-login-border-color;
+
+    
+
+    .rowStyles {
+        // width: 100%;
+        // padding-right: 50px;
+        
+        height: 60px;
+        align-items: center;
+        // flex-direction: row-reverse;
+        // color: white;
+
+        .bottomNavIcon {
+            color: white;
+            // width: 100px;
+            // height: 100px;
+            padding: 0 30px;
+
+            @include transition(color 0.2s ease-in);
+
+            &:hover {
+                color: $golden-login-border-color;
+                cursor: pointer;
+            }
+        } 
+
+    }
+}
+
+

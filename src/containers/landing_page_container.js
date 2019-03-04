@@ -18,8 +18,10 @@ class MainLandingPageContainer extends Component {
         console.log(this.props);
 
         return (
-            <div>
-                Main Landing Page
+            <div style={{
+                background: 'white'
+            }}>
+                Hello world
             </div>
         );
     }
