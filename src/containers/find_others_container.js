@@ -28,7 +28,7 @@ class FindContainer extends Component{
                         </li>
                         <li className={styles.playerNameSection}>
                             <p>{i.username}</p>
-                            <p>{i.leagueName}</p>
+                            <p>{i.league_name}</p>
                         </li>
                         <li className={styles.inviteSection}>
                             <button className={styles.inviteButton}>Invite</button>
