@@ -6,19 +6,20 @@ import { connect } from 'react-redux';
 import { getAllUsers, getUserByUsername, getUserByEmail, getUserById } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
+import LoginContainer from './login_container';
+
 
 class MainLandingPageContainer extends Component {
 
     componentWillMount() {
-        this.props.getAllUsers();        
+        this.props.getAllUsers();     
     }
 
     render() {
 
-        console.log(this.props);
-
         return (
             <div>
+                <LoginContainer/>
                 Main Landing Page
             </div>
         );
