@@ -23,7 +23,7 @@ class HeaderContainer extends Component {
                         
                         <ul className={cx("nav", "justify-content-center", styles.middleNav)}>
                             <li>
-                                <NavLink to="/">Find Others</NavLink>
+                                <NavLink to="/find">Find Others</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/">Tournaments</NavLink>
