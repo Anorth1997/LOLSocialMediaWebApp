@@ -1,9 +1,13 @@
 @import "../scss-general-modules/whole-dir_scss.module";
 
 .profilePageContainer {
+
+    background: $dark-bg-login url('../../assets/images/login-bg-blended.png') no-repeat center top;
+    min-height: 720px;
     color: white;
 
-    p {
+    .profileStats {
+        margin-left: 10px;
     }
 
     .iconAndId {

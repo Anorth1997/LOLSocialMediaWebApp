@@ -46,7 +46,7 @@ const users = [
         date_created: '02/24/19 12:43:38 EST',
         league_name: 'Rush dog',
         server: 'NA',
-        profile_pic: 'profile-pic-2.png',
+        profile_pic: 'profile-pic-2.jpg',
         friends: ['jfdsflskgdjlvjlk','',''],
         tournaments_participating: [
             {

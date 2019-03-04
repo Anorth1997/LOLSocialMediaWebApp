@@ -51,6 +51,14 @@ export function getUserById(id) {
     }
 }
 
+export function logOut() {
+    const user = undefined;
+    return {
+        type: 'LOG_OUT',
+        payload: user
+    }
+}
+
 export function tryLoggingIn(username, password) {
     const user = users.find( (item) => {
         console.log('in actions');
@@ -64,7 +72,6 @@ export function tryLoggingIn(username, password) {
         payload: user
     }
 }
-
 
 
 // ####################### tournament methods #######################
