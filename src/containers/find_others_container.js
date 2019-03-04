@@ -15,48 +15,13 @@ import HelpSection from '../Components/LoginPortal/helpSection';
 
 class FindContainer extends Component{
 
-    render(){
-        return (
-            <div className={styles.bg}>
-                <div className={styles.navBarContainer}>
-                    <ul className={styles.navBar}>
-                        <li><button className={styles.navButton}>Explore</button></li>
-                        <li><button className={styles.navButton}>Find Others</button></li>
-                        <li><button className={styles.navButton}>Tournaments</button></li>
-                        <li><button className={styles.navButton}>Bookup Esports</button></li>
-                        <li><button className={styles.navButton}>Name</button></li>
-                    </ul>
-                </div>
-                <div className={styles.searchPannel}>
-                    <h2>Find Players</h2>
-                    <br></br>
-                    <h3>How many?</h3>
-                    <select>
-                        <option value="one">One</option>
-                        <option value="two">Two</option>
-                        <option value="three">Three</option>
-                        <option value="four">Four</option>
-                    </select>
-                    <h3>Rank level?</h3>
-                    <select>
-                        <option value="iron">Iron</option>
-                        <option value="bronze">Bronze</option>
-                        <option value="silver">Silver</option>
-                        <option value="gold">Gold</option>
-                        <option value="platinum">Platinum</option>
-                        <option value="diamond">Diamond</option>
-                        <option value="master">Master</option>
-                        <option value="grandmaster">Grandmaster</option>
-                        <option value="challenger">Challenger</option>
-                    </select>
-                    <h3>Mics?</h3>
-                    <select>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br></br>
-                    <button className={styles.searchButton} onClick={this.SearchPlayers}><h3>Search</h3></button>
-                </div>
+    state = {
+        showPlayers: false,
+    }
+
+    renderPlayers(show) {
+        if (show){
+            return (
                 <div className={styles.playerDisplayPannel} ref="xd">
                     <ul className={styles.playerBox}>
                         <li className={styles.playerIconContainer}>
@@ -85,6 +50,52 @@ class FindContainer extends Component{
                         </li>
                     </ul>
                 </div>
+            )
+        }
+    }
+        
+
+    renderSearchPanel() {
+        return (
+            <div className={styles.searchPannel}>
+                <h2>Find Players</h2>
+                <br></br>
+                <h3>How many?</h3>
+                <select>
+                    <option value="one">One</option>
+                    <option value="two">Two</option>
+                    <option value="three">Three</option>
+                    <option value="four">Four</option>
+                </select>
+                <h3>Rank level?</h3>
+                <select>
+                    <option value="iron">Iron</option>
+                    <option value="bronze">Bronze</option>
+                    <option value="silver">Silver</option>
+                    <option value="gold">Gold</option>
+                    <option value="platinum">Platinum</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="master">Master</option>
+                    <option value="grandmaster">Grandmaster</option>
+                    <option value="challenger">Challenger</option>
+                </select>
+                <h3>Mics?</h3>
+                <select>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <br></br>
+                <button className={styles.searchButton} onClick={this.SearchPlayers}><h3>Search</h3></button>
+            </div>
+        )
+
+    }
+
+    render(){
+        return (
+            <div className={styles.bg}>
+                {this.renderSearchPanel()}
+                {this.renderPlayers(this.state.showPlayers)}
                 <div className={styles.eventBarContainer}>
                     <ul className={styles.eventBar}>
                         <li><a>something</a></li>
@@ -92,23 +103,17 @@ class FindContainer extends Component{
                     </ul>
                 </div>
 
-
-
-
-
-
-
             </div>
         )
     }
 
-    // SearchPlayers = (event) => {
-    //     event.preventDefault();
+    SearchPlayers = (event) => {
+        event.preventDefault();
 
-    //     const pdp = document.querySelector('.playerDisplayPannel')
-    //     console.log(pdp)
-    //     pdp.style.display = false;
-    // }
+        this.setState({
+            showPlayers: true
+        })
+    }
 }
 
 export default FindContainer;
