@@ -1,0 +1,27 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.bg {
+    background: white;
+    // background: $dark-bg-login url('../../assets/images/login-bg-blended.png') no-repeat center top;
+    min-height: 720px;
+}
+
+.container_frame {
+    background: wheat;
+    margin-top: 70px;
+    margin-left: 70px;
+    margin-right: 70px;
+    border: 1px solid $golden-login-border-color;
+}
+
+.top_row {
+    height: 80px;
+}
+
+.middle_chunk {
+    height: 350px;
+}
+
+.bottom_footer {
+    height:80px;
+}

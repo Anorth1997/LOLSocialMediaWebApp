@@ -14,6 +14,7 @@ import FormFields from '../widgets/Forms/formfields';
 import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import CheckBox from '../widgets/Checkbox/checkbox';
 import HelpSection from '../Components/LoginPortal/helpSection';
+import { users } from '../dummy_hardcoded_data';
 
 import { connect } from 'react-redux';
 import { tryLoggingIn } from '../actions/index';
@@ -234,20 +235,21 @@ class LoginContainer extends Component {
             dataToSubmit[key] = this.state.formData[key].value;
         }
 
-        // do error checking first
-        // if there is an error
-        this.setState({
-            showWarning: true
-        })
+        let validate = users.some(function (user) {
+            return dataToSubmit.username === user.username && dataToSubmit.password === user.password;
+        })        
 
-
-
-
-        console.log(dataToSubmit);
-
-        this.props.tryLoggingIn(dataToSubmit.username, dataToSubmit.password);
-        
-
+        if (validate) {
+            // redirect to user main page
+            this.props.tryLoggingIn(dataToSubmit.username, dataToSubmit.password);
+        } else {
+            // do error checking first
+            // if there is an error
+            this.setState({
+                showWarning: true
+            })
+        }
+        // console.log(dataToSubmit);
     }    
 
     componentDidUpdate() {
