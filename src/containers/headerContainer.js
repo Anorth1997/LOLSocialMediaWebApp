@@ -26,7 +26,7 @@ class HeaderContainer extends Component {
                                 <NavLink to="/find">Find Others</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/">Tournaments</NavLink>
+                                <NavLink to="/tournaments">Tournaments</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/">Esports</NavLink>
