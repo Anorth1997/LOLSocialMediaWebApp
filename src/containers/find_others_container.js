@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import styles from '../scss-modules/find-container/find-container.module.scss';
+import { users } from '../dummy_hardcoded_data';
 import brandImage from '../assets/images/lol-brand-img.png';
 
 import cx from 'classnames';
@@ -12,7 +13,6 @@ import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import CheckBox from '../widgets/Checkbox/checkbox';
 import HelpSection from '../Components/LoginPortal/helpSection';
 
-
 class FindContainer extends Component{
 
     state = {
@@ -20,36 +20,29 @@ class FindContainer extends Component{
     }
 
     renderPlayers(show) {
-        if (show){
+        const players = users.map((i) => {
             return (
-                <div className={styles.playerDisplayPannel} ref="xd">
                     <ul className={styles.playerBox}>
                         <li className={styles.playerIconContainer}>
-                            <img className={styles.playerIcon} ></img>
+                            <img className={styles.playerIcon} src={i.profile_pic}></img>
                         </li>
                         <li className={styles.playerNameSection}>
-                            <p>Jim</p>
-                            <p>xXLissxX</p>
+                            <p>{i.username}</p>
+                            <p>{i.leagueName}</p>
                         </li>
                         <li className={styles.inviteSection}>
                             <button className={styles.inviteButton}>Invite</button>
                             <p>Rank: PlatinumVI</p>
                         </li>
                     </ul>
-                    <ul className={styles.playerBox}>
-                        <li className={styles.playerIconContainer}>
-                            <img className={styles.playerIcon} ></img>
-                        </li>
-                        <li className={styles.playerNameSection}>
-                            <p >Lisa</p>
-                            <p>Hearts_XO</p>
-                        </li>
-                        <li className={styles.inviteSection}>
-                            <button className={styles.inviteButton}>Invite</button>
-                            <p>Rank: PlatinumV</p>
-                        </li>
-                    </ul>
-                </div>
+            )
+        });
+
+        if (show){
+            const playerPannel = document.createElement('div');
+            playerPannel.className = styles.playerDisplayPannel;
+            return (
+                <div className={styles.playerDisplayPannel}>{players}</div>
             )
         }
     }
@@ -96,13 +89,6 @@ class FindContainer extends Component{
             <div className={styles.bg}>
                 {this.renderSearchPanel()}
                 {this.renderPlayers(this.state.showPlayers)}
-                <div className={styles.eventBarContainer}>
-                    <ul className={styles.eventBar}>
-                        <li><a>something</a></li>
-                        <li><a>something</a></li>
-                    </ul>
-                </div>
-
             </div>
         )
     }
