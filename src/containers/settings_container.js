@@ -56,7 +56,18 @@ class SettingsContainer extends Component {
     renderPassword() {
         if (this.state.displayPassword){
             return (
-                <div className={styles.displayPanel}>Password</div>
+                <div className={styles.displayPanel}>
+                    <form className={styles.passwordForm}>
+                        New Password:<br></br>
+                        <input type="text"></input>
+                        <br></br>
+                        Confirm Password:<br></br>
+                        <input type="text"></input>
+                        <br></br>
+                        <br></br>
+                        <input type="submit" value="Reset"></input>
+                    </form> 
+                </div>
             )
         }
     }
@@ -64,7 +75,17 @@ class SettingsContainer extends Component {
     renderEmail() {
         if (this.state.displayEmail){
             return (
-                <div className={styles.displayPanel}>Email</div>
+                <div className={styles.displayPanel}>
+                    <form className={styles.passwordForm}>
+                        Current Email:<br></br>
+                        <p>{user.email}</p>
+                        New Email:<br></br>
+                        <input type="text"></input>
+                        <br></br>
+                        <br></br>
+                        <input type="submit" value="Change"></input>
+                    </form> 
+                </div>
             )
         }
     }
