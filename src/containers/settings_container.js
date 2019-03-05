@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { users, tournaments } from '../dummy_hardcoded_data';
+import { users } from '../dummy_hardcoded_data';
 
 
 import styles from '../scss-modules/settings-container/settings-container.module.scss';
-import brandImage from '../assets/images/lol-brand-img.png';
-import profilePicTest from '../assets/images/profile-pic-1.png'
 
 import cx from 'classnames';
-import FontAwesome from 'react-fontawesome';
 // import 'font-awesome/css/font-awesome.min.css';
 
-import FormFields from '../widgets/Forms/formfields';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
-import CheckBox from '../widgets/Checkbox/checkbox';
-import HelpSection from '../Components/LoginPortal/helpSection';
 
 const user = users[0];
 class SettingsContainer extends Component {
