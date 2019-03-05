@@ -30,7 +30,7 @@ const TournamentInfo = (props) => {
                             icon={faCalendarAlt}
                         /> {props.tournament.date_starting}
                     <div>  
-                        <button type="button" class={cx("btn btn-dark", styles.detailsButton)}>Details</button>
+                        <button type="button" className={cx("btn btn-dark", styles.detailsButton)}>Details</button>
                     </div>
                 </div>
             </div>
