@@ -80,6 +80,7 @@ const users = [
 const tournaments = [
     {
         id: 'efsjfewlejfelkf',
+        tourn_name: 'The Challengers Cup 1',
         num_teams: 24,
         team_ids: [
             'cndskjnckdsncdkjcsd',
@@ -93,6 +94,7 @@ const tournaments = [
     },
     {
         id: 'sadasdasdasadetwe',
+        tourn_name: 'The Challengers Cup 2',
         num_teams: 8,
         team_ids: [
             'casfssdlfljssldl' //there will obviously be 7 more teams but im too lazy to type them out lol
@@ -105,6 +107,7 @@ const tournaments = [
     },
     {
         id: 'fjsdfljdlkcmdlcfsdfs',
+        tourn_name: 'The Challengers Cup 3',
         num_teams: 48,
         team_ids: [
             'fskdhfskjdnvdskkj' //there will obviously be 47 more teams but im too lazy to type them out lol
@@ -117,6 +120,7 @@ const tournaments = [
     },
     {
         id: 'cdsfndfnkjsnckjsc',
+        tourn_name: 'The Challengers Cup 4',
         num_teams: 34,
         team_ids: [
             'vjndnvkjavnaknad'
@@ -129,6 +133,7 @@ const tournaments = [
     },
     {
         id: 'fdslkfjsdcmdlkscdsmcl',
+        tourn_name: 'The Challengers Cup 5',
         num_teams: 12,
         team_ids: [
             'dfhsdkfjhsdkfhksd'
@@ -141,6 +146,7 @@ const tournaments = [
     },
     {
         id: 'vdfsldkjfslfmcdsdf',
+        tourn_name: 'The Challengers Cup 6',
         num_teams: 10,
         team_ids: [
             'dlvmdmlkcmsdlkscd' 
@@ -153,6 +159,7 @@ const tournaments = [
     },
     {
         id: 'cmldskflejerlkjr',
+        tourn_name: 'The Challengers Cup 7',
         num_teams: 14,
         team_ids: [
             'vdsmvfdsjfljsdflfds'

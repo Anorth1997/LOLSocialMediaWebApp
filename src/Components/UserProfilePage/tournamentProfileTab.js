@@ -8,6 +8,8 @@ import {getTournamentById, getAllTournaments} from '../../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import TournamentInfo from '../../hoc/TournamentInfoContainer/tournInfo';
+
 class TournamentUserProfileTab extends Component {
 
 
@@ -30,8 +32,28 @@ class TournamentUserProfileTab extends Component {
     
 
 
-    renderTournaments = (tournaments) => {
+    renderTournaments = (type) => {
 
+        let tourn_to_render = null;
+        if (type === 'participating') {
+            tourn_to_render = this.props.server_response.tournaments_participating_in;
+        } else {
+            tourn_to_render = this.props.server_response.tournaments_participated_in;
+        }
+
+        if (tourn_to_render) {
+            return (
+                <div>
+                    {tourn_to_render.map( (item, i) => {
+                        return (
+                            <div key={i}>
+                                <TournamentInfo tournament={item}/>
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
     }
 
     render() {
@@ -42,11 +64,11 @@ class TournamentUserProfileTab extends Component {
         return (
             <div className={styles.tournamentTab}>
                 <div className={styles.tournamentsParticipating}>
-                    {this.renderTournaments()}
+                    {this.renderTournaments('participating')}
                 </div>
 
                 <div className={styles.tournamentsParticipated}>
-                    {this.renderTournaments()}
+                    {this.renderTournaments('participated')}
                 </div>
             </div>
         );
