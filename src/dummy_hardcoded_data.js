@@ -47,7 +47,7 @@ const users = [
         date_created: '02/24/19 12:43:38 EST',
         league_name: 'Rush dog',
         server: 'NA',
-        rank: 15, //silver 1
+        rank: 15, //silver 1 iron > bronze > silver 1
         profile_pic: 'profile-pic-2.jpg',
         friends: ['jfdsflskgdjlvjlk','',''],
         tournaments_participating: [
@@ -176,42 +176,50 @@ const teams = [
     {
         id: 'cndskjnckdsncdkjcsd',
         name: 'Jackos Rackos',
-        average_rank: 'Silver I' //this will be a number (number 15 since Iron 5-1 + Bronze 5-1 + Silver 5-1 = 15th. Silver 2 would be 14, etc)
+        average_rank: 15, //this will be a number (number 15 since Iron 5-1 + Bronze 5-1 + Silver 5-1 = 15th. Silver 2 would be 14, etc)
+        icon: 'team-pic-1.png'
     },
     {
         id: 'casfssdlfljssldl',
         name: 'Killer Instinct',
-        average_rank: 'Gold IV' 
+        average_rank: 17,
+        icon: 'team-pic-2.png'
     },
     {
         id: 'xdlvskmglsdkfmsl',
         name: 'Team Tilters',
-        average_rank: 'Platinum V' 
+        average_rank: 21,
+        icon: 'team-pic-3.jpg'
     },
     {
         id: 'vjndnvkjavnaknad',
         name: 'Owned boys',
-        average_rank: 'Gold V' 
+        average_rank: 16,
+        icon: 'team-pic-4.png'
     },
     {
         id: 'fskdhfskjdnvdskkj',
         name: 'The Sirens',
-        average_rank: 'Silver III' 
+        average_rank: 13,
+        icon: 'team-pic-5.jpg'
     },
     {
         id: 'dfhsdkfjhsdkfhksd',
         name: 'Olafs Goats',
-        average_rank: 'Silver II' 
+        average_rank: 14,
+        icon: 'team-pic-6.png'
     },
     {
         id: 'dlvmdmlkcmsdlkscd',
         name: 'One Tricks',
-        average_rank: 'Bronze I' 
+        average_rank: 10,
+        icon: 'team-pic-7.png'
     },
     {
         id: 'vdsmvfdsjfljsdflfds',
         name: 'Tilted for life',
-        average_rank: 'Bronze III' 
+        average_rank: 8,
+        icon: 'team-pic-8.png'
     }
 ]
 

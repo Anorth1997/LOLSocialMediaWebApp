@@ -4,7 +4,7 @@ import styles from '../../scss-modules/others/rankImageStyling.module.scss';
 
 const RankImage = (props) => {
 
-    // console.log(props);
+    console.log(props);
 
     let rank = '';
     let value = 0;
@@ -55,7 +55,7 @@ const RankImage = (props) => {
         <div className={styles.rankDiv}>
             <span>
                 <img src={require(`../../assets/images/ranks/${rank}.png`)} alt=""/>
-                <span>{`${rank.toUpperCase()} ${romanNumeral}`}</span>
+                {props.showInfo ? <span>{`${rank.toUpperCase()} ${romanNumeral}`}</span> : null}
             </span>
             
         </div>
