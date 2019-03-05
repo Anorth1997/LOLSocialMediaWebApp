@@ -48,7 +48,7 @@ const users = [
         league_name: 'Rush dog',
         server: 'NA',
         rank: 15, //silver 1
-        profile_pic: 'profile-pic-2.png',
+        profile_pic: 'profile-pic-2.jpg',
         friends: ['jfdsflskgdjlvjlk','',''],
         tournaments_participating: [
             {

@@ -9,6 +9,7 @@ import UserProfilePage from './Components/UserProfilePage/user_profile_page';
 import UserHomePage from './Components/UserHomePage/user_home_page';
 import Find from './Components/FindOthersPage/findOthers';
 import TournamentPage from './Components/TournamentsPage/tournament_page';
+import SettingsPage from './Components/SettingPage/setting_page';
 // import Login from './Components/LoginPage/login';
 
 import './scss-modules/base/base.module.scss';
@@ -26,6 +27,7 @@ class Routes extends Component {
                         <Route path="/profile/:id" exact component={UserProfilePage}/>
                         <Route path="/find" exact component={Find}/>
                         <Route path="/tournaments" exact component={TournamentPage}/>
+                        <Route path="/settings" exact component={SettingsPage}/>
                     </Switch>
                 </Layout>
             </div>

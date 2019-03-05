@@ -32,9 +32,11 @@ class ProfilePageContainer extends Component {
             return (
                 <div className={styles.profile}>
                     <img className={styles.profilePic} src={require(`../assets/images/${this.props.currUser.profile_pic}`)} alt=""/>
+                    
                     <div className={styles.username}>
                         {this.props.currUser.username}
                     </div>
+
                     <div className={styles.leagueAccountInfo}>
                         <i>{this.props.currUser.league_name}</i> 
                     </div>
@@ -104,8 +106,6 @@ class ProfilePageContainer extends Component {
                     </div>
                     <div className="col-md-9">
                         {this.renderTabs()}
-
-
                     </div>
                 </div>
                 

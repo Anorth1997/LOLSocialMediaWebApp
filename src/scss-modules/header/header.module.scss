@@ -12,10 +12,25 @@
 
         align-items: center;
 
+        #explore {
+            margin: auto;
+            color: $golden-login-border-color;
+            @extend .sanson-font-style;
+            font-size: 2rem;
+            text-decoration: none;
+        }
+
         .middleNav {
 
             li {
-                padding: 0 5px;
+                padding: 0 10px;
+                @extend .sanson-font-style;
+                font-size: 30px;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
             }
             // display: none;
 

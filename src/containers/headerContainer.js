@@ -16,24 +16,22 @@ class HeaderContainer extends Component {
             <div className={cx("container-fluid", styles.headerContainer)}>
                 <div className={cx("row", "", styles.rowStyles)}>
                     <div className="col-sm-2">
-                        <p>fljsdlfkajslfjasdfljsl</p>
+                        <a href="" id={styles.explore}>Explore▼</a>
                     
                     </div>
                     <div className={cx("col-sm-8")}>
                         
                         <ul className={cx("nav", "justify-content-center", styles.middleNav)}>
                             <li>
+                                <NavLink to="/">Home</NavLink>
+                            </li>
+                            <li>
                                 <NavLink to="/find">Find Others</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/">Tournaments</NavLink>
+                                <NavLink to="/tournaments">Tournaments</NavLink>
                             </li>
-                            <li>
-                                <NavLink to="/">Esports</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/profile/1">Profiles</NavLink>
-                            </li>
+                            
                         </ul>
 
                         

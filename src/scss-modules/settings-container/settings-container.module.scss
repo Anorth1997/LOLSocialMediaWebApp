@@ -5,6 +5,60 @@
     min-height: 720px;
 }
 
+.settingTabs {
+    overflow: hidden;
+    float: left;
+    margin-top: 100px;
+    margin-left: 100px;
+    font-family: 'Sanson', 'Bebas', sans-serif;
+}
+
+.settingTabs button {
+    margin-top: 5px;
+    border: 2px solid #ffc107;
+    background-color: inherit;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 20px;
+    display: block;
+    width: 200px;
+    color: white;
+}
+
+.displayPanel {
+    margin-top: 100px;
+    border: 2px solid #ffc107;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    // background: #067773;
+}
+
+.displayPanel ul {
+    margin-left: 20px;
+}
+
+.displayPanel ul li {
+    display: inline;
+    padding: 30px;
+}
+
+.editButton {
+    margin-right: 20px;
+}
+
+.passwordForm {
+    padding: 20px;
+}
+
+
+
+
+
+
+
 .leftPannel {
     width: 200px;
 }

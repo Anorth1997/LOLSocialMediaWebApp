@@ -11,11 +11,6 @@ import { bindActionCreators } from 'redux';
 class TournamentUserProfileTab extends Component {
 
 
-    state = {
-        tournaments_participating: [],
-        tournaments_participated: []
-    }
-
     
     componentWillMount() {
 
@@ -29,31 +24,20 @@ class TournamentUserProfileTab extends Component {
             return item.tournament_id;
         })
 
-
-        this.setState({
-            // tournaments_participated: this.props.getTournamentById(this.props.tournaments_participating[0].tournament_id),
-            // tournaments_participating: this.props.getTournamentById(this.props.tournaments_participated[0].tournament_id)
-            tournaments_participated: this.props.getAllTournaments(tourns_participated_ids),
-            tournaments_participating: this.props.getAllTournaments(tourns_participating_ids)
-            
-        });
+        this.props.getAllTournaments(tourns_participating_ids, 'participated');
+        this.props.getAllTournaments(tourns_participated_ids, 'participating');
     }
     
 
 
     renderTournaments = (tournaments) => {
-        // console.log(tournaments)
-        console.log('here')
-        if (this.props.tournament) {
-            console.log(this.props.tournament);
-        }
-        
+
     }
 
     render() {
 
         // console.log(this.state);
-        // console.log(this.props)
+        console.log(this.props)
 
         return (
             <div className={styles.tournamentTab}>
@@ -72,7 +56,10 @@ class TournamentUserProfileTab extends Component {
 const mapStateToProps = (state) => {
     // console.log(state.currUser.info)
     return {
-        tournament: state.tournaments
+        server_response: {
+            tournaments_participating_in: state.tournaments.tourns_participating,
+            tournaments_participated_in: state.tournaments.tourns_participated
+        }
     }
 }
  

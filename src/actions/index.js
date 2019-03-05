@@ -51,6 +51,14 @@ export function getUserById(id) {
     }
 }
 
+export function logOut() {
+    const user = undefined;
+    return {
+        type: 'LOG_OUT',
+        payload: user
+    }
+}
+
 export function tryLoggingIn(username, password) {
     const user = users.find( (item) => {
         console.log('in actions');
@@ -66,22 +74,28 @@ export function tryLoggingIn(username, password) {
 }
 
 
-
 // ####################### tournament methods #######################
 
-export function getAllTournaments(ids) {
+/**
+ * 
+ * @param {Array of ids} ids 
+ * @param {*} type 
+ */
+export function getAllTournaments(ids, type) {
 
-    const results = Object.entries(tournaments).map( (item) => {
-        console.log('in get all tournaments')
-        for (let i = 0; i < ids.length; i++) {
-            if (item.id === ids[i]) {
-                return item;
-            }
-        }
+    const results = tournaments.filter( (item) => {
+        return ids.includes(item.id)
     })
 
+    let returnType = ''; 
+    if (type === 'participated') {
+        returnType = 'GET_TOURNAMENTS_PARTICIPATED_BY_IDS';
+    } else {
+        returnType = 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS';
+    }
+
     return {
-        type: 'GET_TOURNAMENTS_BY_IDS',
+        type: returnType,
         payload: results
     }
 }
@@ -90,9 +104,8 @@ export function getTournamentById(id) {
 
     console.log('in action')
 
-
     const tournament = tournaments.find( (item) => {
-        console.log(`item.id: ${item.id}, id given: ${id}`);
+        // console.log(`item.id: ${item.id}, id given: ${id}`);
         return item.id === id;
     })
 
