@@ -12,10 +12,12 @@ import LoginContainer from './login_container';
 class MainLandingPageContainer extends Component {
 
     componentWillMount() {
-        this.props.getAllUsers();     
+         
     }
 
     render() {
+
+        console.log(this.props)
 
         return (
             <div>
@@ -29,12 +31,12 @@ class MainLandingPageContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users
+        currUser: state.currUser.info
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getAllUsers, getUserByUsername, getUserByEmail, getUserById}, dispatch);
+    return bindActionCreators({}, dispatch);
 }
 
 

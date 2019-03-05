@@ -15,11 +15,11 @@ class HeaderContainer extends Component {
 
             <div className={cx("container-fluid", styles.headerContainer)}>
                 <div className={cx("row", "", styles.rowStyles)}>
-                    <div className="col-sm-2">
+                    <div className="col-2">
                         <a href="" id={styles.explore}>Explore▼</a>
                     
                     </div>
-                    <div className={cx("col-sm-8")}>
+                    <div className={cx("col-8")}>
                         
                         <ul className={cx("nav", "justify-content-center", styles.middleNav)}>
                             <li>
@@ -34,11 +34,8 @@ class HeaderContainer extends Component {
                             
                         </ul>
 
-                        
-                        
-
                     </div>
-                    <div className={cx("col-sm-2", "", styles.rightNav)}>
+                    <div className={cx("col-2", "", styles.rightNav)}>
                         
                         <ProfilePictureContainer hoverPopup={true}/>
 

@@ -6,7 +6,7 @@ import styles from '../../scss-modules/others/team_info.module.scss';
 
 const TeamInfo = (props) => {
 
-    console.log(props);
+    // console.log(props);
 
     return (
         <div className={cx("container-fluid", styles.teamInfo)}>

@@ -33,9 +33,9 @@ class TournamentsContainer extends Component {
     }
 
     renderTournaments(search) {
-        const all_tour = tournaments.map((tournament) => {
+        const all_tour = tournaments.map((tournament, i) => {
             return (
-                <div className = {styles.tournamentBox}>
+                <div key={i} className = {styles.tournamentBox}>
                     <div className = {styles.tournamentInfoSection}>
                         <p>{tournament.id}</p>
                         <p>Teams: {tournament.num_teams}</p>
