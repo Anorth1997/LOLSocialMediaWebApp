@@ -118,11 +118,17 @@ export function getTournamentById(id) {
 
 // ####################### Team methods #######################
 
-export function getAllTeams() {
+export function getAllTeams(ids) {
+
+    // console.log('in heer')
+
+    const results = teams.filter( (item) => {
+        return ids.includes(item.id)
+    })
 
     return {
-        type: 'GET_ALL_TEAMS',
-        payload: teams
+        type: 'GET_TEAMS_BY_IDS',
+        payload: results
     }
 }
 

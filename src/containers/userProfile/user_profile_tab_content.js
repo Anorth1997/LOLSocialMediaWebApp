@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Tabs, Tab, Sonnet } from 'react-bootstrap';
 
 import TournamentUserProfileTab from '../../Components/UserProfilePage/tournamentProfileTab';
+import TeamsUserProfileTab from '../../Components/UserProfilePage/teamsProfileTab';
 
 class UserProfileTabContentContainer extends Component {
     render() {
@@ -23,9 +24,7 @@ class UserProfileTabContentContainer extends Component {
                         <TournamentUserProfileTab {...this.props}/>
                     </Tab>
                     <Tab eventKey="teams" title="Teams">
-                        <div>
-                            Contact
-                        </div>
+                        <TeamsUserProfileTab {...this.props}/>
                     </Tab>
                 </Tabs>
 

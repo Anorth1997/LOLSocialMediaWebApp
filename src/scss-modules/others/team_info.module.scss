@@ -1,0 +1,13 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.teamInfo {
+    text-align: left;
+    border: 2px solid #534f4f;
+    @extend .sanson-font-style;
+    font-size: 24px;
+
+    
+    // .numTeamsParticipating {
+    //     color: red;
+    // }
+}
