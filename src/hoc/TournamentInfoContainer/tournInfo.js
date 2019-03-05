@@ -3,13 +3,13 @@ import React from 'react';
 import styles from '../../scss-modules/others/tournament_info.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faUserFriends, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 import cx from 'classnames';
 
 const TournamentInfo = (props) => {
 
-    // console.log(props);
+    console.log(props);
 
     return (
         <div className={cx("container-fluid", styles.tournInfo)}>
@@ -22,6 +22,15 @@ const TournamentInfo = (props) => {
                             className={styles.numTeamsParticipating}
                             icon={faUserFriends}
                         /> {props.tournament.num_teams}
+                    </div>
+                </div>
+                <div className="col-6">
+                    <FontAwesomeIcon
+                            className={styles.numTeamsParticipating}
+                            icon={faCalendarAlt}
+                        /> {props.tournament.date_starting}
+                    <div>  
+                        <button type="button" class={cx("btn btn-dark", styles.detailsButton)}>Details</button>
                     </div>
                 </div>
             </div>
