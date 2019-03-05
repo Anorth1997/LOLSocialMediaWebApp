@@ -14,6 +14,7 @@ import SettingsPage from './Components/SettingPage/setting_page';
 
 import './scss-modules/base/base.module.scss';
 import Layout from './hoc/Layout/layout';
+import AdminPortal from './Components/AdminPortal/adminPortal';
 
 class Routes extends Component {
     render() {
@@ -28,6 +29,7 @@ class Routes extends Component {
                         <Route path="/find" exact component={Find}/>
                         <Route path="/tournaments" exact component={TournamentPage}/>
                         <Route path="/settings" exact component={SettingsPage}/>
+                        <Route path="/adminportal" exact component={AdminPortal}/>
                     </Switch>
                 </Layout>
             </div>

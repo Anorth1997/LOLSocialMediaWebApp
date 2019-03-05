@@ -6,6 +6,9 @@ import TournamentUserProfileTab from '../../Components/UserProfilePage/tournamen
 import TeamsUserProfileTab from '../../Components/UserProfilePage/teamsProfileTab';
 
 class UserProfileTabContentContainer extends Component {
+
+
+    
     render() {
 
         // console.log(this.props)
@@ -26,6 +29,7 @@ class UserProfileTabContentContainer extends Component {
                     <Tab eventKey="teams" title="Teams">
                         <TeamsUserProfileTab {...this.props}/>
                     </Tab>
+                    
                 </Tabs>
 
             </div>

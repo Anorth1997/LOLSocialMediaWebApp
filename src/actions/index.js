@@ -7,11 +7,12 @@ import { users, tournaments, teams, brackets } from '../dummy_hardcoded_data';
 export function getAllUsers() {
 
     //do a request
+    const result = users;
 
     //return this object
     return {
         type: 'GET_ALL_USERS',
-        payload: users
+        payload: result
     }
 }
 

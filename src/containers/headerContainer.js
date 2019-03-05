@@ -7,8 +7,24 @@ import styles from '../scss-modules/header/header.module.scss';
 import { NavLink } from 'react-router-dom';
 import ProfilePictureContainer from './Reusables/profile_picture_container';
 
+import { connect } from 'react-redux';
+// import {  } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
 
 class HeaderContainer extends Component {
+
+    renderAdminHeader = () => {
+        if (this.props.currUser) {
+            if (this.props.currUser.username === 'admin') {
+                return (
+                    <li>
+                        <NavLink to="/adminportal">Admin Portal</NavLink>
+                    </li>
+                );
+            }
+        }
+    }
 
     render() {
         return (
@@ -31,6 +47,7 @@ class HeaderContainer extends Component {
                             <li>
                                 <NavLink to="/tournaments">Tournaments</NavLink>
                             </li>
+                            {this.renderAdminHeader()}
                             
                         </ul>
 
@@ -46,4 +63,17 @@ class HeaderContainer extends Component {
     }
 }
 
-export default HeaderContainer;
+
+const mapStateToProps = (state) => {
+    return {
+        currUser: state.currUser.info
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({}, dispatch);
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

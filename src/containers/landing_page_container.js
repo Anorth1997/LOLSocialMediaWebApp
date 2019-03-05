@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
 
-
 import { connect } from 'react-redux';
-import { getAllUsers, getUserByUsername, getUserByEmail, getUserById } from '../actions/index';
+// import {  } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-import LoginContainer from './login_container';
+
 
 
 class MainLandingPageContainer extends Component {
@@ -21,8 +20,7 @@ class MainLandingPageContainer extends Component {
 
         return (
             <div>
-                {/* <LoginContainer/> */}
-                Main Landing Page
+                {/* <WelcomeSection {...this.props}/> */}
             </div>
         );
     }
