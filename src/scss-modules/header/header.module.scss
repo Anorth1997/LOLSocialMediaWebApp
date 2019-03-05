@@ -15,7 +15,14 @@
         .middleNav {
 
             li {
-                padding: 0 5px;
+                padding: 0 10px;
+                @extend .sanson-font-style;
+                font-size: 30px;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
             }
             // display: none;
 
