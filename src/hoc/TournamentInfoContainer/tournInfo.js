@@ -9,7 +9,7 @@ import cx from 'classnames';
 
 const TournamentInfo = (props) => {
 
-    console.log(props);
+    // console.log(props);
 
     return (
         <div className={cx("container-fluid", styles.tournInfo)}>

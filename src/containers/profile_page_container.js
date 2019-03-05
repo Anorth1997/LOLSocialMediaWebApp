@@ -22,7 +22,7 @@ class ProfilePageContainer extends Component {
 
     
     componentWillMount() {
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         this.props.getUserByUsername(this.props.match.params.id);
     }
     
@@ -95,7 +95,7 @@ class ProfilePageContainer extends Component {
 
     render() {
 
-        console.log(this.props);
+        // console.log(this.props);
         // const userProfilePic = this.props.currUser ? `../assets/images/${this.props.currUser.profile_pic}`: null;
 
         return (
