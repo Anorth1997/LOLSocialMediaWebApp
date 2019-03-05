@@ -1,0 +1,140 @@
+@import "../scss-general-modules/whole-dir_scss.module";
+
+.userProfile {
+    display: block;
+    text-align: center;
+    color: white;
+    padding-top: 5%;
+    // padding-left: 1%;
+    padding-bottom: 20px;
+
+    .leftSide {
+
+        border-bottom: 2px solid white;
+        border-right: 2px solid white;
+
+        .profile {
+
+            display: inline-block;
+            text-align: center;
+    
+            .profilePic {
+                height: 50%;
+                width: 100%;
+                border-radius: 50%;
+
+                @media screen and (min-width: 767px) {
+                    // width: 150px;
+                }
+            }
+    
+            .username {
+                display: block;
+                margin-top: 10px;
+                font-size: 24px; 
+            }
+
+            .leagueAccountInfo {
+                display: block;
+                // margin-top: 10%;
+                // margin-top: 40px;
+                // padding: 10px;
+                font-size: 16px;
+                color: $golden-login-border-color;
+                margin-bottom: 50px;
+        
+            }
+
+
+            .tournamentOutcomes {
+                // width: 100%;
+                // background: red;
+                // padding: 20px 20px;
+                display: block;
+                text-align: center;
+                margin: 0;
+                
+                .tournOutcome {
+
+                    padding: 9px;
+
+                    .goldTrophy {
+                        color: gold;
+                        // padding: 10px;
+                        font-size: 30px;
+    
+                    }
+    
+                    .silverTrophy {
+                        color: silver;
+                        font-size: 30px;
+                        // padding: 10px;
+                    }
+    
+                    .medal {
+                        color: rgb(69, 69, 209);
+                        font-size: 30px;
+                        // padding: 10px;
+                    }
+                }
+
+                
+            }
+        }
+    
+    
+        
+
+    }
+
+    
+
+
+}
+
+
+// bootstrap breakpoints
+
+// @media (min-width: 0px) {
+
+//     .helpSection div div.right {
+//         // background: red;
+//         text-align: left;
+//     }
+// }
+
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { 
+//     .helpSection div div.right {
+//         // background: red;
+//         text-align: right;
+//     }
+// }
+// @media (max-width: 767px) {
+
+//     .profilePic {
+//         width: 300px;
+//         height: 300px;
+//     }
+// }
+
+
+// Medium devices (tablets, 768px and up)
+// @media (min-width: 300px) { 
+
+//     img.profilePic {
+//         width: 300px;
+//         height: 300px;
+//     }
+// }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { 
+
+//     .formArea {
+//         max-width: 500px;
+//     }
+// }

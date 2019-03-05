@@ -42,7 +42,7 @@ class HeaderContainer extends Component {
                     </div>
                     <div className={cx("col-sm-2", "", styles.rightNav)}>
                         
-                        <ProfilePictureContainer />
+                        <ProfilePictureContainer hoverPopup={true}/>
 
                     </div>
                 </div>

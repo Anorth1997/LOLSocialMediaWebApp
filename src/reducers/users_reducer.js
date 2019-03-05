@@ -5,7 +5,7 @@ export default function(state={}, action) {
             return {...state, usersList: action.payload}
 
         case "GET_USER_BY_USERNAME":
-            return {...state, usersList: action.payload}
+            return {...state, user: action.payload}
 
         case "GET_USER_BY_EMAIL":
             return {...state, usersList: action.payload}

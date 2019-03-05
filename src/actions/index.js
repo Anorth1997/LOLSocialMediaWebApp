@@ -69,17 +69,30 @@ export function tryLoggingIn(username, password) {
 
 // ####################### tournament methods #######################
 
-export function getAllTournaments() {
+export function getAllTournaments(ids) {
+
+    const results = Object.entries(tournaments).map( (item) => {
+        console.log('in get all tournaments')
+        for (let i = 0; i < ids.length; i++) {
+            if (item.id === ids[i]) {
+                return item;
+            }
+        }
+    })
 
     return {
-        type: 'GET_ALL_TOURNAMENTS',
-        payload: tournaments
+        type: 'GET_TOURNAMENTS_BY_IDS',
+        payload: results
     }
 }
 
 export function getTournamentById(id) {
 
+    console.log('in action')
+
+
     const tournament = tournaments.find( (item) => {
+        console.log(`item.id: ${item.id}, id given: ${id}`);
         return item.id === id;
     })
 

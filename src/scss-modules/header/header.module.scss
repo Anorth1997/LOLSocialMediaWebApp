@@ -30,3 +30,48 @@
 }
 
 
+
+
+// bootstrap breakpoints
+
+// @media (min-width: 0px) {
+
+//     .helpSection div div.right {
+//         // background: red;
+//         text-align: left;
+//     }
+// }
+
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { 
+//     .helpSection div div.right {
+//         // background: red;
+//         text-align: right;
+//     }
+// }
+@media (max-width: 767px) {
+
+    .middleNav {
+        display: none;
+    }
+}
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+
+    .middleNav {
+        display: flex;
+    }
+}
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { 
+
+//     .formArea {
+//         max-width: 500px;
+//     }
+// }

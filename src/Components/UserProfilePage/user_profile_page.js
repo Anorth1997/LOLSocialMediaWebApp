@@ -5,7 +5,7 @@ import UserProfilePageContainer from '../../containers/profile_page_container';
 const UserProfilePage = (props) => {
     return (
         <div>
-            <UserProfilePageContainer />
+            <UserProfilePageContainer {...props}/>
         </div>
     );
 }

@@ -7,6 +7,7 @@ const users = [
         date_created: '02/24/19 12:43:38 EST', //date account was created on platform
         league_name: 'Elo over friends', //league of legends display name
         server: 'NA',
+        rank: 21, //platinum 5 
         profile_pic: 'profile-pic-1.png',
         friends: [ //friends
             'fncneknwkjrhwekjhe', //second user after this current user (look at the id of second user)
@@ -15,25 +16,25 @@ const users = [
         ],
         tournaments_participating: [ //tournaments being participated in
             {
-                tournamenet_id:'efsjfewlejfelkf', //tournament id
+                tournament_id:'efsjfewlejfelkf', //tournament id
                 team_id: 'cndskjnckdsncdkjcsd' //team's id
             },
             {
-                tournamenet_id:'sadasdasdasadetwe', 
+                tournament_id:'sadasdasdasadetwe', 
                 team_id: 'casfssdlfljssldl'
             }
         ],
         tournaments_participated: [ //tournaments already participated in
             {
-                tournamenet_id:'fjsdfljdlkcmdlcfsdfs', 
+                tournament_id:'fjsdfljdlkcmdlcfsdfs', 
                 team_id: 'fskdhfskjdnvdskkj'
             },
             {
-                tournamenet_id:'cdsfndfnkjsnckjsc', 
+                tournament_id:'cdsfndfnkjsnckjsc', 
                 team_id: 'vjndnvkjavnaknad'
             },
             {
-                tournamenet_id:'fdslkfjsdcmdlkscdsmcl', 
+                tournament_id:'fdslkfjsdcmdlkscdsmcl', 
                 team_id: 'dfhsdkfjhsdkfhksd'
             }
         ]
@@ -46,29 +47,30 @@ const users = [
         date_created: '02/24/19 12:43:38 EST',
         league_name: 'Rush dog',
         server: 'NA',
+        rank: 15, //silver 1
         profile_pic: 'profile-pic-2.png',
         friends: ['jfdsflskgdjlvjlk','',''],
         tournaments_participating: [
             {
-                tournamenet_id:'efsjfewlejfelkf', 
+                tournament_id:'efsjfewlejfelkf', 
                 team_id: 'xdlvskmglsdkfmsl'
             },
             {
-                tournamenet_id:'sadasdasdasadetwe', 
+                tournament_id:'sadasdasdasadetwe', 
                 team_id: 'casfssdlfljssldl'
             }
         ],
         tournaments_participated: [
             {
-                tournamenet_id:'vdfsldkjfslfmcdsdf', 
+                tournament_id:'vdfsldkjfslfmcdsdf', 
                 team_id: 'dlvmdmlkcmsdlkscd'
             },
             {
-                tournamenet_id:'cdsfndfnkjsnckjsc', 
+                tournament_id:'cdsfndfnkjsnckjsc', 
                 team_id: 'vjndnvkjavnaknad'
             },
             {
-                tournamenet_id:'cmldskflejerlkjr', 
+                tournament_id:'cmldskflejerlkjr', 
                 team_id: 'vdsmvfdsjfljsdflfds'
             }
         ]
