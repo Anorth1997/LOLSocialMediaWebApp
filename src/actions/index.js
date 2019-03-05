@@ -60,13 +60,33 @@ export function logOut() {
     }
 }
 
+export function changePassword(id, password) {
+    // Password will be changed here
+    
+    //----
+    return {
+        type: 'CHANGE_PASSWORD',
+        payload: undefined
+    }
+}
+
+export function changeEmail(id, email) {
+    // email will be changed here
+    
+    //----
+    return {
+        type: 'CHANGE_EMAIL',
+        payload: undefined
+    }
+}
+
 export function tryLoggingIn(username, password) {
     const user = users.find( (item) => {
         console.log('in actions');
         return (item.username === username || item.email === username) && item.password === password;
     })
 
-    console.log(user);
+    // console.log(user);
 
     return {
         type: 'GET_USER_BY_USERNAME_AND_PASSWORD',

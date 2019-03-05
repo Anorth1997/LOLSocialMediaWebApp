@@ -21,7 +21,7 @@ class UserProfileTabContentContainer extends Component {
 
             if (this.props.currUser.username === this.props.username) {
                 return (<Tab eventKey="settings" title="Settings">
-                    <SettingsContainer />
+                    <SettingsContainer {...this.props}/>
                 </Tab>)
             }
 
