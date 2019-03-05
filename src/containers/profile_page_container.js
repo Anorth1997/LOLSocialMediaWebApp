@@ -22,7 +22,7 @@ class ProfilePageContainer extends Component {
 
     
     componentWillMount() {
-        // console.log(this.props.match.params.id)
+     console.log(this.props.match.params.id)
         this.props.getUserByUsername(this.props.match.params.id);
     }
     
@@ -85,7 +85,10 @@ class ProfilePageContainer extends Component {
     renderTabs = () => {
         if (this.props.currUser) {
             return (
-                <UserProfileTabContent {...this.props.currUser}/>
+                <UserProfileTabContent
+                    {...this.props.currUser}
+                   // loggedInUser={this.props.loggedInUser}
+                />
             );
         } else {
             return null;
@@ -119,7 +122,8 @@ class ProfilePageContainer extends Component {
 
 const mapStateToProps = (state) => {
      return {
-         currUser: state.users.user
+         currUser: state.users.user,
+         loggedInUser: state.currUser.info
      }
  }
  
