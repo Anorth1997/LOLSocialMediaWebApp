@@ -12,6 +12,14 @@
 
         align-items: center;
 
+        #explore {
+            margin: auto;
+            color: $golden-login-border-color;
+            @extend .sanson-font-style;
+            font-size: 2rem;
+            text-decoration: none;
+        }
+
         .middleNav {
 
             li {
