@@ -6,7 +6,8 @@ import { users, tournaments, teams, brackets } from '../dummy_hardcoded_data';
 
 export function getAllUsers() {
 
-    //do a request
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const result = users;
 
     //return this object
@@ -32,7 +33,6 @@ export function getUserByUsername(username) {
         // }
     // })
 
-
     return {
         type: 'GET_USER_BY_USERNAME',
         payload: user
@@ -41,9 +41,19 @@ export function getUserByUsername(username) {
 
 export function getUserByEmail(email) {
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const user = users.find( (item) => {
         return item.email === email;
     })
+
+    //a request will be made to the server right here when we program our backend
+    //for example axios.get(`url/email).then( (response) => {
+        // return {
+        //     type: 'GET_USER_BY_EMAIL',
+        //     payload: response.data
+        // }
+    // })
 
     return {
         type: 'GET_USER_BY_EMAIL',
@@ -53,9 +63,19 @@ export function getUserByEmail(email) {
 
 export function getUserById(id) {
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const user = users.find( (item) => {
         return item.id === id;
     })
+
+    //a request will be made to the server right here when we program our backend
+    //for example axios.get(`url/id).then( (response) => {
+        // return {
+        //     type: 'GET_USER_BY_ID',
+        //     payload: response.data
+        // }
+    // })
 
     return {
         type: 'GET_USER_BY_ID',
@@ -65,14 +85,17 @@ export function getUserById(id) {
 
 export function changeUserInfo(user, newInfo) {
 
+    // After we program our back end, this part will
+    // change the users information and return true or false if it was successful
+
     let response = true;
 
-    // change the users information and return true or false if it was successful
     console.log('user:')
     console.log(user);
     console.log('New Information')
     console.log(newInfo)
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'CHANGE_USER_INFO',
         payload: response
@@ -81,6 +104,8 @@ export function changeUserInfo(user, newInfo) {
 
 export function logOut() {
     const user = undefined;
+
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'LOG_OUT',
         payload: user
@@ -88,9 +113,10 @@ export function logOut() {
 }
 
 export function changePassword(id, password) {
-    // Password will be changed here
+    // Password will be changed here after we programmed our backend
     
-    //----
+
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'CHANGE_PASSWORD',
         payload: undefined
@@ -98,9 +124,10 @@ export function changePassword(id, password) {
 }
 
 export function changeEmail(id, email) {
-    // email will be changed here
+    // email will be changed here after we programmed our backend
     
-    //----
+
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'CHANGE_EMAIL',
         payload: undefined
@@ -108,6 +135,9 @@ export function changeEmail(id, email) {
 }
 
 export function tryLoggingIn(username, password) {
+
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const user = users.find( (item) => {
         console.log('in actions');
         return (item.username === username || item.email === username) && item.password === password;
@@ -115,6 +145,7 @@ export function tryLoggingIn(username, password) {
 
     // console.log(user);
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_USER_BY_USERNAME_AND_PASSWORD',
         payload: user
@@ -131,6 +162,8 @@ export function tryLoggingIn(username, password) {
  */
 export function getAllTournaments(ids, type) {
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const results = tournaments.filter( (item) => {
         return ids.includes(item.id)
     })
@@ -142,6 +175,7 @@ export function getAllTournaments(ids, type) {
         returnType = 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS';
     }
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: returnType,
         payload: results
@@ -150,13 +184,16 @@ export function getAllTournaments(ids, type) {
 
 export function getTournamentById(id) {
 
-    console.log('in action')
+    // console.log('in action')
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const tournament = tournaments.find( (item) => {
         // console.log(`item.id: ${item.id}, id given: ${id}`);
         return item.id === id;
     })
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_TOURNAMENT_BY_ID',
         payload: tournament
@@ -170,10 +207,13 @@ export function getAllTeams(ids) {
 
     // console.log('in heer')
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const results = teams.filter( (item) => {
         return ids.includes(item.id)
     })
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_TEAMS_BY_IDS',
         payload: results
@@ -182,10 +222,13 @@ export function getAllTeams(ids) {
 
 export function getTeamById(id) {
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const team = teams.find( (item) => {
         return item.id === id;
     })
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_TEAM_BY_ID',
         payload: team
@@ -197,6 +240,7 @@ export function getTeamById(id) {
 
 export function getAllBrackets() {
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_ALL_BRACKETS',
         payload: brackets
@@ -205,10 +249,13 @@ export function getAllBrackets() {
 
 export function getBracketeById(id) {
 
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const bracket = brackets.find( (item) => {
         return item.id === id;
     })
 
+    //a request will be made to the server right here when we program our backend
     return {
         type: 'GET_BRACKET_BY_ID',
         payload: bracket
