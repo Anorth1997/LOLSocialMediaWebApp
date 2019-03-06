@@ -18,7 +18,8 @@ export function getAllUsers() {
 
 export function getUserByUsername(username) {
 
-    
+    // this will only be used for the front-end part of the project
+    // since we cannot send requests to an external server
     const user = users.find( (item) => {
         return item.username === username;
     })
