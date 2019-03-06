@@ -31,7 +31,7 @@ class AdminPortalContainer extends Component {
     }
 
     accessDenied = () => {
-        alert("You don't have permission to access the admin portal.");
+        // alert("You don't have permission to access the admin portal.");
         return (
             <Redirect to="/" />
         )
