@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../actions/index';
 import { bindActionCreators } from 'redux';
@@ -30,26 +30,37 @@ class AdminPortalContainer extends Component {
         }
     }
 
+    accessDenied = () => {
+        alert("You don't have permission to access the admin portal.");
+        return (
+            <Redirect to="/" />
+        )
+    }
+
     render() {
     
         console.log(this.props);
+        if (this.props.currUser && this.props.currUser.username === 'admin') {
+            return (
+                <div>
 
-        return (
-            <div>
-
-                <div className={cx("container-fluid", styles.adminContainer)}>
-                    <div className="row">
-                        <div className={cx("col-12")}>
-                            {this.renderTabs()}
-                        
-                        
+                    <div className={cx("container-fluid", styles.adminContainer)}>
+                        <div className="row">
+                            <div className={cx("col-12")}>
+                                {this.renderTabs()}
+                            
+                            
+                            </div>
                         </div>
                     </div>
-                </div>
 
-     
-            </div>
-        );
+        
+                </div>
+            );
+        }
+        else {
+            return this.accessDenied();
+        }
     }
 }
 

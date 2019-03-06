@@ -60,7 +60,7 @@ class TeamsUserProfileTab extends Component {
         // console.log(this.props)
 
         return (
-            <div className={styles.teamTab}>
+            <div className={cx(styles.teamTab)}>
                 {this.renderTeams()}
             </div>
         );

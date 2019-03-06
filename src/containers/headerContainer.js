@@ -32,8 +32,7 @@ class HeaderContainer extends Component {
             <div className={cx("container-fluid", styles.headerContainer)}>
                 <div className={cx("row", "", styles.rowStyles)}>
                     <div className="col-2">
-                        <Link to="/" id={styles.explore}>Explore▼</Link>
-                    
+                        <Link to="/" id={styles.explore}>Explore▼</Link>                    
                     </div>
                     <div className={cx("col-8")}>
                         

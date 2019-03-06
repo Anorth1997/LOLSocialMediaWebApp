@@ -18,6 +18,7 @@ class FindContainer extends Component{
                     <ul className={styles.playerBox}>
                         <li className={styles.playerIconContainer}>
                             <img className={styles.playerIcon} src={i.profile_pic} alt="profile pic"></img>
+
                         </li>
                         <li className={styles.playerNameSection}>
                             <p>{i.username}</p>

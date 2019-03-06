@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 // import { getAllUsers, getUserByUsername, getUserByEmail, getUserById } from '../../actions/index';
+
 import { bindActionCreators } from 'redux';
 
 import cx from 'classnames';
@@ -50,10 +51,7 @@ class ProfilePictureContainer extends Component {
                                 <span>{this.props.currUser.username}</span>
                             </Link> 
                         {/* </span> */}
-                        
-                        
                     </div>
-                    
                 )
                 : 
                     <Link to="/login">
