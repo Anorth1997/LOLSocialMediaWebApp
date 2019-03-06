@@ -18,9 +18,19 @@ export function getAllUsers() {
 
 export function getUserByUsername(username) {
 
+    
     const user = users.find( (item) => {
         return item.username === username;
     })
+
+    //a request will be made to the server right here when we program our backend
+    //for example axios.get(`url/username).then( (response) => {
+        // return {
+        //     type: 'GET_USER_BY_USERNAME',
+        //     payload: response.data
+        // }
+    // })
+
 
     return {
         type: 'GET_USER_BY_USERNAME',
