@@ -39,7 +39,6 @@ class AdminPortalContainer extends Component {
 
     render() {
     
-        console.log(this.props);
         if (this.props.currUser && this.props.currUser.username === 'admin') {
             return (
                 <div>

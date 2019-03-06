@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import styles from '../../scss-modules/main-landing-page/user_dashboard.module.scss';
-import cx from 'classnames';
+// import cx from 'classnames';
 
 
 import { Tab, Row, Col, Nav } from 'react-bootstrap';
@@ -12,8 +12,6 @@ class UserDashboard extends Component {
 
 
     render() {
-
-        console.log(this.props);
 
         return (
             <div>

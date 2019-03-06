@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 
 const WelcomeSection = (props) => {
 
-    // console.log(props);
-
     return (
         <div className={styles.welcomeSection}>
 
             <h1 className={styles.welcomingHeader}>Join our community with thousands of players and find other players or join tournaments with your friends!</h1>
             <iframe 
+                title='Some title'
                 className={styles.welcomeVideo}
                 src="https://www.youtube.com/embed/SdidA-9GvgE" 
                 frameBorder="0" 

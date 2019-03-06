@@ -4,10 +4,6 @@ import cx from 'classnames';
 
 const HelpSection = (props) => {
 
-    // console.log(props);
-
-    // props.forgotUsername();
-
     return (
 
         <div className={cx("container-fluid", props.helpSectionStyle.helpSection)}>

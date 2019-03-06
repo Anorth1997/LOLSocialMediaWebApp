@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 
-import cx from 'classnames';
+// import cx from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../scss-modules/profile-icon/profile-icon.module.scss';
 

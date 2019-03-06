@@ -24,7 +24,7 @@ class UserHomePageContainer extends Component {
     }
 
     render() {
-        console.log(this.props);
+        
         return (
             <div className = {styles.bg}>
                 user home page container 

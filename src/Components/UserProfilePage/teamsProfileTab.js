@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import cx from 'classnames';
+import cx from 'classnames';
 
 import styles from '../../scss-modules/profile-page-container/team-tab.module.scss';
 
@@ -17,8 +17,6 @@ class TeamsUserProfileTab extends Component {
     
     componentWillMount() {
 
-        // console.log(this.props.tournaments_participating[0])
-
         const _teams_participating_ids = this.props.tournaments_participating.map( (item) => {
             return item.team_id;
         })
@@ -27,7 +25,6 @@ class TeamsUserProfileTab extends Component {
             return item.team_id;
         })
         const all_teams = teams_participated_ids.concat(_teams_participating_ids);
-        // console.log(all_teams);
 
         this.props.getAllTeams(all_teams);
         // this.props.getAllTournaments(tourns_participated_ids, 'participating');
@@ -56,9 +53,6 @@ class TeamsUserProfileTab extends Component {
 
     render() {
 
-        // console.log(this.state);
-        // console.log(this.props)
-
         return (
             <div className={cx(styles.teamTab)}>
                 {this.renderTeams()}
@@ -68,7 +62,7 @@ class TeamsUserProfileTab extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state.currUser.info)
+
     return {
         server_response: {
             teams: state.teams.teams

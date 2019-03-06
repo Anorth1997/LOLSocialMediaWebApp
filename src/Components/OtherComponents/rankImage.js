@@ -4,8 +4,6 @@ import styles from '../../scss-modules/others/rankImageStyling.module.scss';
 
 const RankImage = (props) => {
 
-    // console.log(props);
-
     let rank = '';
     let value = 0;
     let romanNumeral = '';

@@ -68,7 +68,7 @@ const FormFields = (props) => {
             error = !valid ? [valid, message]: error;
         }
 
-        console.log(error)
+        // console.log(error)
 
         return error;
     }

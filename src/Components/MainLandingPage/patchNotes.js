@@ -6,6 +6,7 @@ const PatchNotes = () => {
     return (
         <div className={styles.patchNotesContainer}>
             <iframe 
+                title="Patch Notes"
                 className={styles.patchNotesVideo}
                 src="https://www.youtube.com/embed/7zhbIt7lL2g" 
                 frameBorder="0" 

@@ -86,7 +86,7 @@ class AdminUserInformationTab extends Component {
     submitChanges = (e) => {
         // e.preventDefaults();
 
-        console.log('pressed the button');
+        // console.log('pressed the button');
 
         let dataToChange = {};
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import cx from 'classnames';
+import cx from 'classnames';
 
 import styles from '../../scss-modules/profile-page-container/tournament-tab.module.scss';
 
@@ -16,7 +16,6 @@ class TournamentUserProfileTab extends Component {
     
     componentWillMount() {
 
-        // console.log(this.props.tournaments_participating[0])
 
         const tourns_participating_ids = this.props.tournaments_participating.map( (item) => {
             return item.tournament_id;
@@ -58,9 +57,6 @@ class TournamentUserProfileTab extends Component {
 
     render() {
 
-        // console.log(this.state);
-        // console.log(this.props)
-
         return (
             <div className={styles.tournamentTab}>
                 <div className={cx(styles.tournamentsParticipating)}>
@@ -76,7 +72,7 @@ class TournamentUserProfileTab extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state.currUser.info)
+    
     return {
         server_response: {
             tournaments_participating_in: state.tournaments.tourns_participating,

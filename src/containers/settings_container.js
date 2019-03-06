@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 
 import { changePassword, changeEmail } from '../actions/index';
 // import 'font-awesome/css/font-awesome.min.css';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 class SettingsContainer extends Component {
     state = {
