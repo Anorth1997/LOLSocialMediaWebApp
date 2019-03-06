@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import cx from 'classnames';
+// import cx from 'classnames';
 
 import styles from '../../scss-modules/profile-page-container/tournament-tab.module.scss';
 

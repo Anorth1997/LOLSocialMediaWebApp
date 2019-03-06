@@ -1,11 +1,12 @@
 .profileIconContainer {
 //    background: red;
-    display: block;
+    display: inline-block;
     text-align: center;
+    width: 100%;
 
     .profileLinkContainer {
 
-        display: block;
+        display: inline;
         height: 58px;
 
         .profileIcon {
@@ -23,9 +24,11 @@
         }
 
     }
+    
 
     &:hover {
         background: rgb(55, 58, 61);
+        // cursor: pointer;
     }
     
 }

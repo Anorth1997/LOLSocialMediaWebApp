@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import styles from '../scss-modules/header/header.module.scss';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import ProfilePictureContainer from './Reusables/profile_picture_container';
 
 import { connect } from 'react-redux';
@@ -32,7 +32,7 @@ class HeaderContainer extends Component {
             <div className={cx("container-fluid", styles.headerContainer)}>
                 <div className={cx("row", "", styles.rowStyles)}>
                     <div className="col-2">
-                        <a href="" id={styles.explore}>Explore▼</a>
+                        <Link to="/" id={styles.explore}>Explore▼</Link>
                     
                     </div>
                     <div className={cx("col-8")}>

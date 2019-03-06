@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 
 
 import styles from '../scss-modules/settings-container/settings-container.module.scss';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import cx from 'classnames';
+
+import { connect } from 'react-redux';
+import { logOut } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 import { changePassword, changeEmail } from '../actions/index';
 // import 'font-awesome/css/font-awesome.min.css';
+import { Redirect } from 'react-router-dom';
 
 class SettingsContainer extends Component {
     state = {
@@ -100,6 +104,10 @@ class SettingsContainer extends Component {
                 <button onClick={this.DisplayPassword}>Password</button>
                 <button onClick={this.DisplayEmail}>Link e-mail</button>
                 <button onClick={this.DisplayIFA}>IFA</button>
+                <button onClick={() => {
+                    this.props.logOut();
+                    // this.renderRedirect(true)
+                }}>Logout</button>
             </div>
         )
     }
@@ -171,12 +179,12 @@ class SettingsContainer extends Component {
         const confirmPassword = document.getElementById('confirmPassword').value;
 
         // Wrong password
-        if (oldPassword != this.props.password) {
+        if (oldPassword !== this.props.password) {
             alert('wrong password');
         }
 
         // New password doesn't match
-        else if (newPassword != confirmPassword) {
+        else if (newPassword !== confirmPassword) {
             alert('new password and comfirm password are not the same');
         }
 
@@ -199,4 +207,16 @@ class SettingsContainer extends Component {
 
 }
 
-export default SettingsContainer;
+const mapStateToProps = (state) => {
+    return {
+        currUser: state.currUser.info
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({logOut}, dispatch);
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer);

@@ -1,0 +1,35 @@
+.dashboardContainer {
+    padding: 40px;
+    background: red;
+    color: white;
+}
+
+.navLeft {
+    display: block;
+    text-align: center;
+    // background: red;
+    color: white;
+
+    .navItem {
+        padding: 20px;
+        text-decoration: none;
+        color: white;
+    }
+
+}
+
+.patchNotesContainer {
+    margin: 40px;
+
+    text-align: center;
+    color: white;
+
+    .patchNotesVideo {
+        width: 100%;
+        min-height: 400px;
+    }
+}
+
+.tournaments {
+    color: white;
+}

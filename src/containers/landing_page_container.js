@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 
-
+import UserDashboard from '../Components/MainLandingPage/userDashboard';
 import WelcomeSection from '../Components/MainLandingPage/welcomeSection';
 
 
@@ -20,12 +20,12 @@ class MainLandingPageContainer extends Component {
         if (this.props.currUser) {
             return (
                 <div>
-                    The user has logged in
+                    <UserDashboard {...this.props.currUser}/>
                 </div>
             );
         } else {
             return (
-                <WelcomeSection {...this.props}/>
+                <WelcomeSection />
             );
         }
     }

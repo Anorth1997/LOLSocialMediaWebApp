@@ -61,10 +61,10 @@ class LoginContainer extends Component {
                 labelText: 'Password',
                 config: {
                     name: 'password_input',
-                    type: 'text',
+                    type: 'password',
                     placeholder: '',
                     autoComplete: 'off'
-                },
+                },  
                 validation: {
                     required: true,
                     minLength: 0

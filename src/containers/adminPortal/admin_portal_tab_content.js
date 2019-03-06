@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Tabs, Tab, Sonnet } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 
 
 import UsersAdminTabContent from './usersTabContent';

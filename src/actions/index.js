@@ -41,6 +41,7 @@ export function getUserByUsername(username) {
 
 export function getUserByEmail(email) {
 
+    
     const user = users.find( (item) => {
         return item.email === email;
     })
