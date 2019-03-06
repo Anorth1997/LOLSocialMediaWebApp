@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import { users, tournaments } from '../dummy_hardcoded_data';
 
 
 import styles from '../scss-modules/settings-container/settings-container.module.scss';
-import brandImage from '../assets/images/lol-brand-img.png';
-import profilePicTest from '../assets/images/profile-pic-1.png'
-
+import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import cx from 'classnames';
-import FontAwesome from 'react-fontawesome';
+
+import { changePassword, changeEmail } from '../actions/index';
 // import 'font-awesome/css/font-awesome.min.css';
 
-import FormFields from '../widgets/Forms/formfields';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
-import CheckBox from '../widgets/Checkbox/checkbox';
-import HelpSection from '../Components/LoginPortal/helpSection';
-
-const user = users[0];
 class SettingsContainer extends Component {
     state = {
         displayGeneral: true,
@@ -28,8 +20,7 @@ class SettingsContainer extends Component {
             return (
                 <div className={styles.displayPanel}>
                     <ul className={styles.linkAcc}>
-                        <li>Linked Account: </li>
-                        <li>{user.league_name}</li>
+                        <li>Linked Account: {this.props.league_name}</li>
                         <li><button>Edit</button></li>
                     </ul>
                     <ul className={styles.linkAcc}>
@@ -57,12 +48,15 @@ class SettingsContainer extends Component {
         if (this.state.displayPassword){
             return (
                 <div className={styles.displayPanel}>
-                    <form className={styles.passwordForm}>
+                    <form className={styles.passwordForm} onSubmit={this.changePasswordForm}>
+                        Old Password <br></br>
+                        <input id="oldPassword" type="password"></input>
+                        <br></br>
                         New Password:<br></br>
-                        <input type="text"></input>
+                        <input id="newPassword" type="password"></input>
                         <br></br>
                         Confirm Password:<br></br>
-                        <input type="text"></input>
+                        <input id="confirmPassword" type="password"></input>
                         <br></br>
                         <br></br>
                         <input type="submit" value="Reset"></input>
@@ -76,11 +70,11 @@ class SettingsContainer extends Component {
         if (this.state.displayEmail){
             return (
                 <div className={styles.displayPanel}>
-                    <form className={styles.passwordForm}>
+                    <form className={styles.passwordForm} onSubmit={this.changeEmailForm}>
                         Current Email:<br></br>
-                        <p>{user.email}</p>
+                        <p>{this.props.email}</p>
                         New Email:<br></br>
-                        <input type="text"></input>
+                        <input id="newEmail" type="text"></input>
                         <br></br>
                         <br></br>
                         <input type="submit" value="Change"></input>
@@ -113,7 +107,7 @@ class SettingsContainer extends Component {
     render() {
 
         return (
-            <div className={styles.bg}>
+            <div>
                 <div className = {cx("container-fluid", styles.container_frame)}>
                     <div className = "row">
                         <div className = {"col-3"}> {this.renderTabs()} </div>
@@ -168,6 +162,40 @@ class SettingsContainer extends Component {
             displayIFA: true
         })
     }
+
+    changePasswordForm = (event) => {
+        event.preventDefault();
+
+        const oldPassword = document.getElementById('oldPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Wrong password
+        if (oldPassword != this.props.password) {
+            alert('wrong password');
+        }
+
+        // New password doesn't match
+        else if (newPassword != confirmPassword) {
+            alert('new password and comfirm password are not the same');
+        }
+
+        else {
+            changePassword(this.props.id, newPassword);
+            alert('Successfully changed password');
+        }
+        
+
+    }  
+    
+    changeEmailForm = (event) => {
+        event.preventDefault();
+        const newEmail = document.getElementById('newEmail').value;
+
+        changeEmail(this.props.id, newEmail);
+        alert('Successfully changed email');
+
+    } 
 
 }
 

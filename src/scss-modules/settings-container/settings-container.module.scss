@@ -1,20 +1,14 @@
 @import "../scss-general-modules/whole-dir_scss.module";
 
-.bg {
-    background: $dark-bg-login url('../../assets/images/login-bg-blended.png') no-repeat center top;
-    min-height: 720px;
-}
-
 .settingTabs {
     overflow: hidden;
     float: left;
-    margin-top: 100px;
-    margin-left: 100px;
+    margin-top: 50px;
     font-family: 'Sanson', 'Bebas', sans-serif;
 }
 
 .settingTabs button {
-    margin-top: 5px;
+    margin-bottom: 20px;
     border: 2px solid #ffc107;
     background-color: inherit;
     outline: none;
@@ -28,16 +22,18 @@
 }
 
 .displayPanel {
-    margin-top: 100px;
+    margin-top: 50px;
+    margin-left: 50px;
     border: 2px solid #ffc107;
     color: white;
     font-size: 20px;
-    padding: 20px;
+    padding: 5px;
     // background: #067773;
 }
 
 .displayPanel ul {
     margin-left: 20px;
+    text-align: left;
 }
 
 .displayPanel ul li {
