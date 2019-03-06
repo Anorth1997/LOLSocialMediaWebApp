@@ -13,6 +13,9 @@ export default function(state={}, action) {
         case "GET_USER_BY_ID":
             return {...state, usersList: action.payload}
 
+        case "CHANGE_USER_INFO":
+            return {...state, response: action.payload}
+
         default:
             return state;
     }

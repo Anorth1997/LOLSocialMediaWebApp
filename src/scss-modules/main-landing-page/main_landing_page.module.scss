@@ -1,0 +1,15 @@
+.welcomeSection {
+    background-image: url('../../assets/images/shadow-lol-bg.jpg');
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center center;
+    min-height: 400px;
+    // margin: auto;
+    text-align: center;
+    padding: 50px;
+
+    .welcomingHeader {
+        color: white;
+        // margin-top: 40px;
+    }
+}

@@ -7,11 +7,27 @@ import { bindActionCreators } from 'redux';
 
 
 
+import WelcomeSection from '../Components/MainLandingPage/welcomeSection';
+
 
 class MainLandingPageContainer extends Component {
 
     componentWillMount() {
          
+    }
+
+    renderTemplate = () => {
+        if (this.props.currUser) {
+            return (
+                <div>
+                    The user has logged in
+                </div>
+            );
+        } else {
+            return (
+                <WelcomeSection {...this.props}/>
+            );
+        }
     }
 
     render() {
@@ -20,7 +36,7 @@ class MainLandingPageContainer extends Component {
 
         return (
             <div>
-                {/* <WelcomeSection {...this.props}/> */}
+               {this.renderTemplate()}
             </div>
         );
     }

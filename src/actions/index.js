@@ -52,6 +52,22 @@ export function getUserById(id) {
     }
 }
 
+export function changeUserInfo(user, newInfo) {
+
+    let response = true;
+
+    // change the users information and return true or false if it was successful
+    console.log('user:')
+    console.log(user);
+    console.log('New Information')
+    console.log(newInfo)
+
+    return {
+        type: 'CHANGE_USER_INFO',
+        payload: response
+    }
+}
+
 export function logOut() {
     const user = undefined;
     return {

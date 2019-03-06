@@ -7,22 +7,27 @@ import { bindActionCreators } from 'redux';
 import cx from 'classnames';
 import styles from '../scss-modules/admin-container/admin_container.module.scss';
 
+
+import AdminPortalTabs from './adminPortal/admin_portal_tab_content';
+
+
 class AdminPortalContainer extends Component {
 
-    renderCurrUser = () => {
-        if (this.props.currUser) {
-            return (
-                <div style={{
-                    color: 'red'
-                }}>
-                    {this.props.currUser.username}
-                </div>
-            );
-        }
-    }
 
     componentWillMount() {
         this.props.getAllUsers();
+    }
+
+    renderTabs = () => {
+        if (this.props.allUsers) {
+            return (
+                <div>
+                    <AdminPortalTabs 
+                        users={this.props.allUsers}
+                    />
+                </div>
+            );
+        }
     }
 
     render() {
@@ -31,12 +36,11 @@ class AdminPortalContainer extends Component {
 
         return (
             <div>
-                {/* {this.renderCurrUser()}  */}
 
                 <div className={cx("container-fluid", styles.adminContainer)}>
                     <div className="row">
                         <div className={cx("col-12")}>
-                            Hello
+                            {this.renderTabs()}
                         
                         
                         </div>
