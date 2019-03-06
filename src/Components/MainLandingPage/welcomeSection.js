@@ -4,7 +4,7 @@ import styles from '../../scss-modules/main-landing-page/main_landing_page.modul
 
 const WelcomeSection = (props) => {
 
-    console.log(props);
+    // console.log(props);
 
     return (
         <div className={styles.welcomeSection}>

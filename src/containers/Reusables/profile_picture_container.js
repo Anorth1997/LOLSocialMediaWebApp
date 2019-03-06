@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 
 import { connect } from 'react-redux';
-import { getAllUsers, getUserByUsername, getUserByEmail, getUserById } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 
 
@@ -10,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import styles from '../../scss-modules/profile-icon/profile-icon.module.scss';
 
-import PopupProfileSettings from '../../Components/Header/ProfileInfo/PopupProfileInfo.js/popup';
+// import PopupProfileSettings from '../../Components/Header/ProfileInfo/PopupProfileInfo.js/popup';
 
 
 class ProfilePictureContainer extends Component {
@@ -44,8 +43,7 @@ class ProfilePictureContainer extends Component {
                     <Link
                         className={styles.profileLinkContainer}
                         to={`/profile/${this.props.currUser.username}`}>
-                        {console.log(this.props.currUser.profile_pic)}
-                        <img className={styles.profileIcon} src={require(`../../assets/images/${this.props.currUser.profile_pic}`)} />
+                        <img className={styles.profileIcon} alt="" src={require(`../../assets/images/${this.props.currUser.profile_pic}`)} />
                         <span>{this.props.currUser.username}</span>
                     </Link>  
                 )

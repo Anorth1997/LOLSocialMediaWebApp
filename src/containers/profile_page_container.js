@@ -22,7 +22,7 @@ class ProfilePageContainer extends Component {
 
     
     componentWillMount() {
-     console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         this.props.getUserByUsername(this.props.match.params.id);
     }
     

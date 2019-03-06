@@ -139,7 +139,7 @@ export function tryLoggingIn(username, password) {
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
     const user = users.find( (item) => {
-        console.log('in actions');
+        // console.log('in actions');
         return (item.username === username || item.email === username) && item.password === password;
     })
 

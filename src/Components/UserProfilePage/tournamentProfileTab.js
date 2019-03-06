@@ -63,7 +63,7 @@ class TournamentUserProfileTab extends Component {
 
         return (
             <div className={styles.tournamentTab}>
-                <div className={styles.tournamentsParticipating}>
+                <div className={cx(styles.tournamentsParticipating)}>
                     {this.renderTournaments('participating')}
                 </div>
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 
 import styles from '../scss-modules/settings-container/settings-container.module.scss';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
 import cx from 'classnames';
 
 import { changePassword, changeEmail } from '../actions/index';
@@ -171,12 +170,12 @@ class SettingsContainer extends Component {
         const confirmPassword = document.getElementById('confirmPassword').value;
 
         // Wrong password
-        if (oldPassword != this.props.password) {
+        if (oldPassword !== this.props.password) {
             alert('wrong password');
         }
 
         // New password doesn't match
-        else if (newPassword != confirmPassword) {
+        else if (newPassword !== confirmPassword) {
             alert('new password and comfirm password are not the same');
         }
 

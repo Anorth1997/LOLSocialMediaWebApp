@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 
 import styles from '../scss-modules/find-container/find-container.module.scss';
 import { users } from '../dummy_hardcoded_data';
-import brandImage from '../assets/images/lol-brand-img.png';
 
-import cx from 'classnames';
-import FontAwesome from 'react-fontawesome';
+// import cx from 'classnames';
 // import 'font-awesome/css/font-awesome.min.css';
-
-import FormFields from '../widgets/Forms/formfields';
-import ErrorMessage from '../widgets/Errors/ErrorMessage';
-import CheckBox from '../widgets/Checkbox/checkbox';
-import HelpSection from '../Components/LoginPortal/helpSection';
 
 class FindContainer extends Component{
 
@@ -24,7 +17,7 @@ class FindContainer extends Component{
             return (
                     <ul className={styles.playerBox}>
                         <li className={styles.playerIconContainer}>
-                            <img className={styles.playerIcon} src={i.profile_pic}></img>
+                            <img className={styles.playerIcon} alt="" src={i.profile_pic}></img>
                         </li>
                         <li className={styles.playerNameSection}>
                             <p>{i.username}</p>

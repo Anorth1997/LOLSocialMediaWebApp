@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Tabs, Tab, Sonnet } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -30,7 +30,7 @@ class UserProfileTabContentContainer extends Component {
 
     render() {
 
-        console.log(this.props)
+        // console.log(this.props)
 
        // console.log(this.props.match.params.id);
 
