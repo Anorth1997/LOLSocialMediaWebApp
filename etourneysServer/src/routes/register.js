@@ -105,7 +105,7 @@ router.post('/register/team', (req, res) => {
             privileges: {
                 owner: [hostId]
             },
-            totalRank: host.currentRank
+            totalRank: host.lolInfo.currentRank
         });
 
         teamModel.save()

@@ -30,21 +30,19 @@ router.get('/searchUser', (req, res) => {
 })
 
 
-// router.get('/searchTeam', (req, res) => {
+router.get('/searchTeam', (req, res) => {
     
-//     const { name, leagueUsername, lowestRank, highestRank, mainRole } = req.query;
-//     let filters = {}
+    const { name, lowestRank, highestRank } = req.query;
+    let filters = {}
 
-//     if (username) filters.username = { "$regex": username, "$options": "i"};
-//     if (leagueUsername) filters.leagueUsername = { "$regex": leagueUsername, "$options": "i"};
-//     if (mainRole) filters.mainRole = mainRole;
-//     if (highestRank && lowestRank) filters.currentRank = {"$gte": lowestRank, "$lte": highestRank} 
+    if (name) filters.name = { "$regex": name, "$options": "i"};
+    if (highestRank && lowestRank) filters.averageRank = {"$gte": lowestRank, "$lte": highestRank} 
     
-//     UserModel.find(filters, 'username leagueUsername mainRole currentRank isOnline', (err, users) => {
-//         if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for users with criteria")
-//         res.status(HttpStatus.OK).json(users);
-//     })
-// })
+    TeamModel.find(filters, 'name averageRank', (err, teams) => {
+        if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
+        res.status(HttpStatus.OK).json(teams);
+    })
+})
 
 
 
