@@ -274,6 +274,21 @@ router.put('/modify/user/leaveTeam', (req, res) => {
 
 // ##################### Team modify routes #####################
 
+router.put('/modify/team/info', (req, res) => {
+
+    const { _id, name } = req.body;
+
+    TeamModel.findOneAndUpdate({
+        _id
+    }, { name }, { new: true }, (err, doc) => {
+        if (err) return res.status(HttpStatus.NOT_FOUND).json({ err: "Could not find the team to modify" })
+        return res.status(HttpStatus.OK).json(doc);
+    })
+    .catch(err => {
+        if (err) return res.status(HttpStatus.NOT_FOUND).json({ err: "Could not find the team to modify" })
+    })
+})
+
 // a player on the team requests for a user to join the team
 router.put('/modify/team/requestUser', (req, res) => {
 
@@ -374,6 +389,11 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
 // ##################### end of Team modify routes #####################
 
 
+//###################### Tournament modify #########################
+
+
+
+// ##################### End of Tournament modify routes #####################
 
 
 // ####################### Helpers ##################################
