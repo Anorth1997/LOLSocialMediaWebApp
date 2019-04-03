@@ -274,6 +274,7 @@ router.put('/modify/user/leaveTeam', (req, res) => {
 
 // ##################### Team modify routes #####################
 
+
 router.put('/modify/team/info', (req, res) => {
 
     const { _id, name } = req.body;
@@ -391,6 +392,29 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
 
 //###################### Tournament modify #########################
 
+
+router.put('/modify/tournament/info', (req, res) => {
+
+    const { _id, name } = req.body;
+    
+    TournamentModel.findOne({
+        _id
+    }, (err, tournament) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ err: "Error when modifying team" })
+        if (!tournament) return res.status(HttpStatus.NOT_FOUND).json({ err: "Could not find the team to modify" })
+        if (tournament.hasStarted) {
+            return res.status(HttpStatus.FORBIDDEN).send("Cannot modify a tournament that has already started")
+        }
+        if (name) {
+            tournament.name = name;
+        }
+        tournament.save().then(() => {
+            return res.status(HttpStatus.OK).send(tournament)
+        }).catch(err => {
+            return res.json({ err, msg: "Error when modifying team" }).status(HttpStatus.INTERNAL_SERVER_ERROR)
+        })
+    })
+})
 
 
 // ##################### End of Tournament modify routes #####################

@@ -62,7 +62,7 @@ router.post('/register/user', (req, res) => {
 router.post('/register/tournament', (req, res) => {
     
     const { name, hostType, hostName, hostId, tournamentType, amountOfTeams, playersPerTeam, dateStarting } = req.body;
-
+    const currDate = Date.now();
     const tournModel = new TournamentModel({
         name,
         hostType,
@@ -74,7 +74,6 @@ router.post('/register/tournament', (req, res) => {
         dateCreated: currDate,
         dateStarting
     });
-
     tournModel.save()
     .then((doc) => {
         if (!doc || doc.length === 0) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(doc)
