@@ -30,6 +30,23 @@ router.get('/searchUser', (req, res) => {
 })
 
 
+router.get('/searchTournament', (req, res) => {
+    
+    const { name, hostType, hasStarted, tournamentType, fromDate, toDate } = req.query;
+    let filters = {}
+
+    if (name) filters.name = { "$regex": name, "$options": "i"};
+    if (hostType) filters.hostType = hostType;
+    if (hasStarted) filters.hasStarted = hasStarted;
+    if (tournamentType) filters.hostType = tournamentType;
+    if (fromDate && toDate) filters.dateStarting = {"$gte": lowestRank, "$lte": highestRank} 
+    
+    TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting', (err, tournaments) => {
+        if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
+        res.status(HttpStatus.OK).json(tournaments);
+    })
+})
+
 router.get('/searchTeam', (req, res) => {
     
     const { name, lowestRank, highestRank } = req.query;
