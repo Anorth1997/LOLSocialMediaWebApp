@@ -35,7 +35,7 @@ class IncomingUsersTeamProfileTab extends Component {
                     {users_to_render.map((item, i) => {
                         return (
                             <div key={i}>
-                                <IncomingUserInfo user={item} />
+                                <IncomingUserInfo user={item} hostId={this.props.hostId} teamId={this.props._id} />
                             </div>
                         );
                     })}
@@ -52,6 +52,7 @@ class IncomingUsersTeamProfileTab extends Component {
             </div>
         );
     }
+
 }
 
 const mapStateToProps = (state) => {
