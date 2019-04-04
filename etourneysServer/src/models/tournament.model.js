@@ -22,10 +22,25 @@ let TournamentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    participants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    
+    participants: {
+        currParticipants:
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        incomingParticipants:
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        outGoingParticipants:
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }]
+    },
+    
     eliminated: [{
         type: mongoose.Schema.Types.ObjectId
     }],
@@ -84,7 +99,13 @@ let TournamentSchema = new mongoose.Schema({
         default: false
     }
 }, { versionKey: false})
-
+TournamentSchema.pre('save', function(next) {
+    this.participants.currParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+    this.participants.incomingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+    this.participants.outGoingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+    // console.log(this.participants.currParticipants.ref)
+    next();
+})
 TournamentSchema.plugin(idValidator);
 
 // TournamentSchema.index({name: 1})

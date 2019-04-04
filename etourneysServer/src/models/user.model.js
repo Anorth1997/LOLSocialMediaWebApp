@@ -113,11 +113,23 @@ let UserSchema = new mongoose.Schema({
             default: []
         }]
     },
-    tournaments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tournament',
-        default: []
-    }],
+    tournaments: {
+        currTournaments: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }],
+        outgoingTournamentRequests: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }],
+        incomingTournamentRequests: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }]
+    },
     dateCreated: {
         type: Number,
         required: true
@@ -135,6 +147,11 @@ let UserSchema = new mongoose.Schema({
     emailIsValidated: {
         type: String,
         required: true
+    },
+    profile_pic: {
+        type: String,
+        required: true,
+        default: 'profile-pic-1.png'
     }
 
 }, { versionKey: false })

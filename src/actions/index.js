@@ -1,6 +1,6 @@
-
+import { backendRootLink } from '../secret/config';
 import { users, tournaments, teams, brackets } from '../dummy_hardcoded_data';
-
+import axios from 'axios';
 
 // ####################### User methods #######################
 
@@ -137,20 +137,20 @@ export function changeEmail(id, email) {
 
 export function tryLoggingIn(username, password) {
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const user = users.find( (item) => {
-        // console.log('in actions');
-        return (item.username === username || item.email === username) && item.password === password;
+    const req = axios.put(`${backendRootLink}/login`, {
+        username,
+        password
     })
-
     // console.log(user);
 
     //a request will be made to the server right here when we program our backend
-    return {
+    
+    return req.then(res => {
+        return {
         type: 'GET_USER_BY_USERNAME_AND_PASSWORD',
-        payload: user
-    }
+        payload: res.data
+        }
+    });
 }
 
 
@@ -159,28 +159,20 @@ export function tryLoggingIn(username, password) {
 /**
  * 
  * @param {Array of ids} ids 
- * @param {*} type 
  */
-export function getAllTournaments(ids, type) {
+export function getAllTournaments(ids) {
 
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
-    const results = tournaments.filter( (item) => {
-        return ids.includes(item.id)
+    const req = axios.get(`${backendRootLink}/getTournamentsByIds`, ids)
+
+    return req.then(res => {
+        console.log(res)
+        return {
+        type: 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS',
+        payload: res.data
+        }
     })
-
-    let returnType = ''; 
-    if (type === 'participated') {
-        returnType = 'GET_TOURNAMENTS_PARTICIPATED_BY_IDS';
-    } else {
-        returnType = 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS';
-    }
-
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: returnType,
-        payload: results
-    }
 }
 
 export function getTournamentById(id) {

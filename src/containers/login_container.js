@@ -558,22 +558,8 @@ class LoginContainer extends Component {
 
         for (let key in this.state.formData) {
             dataToSubmit[key] = this.state.formData[key].value;
-        }
-
-        let validate = users.some(function (user) {
-            return dataToSubmit.username === user.username && dataToSubmit.password === user.password;
-        })        
-
-        if (validate) {
-            // redirect to user main page
-            this.props.tryLoggingIn(dataToSubmit.username, dataToSubmit.password);
-        } else {
-            // do error checking first
-            // if there is an error
-            this.setState({
-                showWarning: true
-            })
-        }
+        }   
+        this.props.tryLoggingIn(dataToSubmit.username, dataToSubmit.password);
         // console.log(dataToSubmit);
     }    
 

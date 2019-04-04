@@ -36,7 +36,10 @@ router.put('/login', (req, res) => {
                         username: doc.username,
                         emailIsValidated: doc.emailIsValidated,
                         dateCreated: doc.dateCreated,
-                        isOnline: doc.isOnline
+                        isOnline: doc.isOnline,
+                        profile_pic: doc.profile_pic,
+                        tournaments: doc.tournaments,
+                        teams: doc.teams
                     })
                 }).catch(err => {
                     if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)

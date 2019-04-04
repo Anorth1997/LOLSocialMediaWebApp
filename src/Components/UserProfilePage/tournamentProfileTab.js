@@ -16,17 +16,14 @@ class TournamentUserProfileTab extends Component {
     
     componentWillMount() {
 
-
-        const tourns_participating_ids = this.props.tournaments_participating.map( (item) => {
+        /*const tourns_participated_ids = this.props.tournaments_participated.map( (item) => {
             return item.tournament_id;
-        })
-
-        const tourns_participated_ids = this.props.tournaments_participated.map( (item) => {
-            return item.tournament_id;
-        })
-
-        this.props.getAllTournaments(tourns_participating_ids, 'participated');
-        this.props.getAllTournaments(tourns_participated_ids, 'participating');
+        })*/
+        if (this.props.tournaments.currTournaments.length > 0) {
+            this.props.getAllTournaments(this.props.tournaments.currTournaments);
+        }
+        
+        /*this.props.getAllTournaments(tourns_participated_ids, 'participating');*/
     }
     
 
@@ -35,11 +32,9 @@ class TournamentUserProfileTab extends Component {
 
         let tourn_to_render = null;
         if (type === 'participating') {
-            tourn_to_render = this.props.server_response.tournaments_participating_in;
-        } else {
-            tourn_to_render = this.props.server_response.tournaments_participated_in;
+            tourn_to_render = this.props.server_response.currTournaments;
         }
-
+        console.log(tourn_to_render)
         if (tourn_to_render) {
             return (
                 <div>
@@ -63,20 +58,20 @@ class TournamentUserProfileTab extends Component {
                     {this.renderTournaments('participating')}
                 </div>
 
-                <div className={styles.tournamentsParticipated}>
+                {/* <div className={styles.tournamentsParticipated}>
                     {this.renderTournaments('participated')}
-                </div>
+                </div> */}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    
+    console.log(state.tournaments)
     return {
         server_response: {
-            tournaments_participating_in: state.tournaments.tourns_participating,
-            tournaments_participated_in: state.tournaments.tourns_participated
+            currTournaments: state.tournaments.currTournaments
+            //,tournaments_participated_in: state.tournaments.tourns_participated
         }
     }
 }

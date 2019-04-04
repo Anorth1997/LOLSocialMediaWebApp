@@ -6,7 +6,7 @@ export default function(state={}, action) {
         case "GET_TOURNAMENTS_PARTICIPATED_BY_IDS":
             return {...state, tourns_participated: action.payload}
         case "GET_TOURNAMENTS_PARTICIPATING_BY_IDS":
-            return {...state, tourns_participating: action.payload}
+            return {...state, currTournaments: action.payload}
 
 
 

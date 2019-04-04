@@ -24,15 +24,25 @@ router.get('/searchUser', (req, res) => {
     if (highestRank && lowestRank) filters.currentRank = {"$gte": lowestRank, "$lte": highestRank} 
     
     UserModel.find(filters, 'username leagueUsername mainRole currentRank isOnline', (err, users) => {
-        if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for users with criteria")
-        res.status(HttpStatus.OK).json(users);
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for users with criteria")
+        return res.status(HttpStatus.OK).json(users);
     })
 })
 
+router.get('/getTournamentsByIds', (req, res) => {
+    const ids = req.body.ids;
+    if (ids.length > 0) {
+        TournamentModel.find({_id: {$in: ids}}, (err, tournaments) => {
+            if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+            return res.status(HttpStatus.OK).json(tournaments);
+        })
+    }
+})
 
 router.get('/searchTournament', (req, res) => {
     
     const { name, hostType, hasStarted, tournamentType, fromDate, toDate } = req.query;
+    
     let filters = {}
 
     if (name) filters.name = { "$regex": name, "$options": "i"};
@@ -42,8 +52,8 @@ router.get('/searchTournament', (req, res) => {
     if (fromDate && toDate) filters.dateStarting = {"$gte": lowestRank, "$lte": highestRank} 
     
     TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting', (err, tournaments) => {
-        if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
-        res.status(HttpStatus.OK).json(tournaments);
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
+        return res.status(HttpStatus.OK).json(tournaments);
     })
 })
 
@@ -56,8 +66,8 @@ router.get('/searchTeam', (req, res) => {
     if (highestRank && lowestRank) filters.averageRank = {"$gte": lowestRank, "$lte": highestRank} 
     
     TeamModel.find(filters, 'name averageRank', (err, teams) => {
-        if (err) res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
-        res.status(HttpStatus.OK).json(teams);
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
+        return res.status(HttpStatus.OK).json(teams);
     })
 })
 
