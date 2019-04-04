@@ -34,15 +34,15 @@ class TournamentUserProfileTab extends Component {
     
 
 
-    renderTournaments = (loadedTournaments) => {
+    renderTournaments = () => {
 
         let tourn_to_render = null;
-        console.log(this.props.server_response.currTournaments)
-        if (loadedTournaments) {
+        // console.log(this.props.server_response.currTournaments)
+        if (this.props.server_response.currTournaments && this.props.server_response.currTournaments.length > 0) {
             tourn_to_render = this.props.server_response.currTournaments;
         }
-        console.log(loadedTournaments)
-        console.log(tourn_to_render)
+        // console.log(loadedTournaments)
+        // console.log(tourn_to_render)
         if (tourn_to_render) {
             return (
                 <div>
