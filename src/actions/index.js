@@ -264,3 +264,16 @@ export function getBracketeById(id) {
         payload: bracket
     }
 }
+
+/**
+ * 
+ * @param {*} friendId Friend Id to switch the current chat to
+ */
+export function changeCurrentActiveChat(friendId) {
+
+
+    return {
+        type: 'CHANGE_CURRENT_ACTIVE_CHAT',
+        payload: friendId
+    }
+}

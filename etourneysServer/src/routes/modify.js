@@ -94,11 +94,13 @@ router.put('/modify/user/addFriend', (req, res) => {
                         const convoIdShared = createConvoId();
                         user.friends.currFriends.push({
                             friendId: _friendId,
-                            convoId: convoIdShared
+                            convoId: convoIdShared,
+                            friendUsername: userAdded.username
                         })
                         userAdded.friends.currFriends.push({
                             friendId: _id,
-                            convoId: convoIdShared
+                            convoId: convoIdShared,
+                            friendUsername: user.username
                         })
 
                         user.friends.incomingRequests = removeItemFromList(user.friends.incomingRequests, _friendId, false)

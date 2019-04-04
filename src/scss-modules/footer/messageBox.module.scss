@@ -1,0 +1,64 @@
+@import '../../scss-modules/scss-general-modules/whole-dir_scss.module';
+
+
+.messageContainer {
+    // background: red;
+    // margin-top: 8px;
+    // padding-top: 5px;
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+    // align-items: flex-end;
+    max-height: 50vh;
+    min-height: 50vh;
+    // margin-bottom: 50px;
+    padding: 5px 10px;
+    // padding-top: 20px;
+    // align-self: flex-end;
+}
+
+
+::-webkit-scrollbar {
+    // color: red;
+    width: 10px;
+    background-color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(153, 153, 153); 
+    border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background:rgb(196, 109, 27);
+} 
+
+.inputField {
+    @extend .dark-input-field;
+    // overflow-x: scroll;
+    // word-break: break-all;
+}
+
+
+.formStyle {
+    display: block;
+    width: 100%;
+    // position: absolute;
+    // bottom: 0;
+}
+
+.message {
+    display: block;
+    // text-align: left;
+    // align-self: flex-start;
+    text-align-last: left;
+    background: rgb(38, 0, 126);
+    max-width: 80%;
+    overflow-wrap: break-word;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 7px;
+    // text-align: start;
+}

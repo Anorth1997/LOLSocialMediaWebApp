@@ -1,0 +1,32 @@
+.openMessagesContainer {
+    display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 100%;
+    min-height: 100%;
+    flex-direction: column;
+
+    .friendMessageContainer {
+
+        padding: 20px 10px;
+        overflow-wrap: unset;
+        font-size: 0.8rem;
+
+        &:hover {
+            cursor: pointer;
+            background: rgb(39, 39, 39);
+        }
+
+
+        .closeButton {
+            margin-left: 5px;
+            color: white;
+            font-size: 12px;
+
+            &:hover {
+                color: red;
+            }
+            // background: red;
+        }
+    }
+}

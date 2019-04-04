@@ -76,6 +76,9 @@ let UserSchema = new mongoose.Schema({
             },
             convoId: {
                 
+            },
+            friendUsername: {
+
             }
         }],
         incomingRequests: [{
@@ -178,7 +181,7 @@ UserSchema.methods.getLeaguePlayerInfo = function(leagueUsername) {
     // },
     // console.log('here')
     // console.log(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${leagueUsername}?api_key=${apiKey}`)
-    return axios.get(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${leagueUsername}?api_key=${apiKey}`)
+    return axios.get(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${encodeURI(leagueUsername)}?api_key=${apiKey}`)
     
 }
 
