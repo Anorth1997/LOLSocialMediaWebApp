@@ -4,7 +4,7 @@ import styles from '../../scss-modules/errors/errors.module.scss';
 
 const ErrorMessage = (props) => {
     return (
-        <div className={styles.errorMessage}
+        <div className={props.error ? styles.errorMessage : styles.successMessage}
              style={{
                  padding: props.show ? '5px' : '0px'
              }}>

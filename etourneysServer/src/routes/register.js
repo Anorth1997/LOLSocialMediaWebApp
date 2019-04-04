@@ -32,7 +32,7 @@ router.post('/register/user', (req, res) => {
         model.getLeaguePlayerInfo(leagueUsername)
         .then((lolResponse) => {
             // console.log('1')
-            console.log(lolResponse.data)
+            // console.log(lolResponse.data)
             model.leagueUsername = leagueUsername;
             model.lolInfo.id = lolResponse.data.id;
             model.lolInfo.puuid = lolResponse.data.puuid;
@@ -42,11 +42,12 @@ router.post('/register/user', (req, res) => {
             model.save()
             .then((doc) => {
                 if (!doc || doc.length === 0) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(doc);
-                return res.status(HttpStatus.CREATED).send(doc)
+                return res.status(HttpStatus.CREATED).send("Success")
             })
             .catch((err) => {
-                const { errors, message } = err;
-                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({errors, message})
+                const { errmsg } = err;
+                console.log(errmsg);
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(errmsg)
             })
         })
         .catch(err => {

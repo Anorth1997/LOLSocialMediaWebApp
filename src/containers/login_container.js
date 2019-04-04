@@ -20,14 +20,22 @@ import { connect } from 'react-redux';
 import { tryLoggingIn } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
+import { riotApiKey, rootRiotApiLink, backendRootLink } from '../secret/config';
+import axios from 'axios';
+
 
 class LoginContainer extends Component {
 
     state = {
         showWarning: false,
         rememberMe: false,
-        mainLoginForm: true,
+        mainLoginForm: 'signIn',
         loginStatus: false,
+        showDiffPasswd: false,
+        showShortPasswd: false,
+        showLeagueUserNotExist: false,
+        showSuccessSignUpMessage: false,
+        showFailedSignup: false,
         forgotPage: {
             type: '',
             message: '',
@@ -95,102 +103,306 @@ class LoginContainer extends Component {
                 touched: false,
                 validationMessage: ''
             }
+        },
+        signupFormData: {
+            username: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: 'Username',
+                config: {
+                    name: 'username_input',
+                    type: 'text',
+                    placeholder: '',
+                    autoComplete: 'off',
+                    autoFocus: true
+                },
+                validation: {
+                    required: true,
+                    minLength: 5
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            },
+            password: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: 'Password',
+                config: {
+                    name: 'password_input',
+                    type: 'password',
+                    placeholder: '',
+                    autoComplete: 'off'
+                },  
+                validation: {
+                    required: true,
+                    minLength: 6
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            },
+            rePassword: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: 'Reenter Pasword',
+                config: {
+                    name: 'rePassword_input',
+                    type: 'password',
+                    placeholder: '',
+                    autoComplete: 'off'
+                },  
+                validation: {
+                    required: true,
+                    minLength: 6
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            },
+            email: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: 'Email',
+                config: {
+                    name: 'email_input',
+                    type: 'email',
+                    placeholder: '',
+                    autoComplete: 'off'
+                },  
+                validation: {
+                    required: true,
+                    minLength: 0
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            },
+            leagueUserName: {
+                element: 'input',
+                value: '',
+                label: true,
+                labelText: 'League User Name',
+                config: {
+                    name: 'lolusername_input',
+                    type: 'lolusername',
+                    placeholder: '',
+                    autoComplete: 'off'
+                },  
+                validation: {
+                    required: true,
+                    minLength: 0
+                },
+                valid: false,
+                touched: false,
+                validationMessage: ''
+            }
         }
     }
 
     renderTemplate = (render) => {
 
-        return render ? 
-            <div>
-                <h1 className={styles.signInLabel}>Sign in</h1>
+        if (render === 'signIn') {
+            return (
+                <div>
+                    <h1 className={styles.signInLabel}>Sign in</h1>
 
-                <form onSubmit={this.submitLoginForm}
+                    <form onSubmit={this.submitLoginForm}
+                        className={styles.formStyle}>
+
+                        <ErrorMessage
+                            error={false}
+                            show={this.state.showSuccessSignUpMessage}
+                            message='You have successfully signed up!'
+                        />
+
+                        <ErrorMessage
+                            error={true}
+                            show={this.state.showWarning}
+                            message='You must fill in the required boxes with information'
+                        />
+
+                        <FormFields
+                            formData={this.state.formData}
+                            onblur={(newState) => {
+                                this.updateForm(newState);
+                            }}
+                            change={(newState) => {
+                                this.updateForm(newState);
+                            }}
+                            styles={styles}
+                        />
+
+                        <CheckBox
+                            checkBoxStyling={styles}
+                            text='Remember me'
+                            checked={this.state.rememberMe}
+                        />
+
+                        <div className={styles.buttonWrapper}>
+                            <button className={cx('btn', styles.btnSignIn)} action="submit">SIGN IN</button>
+                        </div>
+
+                        <div style={{textAlign: 'center', marginBottom: '40px', fontSize: '16px', color: 'white'}}>
+                            If you do not have an account, sign up <span className={styles.createAccountButton} onClick={() => {
+                                this.setState({
+                                    mainLoginForm: 'signUp'
+                                })
+                            }} style={{color: 'blue'}}>here</span>
+                        </div>
+
+                        <HelpSection
+                            helpSectionStyle={styles}
+                            forgotUsername={this.renderForgotUsername}
+                            forgotPassword={this.renderForgotPassword}
+                            forgotEmail={this.renderForgotEmail}
+                        />
+
+                    </form>
+                </div>
+            )
+        } else if (render === 'signUp') {
+
+            return (
+                <div>
+
+                    <FontAwesome
+                        className={styles.backButtonIcon}
+                        name='arrow-left'
+                        onClick={() => {
+                            this.setState({
+                                forgotPage: {
+                                    type: '',
+                                    message: '',
+                                    show: false
+                                },
+                                mainLoginForm: 'signIn',
+                            });
+                        }}
+                    />
+
+                <h1 className={styles.signInLabel}>Register</h1>
+
+                <form onSubmit={this.submitSignupForm}
                     className={styles.formStyle}>
+
+                    <ErrorMessage 
+                        error={true}
+                        show={this.state.showFailedSignup}
+                        message={this.state.failedSignupMessage}
+                    />
 
                     <ErrorMessage
+                        error={true}
+                        show={this.state.showDiffPasswd}
+                        message='The passwords do not match'
+                    />
+
+                    <ErrorMessage
+                        error={true}
                         show={this.state.showWarning}
                         message='You must fill in the required boxes with information'
                     />
 
-                    <FormFields
-                        formData={this.state.formData}
-                        onblur={(newState) => {
-                            this.updateForm(newState);
-                        }}
-                        change={(newState) => {
-                            this.updateForm(newState);
-                        }}
-                        styles={styles}
+                    <ErrorMessage
+                        error={true}
+                        show={this.state.showShortPasswd}
+                        message='Password must be at least 8 characters long with one numeric value'
+                    />          
+                    
+                    <ErrorMessage
+                        error={true}
+                        show={this.state.showLeagueUserNotExist}
+                        message='League of Legends username does not exist.'
                     />
-
-                    <CheckBox
-                        checkBoxStyling={styles}
-                        text='Remember me'
-                        checked={this.state.rememberMe}
-                    />
-
-                    <div className={styles.buttonWrapper}>
-                        <button className={cx('btn', styles.btnSignIn)} action="submit">SIGN IN</button>
-                    </div>
-
-                    <HelpSection
-                        helpSectionStyle={styles}
-                        forgotUsername={this.renderForgotUsername}
-                        forgotPassword={this.renderForgotPassword}
-                        forgotEmail={this.renderForgotEmail}
-                    />
-
-                </form>
-            </div>
-        : 
-            <div>
-
-                <FontAwesome 
-                    className={styles.backButtonIcon}
-                    name='arrow-left'
-                    onClick={() => {
-                        this.setState({
-                            forgotPage: {
-                                type: '',
-                                message: '',
-                                show: false
-                            },
-                            mainLoginForm: true,
-                        });
-                    }}
-                />
-
-                <h1 className={styles.signInLabel}>{this.state.forgotPage.type}</h1>
-
-                <ErrorMessage
-                        show={this.state.showWarning}
-                        message='You must fill in the required boxes with information'
-                    />
-            
-                <p className={styles.forgotInfo}>{this.state.forgotPage.message}</p>
-
-                <form onSubmit={this.submitForgotForm}
-                    className={styles.formStyle}>
 
                     <FormFields
-                        formData={this.state.forgotFormData}
+                        formData={this.state.signupFormData}
                         onblur={(newState) => {
-                            this.updateForgottenForm(newState);
+                            this.updateSignupForm(newState);
                         }}
                         change={(newState) => {
-                            this.updateForgottenForm(newState);
+                            this.updateSignupForm(newState);
                         }}
                         styles={styles}
                     />
 
                     <div className={styles.buttonWrapper}>
-                        <button className={cx('btn', styles.btnSignIn)} action="submit">SUBMIT</button>
+                        <button className={cx('btn', styles.btnSignIn)} action="submit">REGISTER</button>
                     </div>
 
                 </form>
-            
             </div>
-        ;
+            )
+
+        } else {
+            return (
+                <div>
+
+                    <FontAwesome
+                        className={styles.backButtonIcon}
+                        name='arrow-left'
+                        onClick={() => {
+                            this.setState({
+                                forgotPage: {
+                                    type: '',
+                                    message: '',
+                                    show: false
+                                },
+                                mainLoginForm: 'signIn',
+                            });
+                        }}
+                    />
+
+                    <h1 className={styles.signInLabel}>{this.state.forgotPage.type}</h1>
+
+                    <ErrorMessage
+                        error={true}
+                        show={this.state.showWarning}
+                        message='You must fill in the required boxes with information'
+                    />
+
+                    <p className={styles.forgotInfo}>{this.state.forgotPage.message}</p>
+
+                    <form onSubmit={this.submitForgotForm}
+                        className={styles.formStyle}>
+
+                        <FormFields
+                            formData={this.state.forgotFormData}
+                            onblur={(newState) => {
+                                this.updateForgottenForm(newState);
+                            }}
+                            change={(newState) => {
+                                this.updateForgottenForm(newState);
+                            }}
+                            styles={styles}
+                        />
+
+                        <div className={styles.buttonWrapper}>
+                            <button className={cx('btn', styles.btnSignIn)} action="submit">SUBMIT</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            )
+        }
+    }
+
+    updateSignupForm = (newState) => {
+        this.setState({
+            signupFormData: newState,
+            showWarning: false,
+            showDiffPasswd: false,
+            showShortPasswd: false,
+            showLeagueUserNotExist: false,
+            showFailedSignup: false,
+            failedSignupMessage: ''
+        })
     }
 
     updateForgottenForm = (newState) => {
@@ -203,8 +415,107 @@ class LoginContainer extends Component {
     updateForm = (newState) => {
         this.setState({
             formData: newState,
-            showWarning: false
+            showWarning: false,
+            showSuccessSignUpMessage: false
         });
+    }
+
+    submitSignupForm = (event) => {
+        event.preventDefault();
+
+
+        let dataToSubmit = {};
+        let noEmptyBox = true;
+        for (let key in this.state.signupFormData) {
+            dataToSubmit[key] = this.state.signupFormData[key].value;
+            if (!dataToSubmit[key])
+            noEmptyBox = false
+        }
+
+        console.log(dataToSubmit);
+
+        const samePasswd = dataToSubmit.password === dataToSubmit.rePassword;
+        // password validation
+        const passwdRegex = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/;
+        // if this is not null, then we can continue
+        const passwdValidate = dataToSubmit.password.match(passwdRegex)
+
+        
+
+        if (!dataToSubmit.password || !dataToSubmit.username || !dataToSubmit.email || !dataToSubmit.leagueUserName) {
+            this.setState({
+                showWarning: true
+            })
+        } else if (!samePasswd) {
+            this.setState({
+                showDiffPasswd: true
+            })
+        } else if (passwdValidate === null) {
+            this.setState({
+                showShortPasswd: true
+            })
+        } 
+
+        // test leagueUsername against api
+        this.testLeagueUsernameAgainstApi(dataToSubmit.leagueUserName)
+        .then(val => {
+            if (!val) this.setState({showLeagueUserNotExist: true})
+            else {
+                this.registerAccount(dataToSubmit.username, dataToSubmit.password, dataToSubmit.email, dataToSubmit.leagueUserName)
+                .then(val => {
+                    console.log('done pinging the server')
+                    if (val.data === 'Success') {
+                        this.setState({
+                            mainLoginForm: 'signIn',
+                            showSuccessSignUpMessage: true
+                        })
+                    }
+                    console.log(val)
+                })
+                .catch(err => {
+                    // console.log('error from server')
+                    console.log(err.response.data)
+                    if (err.response.data.includes('username')) {
+                        this.setState({
+                            showFailedSignup: true,
+                            failedSignupMessage: 'The username is already in use'
+                        })
+                    } else if (err.response.data.includes('email')) {
+                        this.setState({
+                            showFailedSignup: true,
+                            failedSignupMessage: 'The email is already in use'
+                        })
+                    } else if (err.response.data.includes('leagueUsername')) {
+                        this.setState({
+                            showFailedSignup: true,
+                            failedSignupMessage: 'The league of legends account is already in use'
+                        })
+                    }
+                })
+            } 
+        })
+        .catch(err => {
+            this.setState({
+                showLeagueUserNotExist: true
+            })
+        })
+
+        // console.log(passwdValidate);
+    }    
+
+    registerAccount = (username, password, email, leagueUsername) => {
+
+        return axios.post(`${backendRootLink}/register/user`, {
+            username,
+            password,
+            email,
+            leagueUsername
+        })
+    }
+
+    testLeagueUsernameAgainstApi = (leagueUsername) => {
+
+        return axios.get(`${rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${encodeURI(leagueUsername)}?api_key=${riotApiKey}`)
     }
 
     submitForgotForm = (event) => {
@@ -300,7 +611,7 @@ class LoginContainer extends Component {
     renderForgotUsername = () => {
         // console.log('forgot username clicked');
         this.setState({
-            mainLoginForm: false,
+            mainLoginForm: 'forgotForm',
             forgotPage: {
                 type: 'Forgot Username',
                 message: 'Please enter the email of the account that you forgot the username of',
@@ -311,7 +622,7 @@ class LoginContainer extends Component {
 
     renderForgotPassword = () => {
         this.setState({
-            mainLoginForm: false,
+            mainLoginForm: 'forgotForm',
             forgotPage: {
                 type: 'Forgot Password',
                 message: 'Please enter the email or username of the account that you forgot the password of',
@@ -322,7 +633,7 @@ class LoginContainer extends Component {
 
     renderForgotEmail = () => {
         this.setState({
-            mainLoginForm: false,
+            mainLoginForm: 'forgotForm',
             forgotPage: {
                 type: 'Forgot Email',
                 message: 'Please enter the username of the account that you forgot the email of',

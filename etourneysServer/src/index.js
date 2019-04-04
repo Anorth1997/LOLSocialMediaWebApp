@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path')
 const bodyParser = require('body-parser');
 const httpStatus = require('http-status-codes');
+const cors = require('cors');
 // let bodyParser = require('');
 
 // routers
@@ -19,6 +20,7 @@ require('./config/db');
 // app.set('trust proxy', true);
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use((req, res, next) => {
     console.log(`${new Date().toString()} => ${req.originalUrl}, ${req.body}, host is: ${req.get('host')}. The IP is: ${req.ip}`)
