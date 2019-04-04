@@ -8,20 +8,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // import TournamentInfo from '../../hoc/TournamentInfoContainer/tournInfo';
-import UserInfo from '../../hoc/userInfoContainer/userInfo';
-import { getAllUsers } from './../../actions/index';
+import IncomingUserInfo from '../../hoc/IncomingUserInfoContainer/incomingUserInfo';
+import { getAllIncomingUsers } from './../../actions/index';
 
-class UsersTeamProfileTab extends Component {
-
+class IncomingUsersTeamProfileTab extends Component {
 
     
     componentWillMount() {
-        
-        const userIds = this.props.players.currPlayers.map( (item) => {
+        console.log(this.props)
+        const userIds = this.props.players.incomingPlayerRequests.map( (item) => {
             return item;
         })
-        console.log(userIds)
-        this.props.getAllUsers(userIds);
+
+        this.props.getAllIncomingUsers(userIds);
         // this.props.getAllTournaments(tourns_participated_ids, 'participating');
     }
     
@@ -29,15 +28,14 @@ class UsersTeamProfileTab extends Component {
 
     renderUsers = () => {
 
-        let users_to_render = this.props.server_response.users;
-        console.log(users_to_render)
+        let users_to_render = this.props.server_response.incomingUsers;
         if (users_to_render) {
             return (
                 <div>
                     {users_to_render.map((item, i) => {
                         return (
                             <div key={i}>
-                                <UserInfo user={item} />
+                                <IncomingUserInfo user={item} />
                             </div>
                         );
                     })}
@@ -59,17 +57,17 @@ class UsersTeamProfileTab extends Component {
 const mapStateToProps = (state) => {
     return {
         server_response: {
-            users: state.users.usersList
+            incomingUsers: state.users.incUsers
         }
     }
 }
  
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getAllUsers}, dispatch);
+    return bindActionCreators({getAllIncomingUsers}, dispatch);
 }
  
  
  
-export default connect(mapStateToProps, mapDispatchToProps)(UsersTeamProfileTab);
+export default connect(mapStateToProps, mapDispatchToProps)(IncomingUsersTeamProfileTab);
  
 
