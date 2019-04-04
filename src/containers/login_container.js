@@ -454,51 +454,53 @@ class LoginContainer extends Component {
             this.setState({
                 showShortPasswd: true
             })
-        } 
-
-        // test leagueUsername against api
-        this.testLeagueUsernameAgainstApi(dataToSubmit.leagueUserName)
-        .then(val => {
-            if (!val) this.setState({showLeagueUserNotExist: true})
-            else {
-                this.registerAccount(dataToSubmit.username, dataToSubmit.password, dataToSubmit.email, dataToSubmit.leagueUserName)
+        } else {
+            this.testLeagueUsernameAgainstApi(dataToSubmit.leagueUserName)
                 .then(val => {
-                    console.log('done pinging the server')
-                    if (val.data === 'Success') {
-                        this.setState({
-                            mainLoginForm: 'signIn',
-                            showSuccessSignUpMessage: true
-                        })
+                    if (!val) this.setState({ showLeagueUserNotExist: true })
+                    else {
+                        this.registerAccount(dataToSubmit.username, dataToSubmit.password, dataToSubmit.email, dataToSubmit.leagueUserName)
+                            .then(val => {
+                                console.log('done pinging the server')
+                                if (val.data === 'Success') {
+                                    this.setState({
+                                        mainLoginForm: 'signIn',
+                                        showSuccessSignUpMessage: true
+                                    })
+                                }
+                                console.log(val)
+                            })
+                            .catch(err => {
+                                // console.log('error from server')
+                                console.log(err.response.data)
+                                if (err.response.data.includes('username')) {
+                                    this.setState({
+                                        showFailedSignup: true,
+                                        failedSignupMessage: 'The username is already in use'
+                                    })
+                                } else if (err.response.data.includes('email')) {
+                                    this.setState({
+                                        showFailedSignup: true,
+                                        failedSignupMessage: 'The email is already in use'
+                                    })
+                                } else if (err.response.data.includes('leagueUsername')) {
+                                    this.setState({
+                                        showFailedSignup: true,
+                                        failedSignupMessage: 'The league of legends account is already in use'
+                                    })
+                                }
+                            })
                     }
-                    console.log(val)
                 })
                 .catch(err => {
-                    // console.log('error from server')
-                    console.log(err.response.data)
-                    if (err.response.data.includes('username')) {
-                        this.setState({
-                            showFailedSignup: true,
-                            failedSignupMessage: 'The username is already in use'
-                        })
-                    } else if (err.response.data.includes('email')) {
-                        this.setState({
-                            showFailedSignup: true,
-                            failedSignupMessage: 'The email is already in use'
-                        })
-                    } else if (err.response.data.includes('leagueUsername')) {
-                        this.setState({
-                            showFailedSignup: true,
-                            failedSignupMessage: 'The league of legends account is already in use'
-                        })
-                    }
+                    this.setState({
+                        showLeagueUserNotExist: true
+                    })
                 })
-            } 
-        })
-        .catch(err => {
-            this.setState({
-                showLeagueUserNotExist: true
-            })
-        })
+        }
+
+        // test leagueUsername against api
+        
 
         // console.log(passwdValidate);
     }    
