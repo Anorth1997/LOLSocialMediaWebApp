@@ -23,26 +23,26 @@ const RankImage = (props) => {
     } else if (props.rank <= 25) {
         rank = 'diamond';
         value = props.rank - 20;
-    } else if (props.rank <= 30) {
+    } else if (props.rank <= 26) {
         rank = 'master';
-        value = props.rank - 25;
+        value = props.rank - 26;
     } else {
         rank = "challenger"
-        value = props.rank - 30;
+        value = props.rank - 27;
     }
 
     switch(value) {
-        case 1: 
+        case 5: 
             romanNumeral = 'I';
             break;
-        case 2:
+        case 4:
             romanNumeral = 'II';
             break;
         case 3:
             romanNumeral = 'III';
             break;
-        case 4:
-            romanNumeral = 'VI';
+        case 2:
+            romanNumeral = 'IV';
             break;
         default: 
             romanNumeral = 'V';

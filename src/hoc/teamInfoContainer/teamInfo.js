@@ -8,13 +8,13 @@ import RankImage from './../../Components/OtherComponents/rankImage';
 
 const TeamInfo = (props) => {
 
-    // console.log(props);
+    console.log(props);
 
     return (
         <div className={cx("container-fluid", styles.teamInfo)}>
             <div className="row">
                 <div className="col-2">
-                    <img className={styles.teamIcon} src={require(`../../assets/images/${props.team.icon}`)} alt=""/>
+                    {/* <img className={styles.teamIcon} src={require(`../../assets/images/${props.team.icon}`)} alt=""/> */}
                 </div>
                 <div className={cx("col-4", styles.teamName)}>
                     {props.team.name}
@@ -22,7 +22,7 @@ const TeamInfo = (props) => {
                 <div className={cx("col-4", styles.rankImageStyles)}>
                     Average rank
                     <RankImage 
-                        rank={props.team.average_rank}
+                        rank={props.team.averageRank}
                         showInfo={true}
                     />
                 </div>

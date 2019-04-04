@@ -19,24 +19,15 @@ export function getAllUsers() {
 
 export function getUserByUsername(username) {
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const user = users.find( (item) => {
-        return item.username === username;
+    
+    const req = axios.put(`${backendRootLink}/searchUser?username=${username}`)
+    return req.then(res => {
+        return {
+            type: 'GET_USER_BY_USERNAME',
+            payload: res.data
+        }
     })
-
-    //a request will be made to the server right here when we program our backend
-    //for example axios.get(`url/username).then( (response) => {
-        // return {
-        //     type: 'GET_USER_BY_USERNAME',
-        //     payload: response.data
-        // }
-    // })
-
-    return {
-        type: 'GET_USER_BY_USERNAME',
-        payload: user
-    }
+    
 }
 
 export function getUserByEmail(email) {
@@ -200,19 +191,17 @@ export function getTournamentById(id) {
 
 export function getAllTeams(ids) {
 
-    // console.log('in heer')
-
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const results = teams.filter( (item) => {
-        return ids.includes(item.id)
+    const req = axios.put(`${backendRootLink}/getTeamsByIds`,{ 
+        ids
     })
 
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'GET_TEAMS_BY_IDS',
-        payload: results
-    }
+    return req.then(res => {
+        console.log(res)
+        return {
+            type: 'GET_TEAMS_BY_IDS',
+            payload: res.data
+        }
+    })
 }
 
 export function getTeamById(id) {

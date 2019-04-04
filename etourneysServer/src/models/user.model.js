@@ -183,10 +183,55 @@ UserSchema.methods.getLeaguePlayerInfo = function(leagueUsername) {
 }
 
 
-UserSchema.methods.updatePlayerRank = (leagueUsername) => {
+UserSchema.methods.updatePlayerRank = (leagueUsername, callback) => {
     // console.log('in here')
-    if (Date.now() - this.lastUpdated < 1000*60) return null;
-    else return axios.get(`${riotApiConstants.rootRiotApiLink}/lol/league/v4/positions/by-summoner/${leagueUsername}?api_key=${apiKey}`)    
+    if (Date.now() - this.lastUpdated < 1000) return null;
+    else {
+        axios.get(`${riotApiConstants.rootRiotApiLink}/lol/league/v4/positions/by-summoner/${leagueUsername}?api_key=${apiKey}`) 
+        .then(doc => {
+            
+            const tier = doc.data[0].tier;
+            const rank = doc.data[0].rank;
+            let rankNum = 0;
+            if (tier === 'SILVER') {
+                rankNum += 5
+            }
+            else if (tier === 'GOLD') {
+                rankNum += 10
+            }
+            else if (tier === 'PLATINUM') {
+                rankNum += 15
+            }
+            else if (tier === 'DIAMOND') {
+                rankNum += 20
+            }
+            else if (tier === 'MASTER') {
+                rankNum += 26
+            }
+            else if (tier === 'CHALLENGER') {
+                rankNum += 27
+            }
+
+            if (rank === 'V') {
+                rankNum += 1;
+            }
+            else if (rank === 'IV') {
+                rankNum += 2;
+            }
+            else if (rank === 'III') {
+                rankNum += 3;
+            }
+            else if (rank === 'II') {
+                rankNum += 4;
+            }
+            else if (rank === 'I' && (tier !== 'MASTER' || tier !== 'CHALLENGER')) {
+                rankNum += 5;
+            }
+            return callback(rankNum);
+        }).catch(err => {
+            return callback(0);
+        })
+    }
 }
 
 module.exports = mongoose.model('User', UserSchema);

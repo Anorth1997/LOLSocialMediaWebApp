@@ -23,12 +23,15 @@ class ProfilePageContainer extends Component {
     
     componentWillMount() {
         // console.log(this.props.match.params.id)
+        
         this.props.getUserByUsername(this.props.match.params.id);
+        console.log(this.props)
     }
     
 
     renderProfile = () => {
         if (this.props.currUser) {
+            console.log(this.props)
             return (
                 <div className={styles.profile}>
                     <img className={styles.profilePic} src={require(`../assets/images/${this.props.currUser.profile_pic}`)} alt=""/>
@@ -38,11 +41,11 @@ class ProfilePageContainer extends Component {
                     </div>
 
                     <div className={styles.leagueAccountInfo}>
-                        <i>{this.props.currUser.league_name}</i> 
+                        <i>{this.props.currUser.leagueUsername}</i> 
                     </div>
 
                     <RankImage 
-                        rank={this.props.currUser.rank}
+                        rank={this.props.currUser.lolInfo.currentRank}
                         showInfo={true}
                         
                     />
@@ -80,13 +83,68 @@ class ProfilePageContainer extends Component {
                 </div>
             );
         }
+
+        else {
+            if (this.props.user) {
+                console.log(this.props)
+                return (
+                <div className={styles.profile}>
+                    <img className={styles.profilePic} src={require(`../assets/images/${this.props.user.profile_pic}`)} alt=""/>
+                    
+                    <div className={styles.username}>
+                        {this.props.user.username}
+                    </div>
+
+                    <div className={styles.leagueAccountInfo}>
+                        <i>{this.props.user.leagueUsername}</i> 
+                    </div>
+
+                    <RankImage 
+                        rank={this.props.user.lolInfo.currentRank}
+                        showInfo={true}
+                        
+                    />
+
+
+                    <div className={cx("container-fluid", styles.tournamentOutcomes)}>
+                        <div className={cx("row", styles.tournamentOutcomes)}>
+                            <div className="col-xs-4">
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.goldTrophy}
+                                        icon={faMedal}
+                                    />
+                                    20
+                                </span>
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.silverTrophy}
+                                        icon={faMedal}
+                                    />
+                                    40
+                                </span>
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.medal}
+                                        icon={faAward}
+                                    />
+                                    15
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>           
+                </div>
+            );}
+        }
     }
 
     renderTabs = () => {
-        if (this.props.currUser) {
+        if (this.props.user) {
             return (
                 <UserProfileTabContent
-                    {...this.props.currUser}
+                    {...this.props}
                    // loggedInUser={this.props.loggedInUser}
                 />
             );
@@ -122,8 +180,8 @@ class ProfilePageContainer extends Component {
 
 const mapStateToProps = (state) => {
      return {
-         currUser: state.users.user,
-         loggedInUser: state.currUser.info
+         currUser: state.currUser.info,
+         user: state.users.user
      }
  }
  

@@ -96,13 +96,13 @@ let TeamSchema = new mongoose.Schema({
 
 TeamSchema.pre('save', function(next) {
     if (this.players.length === 0) this.averageRank = 0
-    else this.averageRank = Math.floor(this.totalRank / this.players.length)
+    else this.averageRank = Math.floor(this.totalRank / this.players.currPlayers.length)
     next()
 });
 
 TeamSchema.pre('update', function(next) {
     if (this.players.length === 0) this.averageRank = 0
-    else this.averageRank = Math.floor(this.totalRank / this.players.length)
+    else this.averageRank = Math.floor(this.totalRank / this.players.currPlayers.length)
     next()
 })
 

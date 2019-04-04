@@ -17,16 +17,11 @@ class TeamsUserProfileTab extends Component {
     
     componentWillMount() {
 
-        const _teams_participating_ids = this.props.tournaments_participating.map( (item) => {
-            return item.team_id;
+        const _teams_participating_ids = this.props.teams.currTeams.map( (item) => {
+            return item;
         })
 
-        const teams_participated_ids = this.props.tournaments_participated.map( (item) => {
-            return item.team_id;
-        })
-        const all_teams = teams_participated_ids.concat(_teams_participating_ids);
-
-        this.props.getAllTeams(all_teams);
+        this.props.getAllTeams(_teams_participating_ids);
         // this.props.getAllTournaments(tourns_participated_ids, 'participating');
     }
     

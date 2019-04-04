@@ -39,16 +39,22 @@ router.post('/register/user', (req, res) => {
             model.lolInfo.accountId = lolResponse.data.accountId;
             model.lolInfo.lastUpdated = currDate;
             
-            model.save()
-            .then((doc) => {
-                if (!doc || doc.length === 0) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(doc);
-                return res.status(HttpStatus.CREATED).send("Success")
+            model.updatePlayerRank(model.lolInfo.id, (rank) => {
+                model.lolInfo.currentRank = rank;
+                model.save()
+                .then((doc) => {
+                    if (!doc || doc.length === 0) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(doc);
+                    return res.status(HttpStatus.CREATED).send("Success")
+                })
+                .catch((err) => {
+                    const { errmsg } = err;
+                    console.log(errmsg);
+                    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(errmsg)
+                })
+            
             })
-            .catch((err) => {
-                const { errmsg } = err;
-                console.log(errmsg);
-                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(errmsg)
-            })
+
+            
         })
         .catch(err => {
             return res.status(HttpStatus.NOT_FOUND).send("The league of legends user does not exist")

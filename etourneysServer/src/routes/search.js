@@ -13,7 +13,7 @@ const BCRYPT_SALT_ROUNDS = 11;
 
 
 
-router.get('/searchUser', (req, res) => {
+router.get('/searchUsers', (req, res) => {
     
     const { username, leagueUsername, lowestRank, highestRank, mainRole } = req.query;
     let filters = {}
@@ -29,13 +29,57 @@ router.get('/searchUser', (req, res) => {
     })
 })
 
+router.put('/searchUser', (req, res) => {
+    
+    const { username } = req.query;
+    let filters = {}
+    if (username) filters.username = { "$regex": username, "$options": "i"};
+    UserModel.findOne(filters, (err, user) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for user with criteria")
+        // console.log(user)
+        user.updatePlayerRank(user.lolInfo.id, (rank) => {
+            console.log(rank)
+            user.lolInfo.currentRank = rank;
+            user.save().then((doc)=> {
+                return res.status(HttpStatus.OK).json({
+                    _id: doc._id,
+                    leagueUsername: doc.leagueUsername,
+                    username: doc.username,
+                    emailIsValidated: doc.emailIsValidated,
+                    dateCreated: doc.dateCreated,
+                    isOnline: doc.isOnline,
+                    profile_pic: doc.profile_pic,
+                    tournaments: doc.tournaments,
+                    teams: doc.teams,
+                    lolInfo: doc.lolInfo
+                })
+            }).catch(err => {
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error saving user rank");
+            })
+            
+        })
+
+    })
+})
+
 router.put('/getTournamentsByIds', (req, res) => {
     const ids = req.body.ids;
     console.log(req.body)
     if (ids.length > 0) {
         TournamentModel.find({_id: {$in: ids}}, (err, tournaments) => {
-            if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+            if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting tournaments");
             return res.status(HttpStatus.OK).json(tournaments);
+        })
+    }
+})
+
+router.put('/getTeamsByIds', (req, res) => {
+    const ids = req.body.ids;
+    console.log(req.body)
+    if (ids.length > 0) {
+        TeamModel.find({_id: {$in: ids}}, (err, teams) => {
+            if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+            return res.status(HttpStatus.OK).json(teams);
         })
     }
 })

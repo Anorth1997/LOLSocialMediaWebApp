@@ -32,14 +32,14 @@ router.put('/login', (req, res) => {
                         _id: doc._id,
                         leagueUsername: doc.leagueUsername,
                         friends: doc.friends,
-                        currentRank: doc.currentRank,
                         username: doc.username,
                         emailIsValidated: doc.emailIsValidated,
                         dateCreated: doc.dateCreated,
                         isOnline: doc.isOnline,
                         profile_pic: doc.profile_pic,
                         tournaments: doc.tournaments,
-                        teams: doc.teams
+                        teams: doc.teams,
+                        lolInfo: doc.lolInfo
                     })
                 }).catch(err => {
                     if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err)

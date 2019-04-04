@@ -19,7 +19,7 @@ class UserProfileTabContentContainer extends Component {
         if (this.props.currUser) {
 
 
-            if (this.props.currUser.username === this.props.username) {
+            if (this.props.currUser.username === this.props.user.username) {
                 return (<Tab eventKey="settings" title="Settings">
                     <SettingsContainer {...this.props}/>
                 </Tab>)
@@ -30,7 +30,7 @@ class UserProfileTabContentContainer extends Component {
 
     render() {
 
-        // console.log(this.props)
+        console.log(this.props)
 
        // console.log(this.props.match.params.id);
 
@@ -45,10 +45,10 @@ class UserProfileTabContentContainer extends Component {
 
                     </Tab>
                     <Tab eventKey="tournament" title="Tournaments">
-                        <TournamentUserProfileTab {...this.props}/>
+                        <TournamentUserProfileTab {...this.props.user}/>
                     </Tab>
                     <Tab eventKey="teams" title="Teams">
-                        <TeamsUserProfileTab {...this.props}/>
+                        <TeamsUserProfileTab {...this.props.user}/>
                     </Tab>
                     {this.renderSettings()}
                     
