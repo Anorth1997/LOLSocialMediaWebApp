@@ -104,26 +104,44 @@ export function logOut() {
     }
 }
 
-export function changePassword(id, password) {
+export function changePassword(_id, password, newPassword) {
     // Password will be changed here after we programmed our backend
+    const req = axios.put(`${backendRootLink}/modify/user/password`, {
+        _id: _id,
+        password,
+        newPassword
+    })
+    return req.then(res => {
+        alert('Successfully changed password');
+        return {
+            type: 'CHANGE_PASSWORD',
+            payload: undefined
+        }
+    }).catch(err => {
+        alert('Error changing password. Old password is incorrect.');
+        return {
+            type: 'CHANGE_PASSWORD',
+            payload: undefined
+        }
+    })
     
-
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'CHANGE_PASSWORD',
-        payload: undefined
-    }
 }
 
-export function changeEmail(id, email) {
+export function changeEmail(_id, newEmail) {
     // email will be changed here after we programmed our backend
-    
+    const req = axios.put(`${backendRootLink}/modify/user/info`, {
+        _id: _id,
+        newEmail
+    })
 
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'CHANGE_EMAIL',
-        payload: undefined
-    }
+    return req.then(res => {
+        return {
+            type: 'CHANGE_EMAIL',
+            payload: undefined
+        }
+    })
+    
+    
 }
 
 export function tryLoggingIn(username, password) {

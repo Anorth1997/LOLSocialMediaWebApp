@@ -16,8 +16,7 @@ class SettingsContainer extends Component {
     state = {
         displayGeneral: true,
         displayPassword: false,
-        displayEmail: false,
-        displayIFA: false
+        displayEmail: false
     }
     renderGeneral() {
         if (this.state.displayGeneral) {
@@ -75,8 +74,8 @@ class SettingsContainer extends Component {
             return (
                 <div className={styles.displayPanel}>
                     <form className={styles.passwordForm} onSubmit={this.changeEmailForm}>
-                        Current Email:<br></br>
-                        <p>{this.props.email}</p>
+                         Current Email:<br></br>
+                        <p>{this.props.currUser.email}</p> 
                         New Email:<br></br>
                         <input id="newEmail" type="text"></input>
                         <br></br>
@@ -88,14 +87,6 @@ class SettingsContainer extends Component {
         }
     }
 
-    renderIFA(){
-        if (this.state.displayIFA){
-            return (
-                <div className={styles.displayPanel}>IFA</div>
-            )
-        }
-    }
-
 
     renderTabs() {
         return(
@@ -103,7 +94,6 @@ class SettingsContainer extends Component {
                 <button onClick={this.DisplayGeneral}>General</button>
                 <button onClick={this.DisplayPassword}>Password</button>
                 <button onClick={this.DisplayEmail}>Link e-mail</button>
-                <button onClick={this.DisplayIFA}>IFA</button>
                 <button onClick={() => {
                     this.props.logOut();
                     // this.renderRedirect(true)
@@ -113,7 +103,7 @@ class SettingsContainer extends Component {
     }
 
     render() {
-
+        console.log(this.props.currUser)
         return (
             <div>
                 <div className = {cx("container-fluid", styles.container_frame)}>
@@ -123,7 +113,6 @@ class SettingsContainer extends Component {
                             {this.renderGeneral()}
                             {this.renderPassword()}
                             {this.renderEmail()}
-                            {this.renderIFA()}
                         </div>
                     </div>
                 </div>
@@ -136,8 +125,7 @@ class SettingsContainer extends Component {
         this.setState({
             displayGeneral: true,
             displayPassword: false,
-            displayEmail: false,
-            displayIFA: false
+            displayEmail: false
         })
     }
 
@@ -146,8 +134,7 @@ class SettingsContainer extends Component {
         this.setState({
             displayGeneral: false,
             displayPassword: true,
-            displayEmail: false,
-            displayIFA: false
+            displayEmail: false
         })
     }
 
@@ -156,18 +143,7 @@ class SettingsContainer extends Component {
         this.setState({
             displayGeneral: false,
             displayPassword: false,
-            displayEmail: true,
-            displayIFA: false
-        })
-    }
-
-    DisplayIFA = (event) => {
-        event.preventDefault();
-        this.setState({
-            displayGeneral: false,
-            displayPassword: false,
-            displayEmail: false,
-            displayIFA: true
+            displayEmail: true
         })
     }
 
@@ -178,19 +154,14 @@ class SettingsContainer extends Component {
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // Wrong password
-        if (oldPassword !== this.props.password) {
-            alert('wrong password');
-        }
-
         // New password doesn't match
-        else if (newPassword !== confirmPassword) {
-            alert('new password and comfirm password are not the same');
+        if (newPassword !== confirmPassword) {
+            alert('new password and comfirm password does not match');
         }
 
         else {
-            changePassword(this.props.id, newPassword);
-            alert('Successfully changed password');
+            changePassword(this.props.currUser._id, oldPassword, newPassword);
+            
         }
         
 
@@ -199,9 +170,22 @@ class SettingsContainer extends Component {
     changeEmailForm = (event) => {
         event.preventDefault();
         const newEmail = document.getElementById('newEmail').value;
-
-        changeEmail(this.props.id, newEmail);
-        alert('Successfully changed email');
+        const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        const emailValidate = newEmail.match(emailRegex)
+        if (emailValidate === null) {
+            alert('Invalid email format');
+        }
+        else{
+            changeEmail(this.props.currUser._id, newEmail);
+            alert('Successfully changed email');
+            this.props.currUser.email = newEmail;
+            this.setState({
+                displayGeneral: false,
+                displayPassword: false,
+                displayEmail: true
+            })
+        }
+        
 
     } 
 

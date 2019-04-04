@@ -17,11 +17,14 @@ const BCRYPT_SALT_ROUNDS = 11;
 //###################### user modification endpoints #########################
 router.put('/modify/user/info', (req, res) => {
 
-    const { _id, leagueUsername, currentRank, newEmail } = req.body;
-
+    const { _id, leagueUsername, newEmail } = req.body;
+    const changes = {}
+    if (leagueUsername) changes.leagueUsername = leagueUsername
+    if (newEmail) changes.email = newEmail
+    console.log(changes)
     UserModel.findOneAndUpdate({
         _id
-    }, { leagueUsername, currentRank, email: newEmail }, { new: true }, (err, doc) => {
+    }, changes, { new: true }, (err, doc) => {
         if (err) return res.status(HttpStatus.NOT_FOUND).json({ err: "Could not find the user to modify" })
         return res.status(HttpStatus.OK).json(doc);
     })
@@ -34,7 +37,6 @@ router.put('/modify/user/info', (req, res) => {
 router.put('/modify/user/password', (req, res) => {
 
     const { _id, password, newPassword } = req.body;
-
     UserModel.findOne({
         _id
     }, (err, user) => {

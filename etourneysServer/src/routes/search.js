@@ -51,7 +51,8 @@ router.put('/searchUser', (req, res) => {
                     profile_pic: doc.profile_pic,
                     tournaments: doc.tournaments,
                     teams: doc.teams,
-                    lolInfo: doc.lolInfo
+                    lolInfo: doc.lolInfo,
+                    email: doc.email
                 })
             }).catch(err => {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error saving user rank");
