@@ -29,8 +29,9 @@ router.get('/searchUser', (req, res) => {
     })
 })
 
-router.get('/getTournamentsByIds', (req, res) => {
+router.put('/getTournamentsByIds', (req, res) => {
     const ids = req.body.ids;
+    console.log(req.body)
     if (ids.length > 0) {
         TournamentModel.find({_id: {$in: ids}}, (err, tournaments) => {
             if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
