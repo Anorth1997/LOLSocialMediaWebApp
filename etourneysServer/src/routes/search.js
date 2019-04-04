@@ -51,7 +51,8 @@ router.put('/searchUser', (req, res) => {
                     profile_pic: doc.profile_pic,
                     tournaments: doc.tournaments,
                     teams: doc.teams,
-                    lolInfo: doc.lolInfo
+                    lolInfo: doc.lolInfo,
+                    email: doc.email
                 })
             }).catch(err => {
                 return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error saving user rank");
@@ -61,6 +62,17 @@ router.put('/searchUser', (req, res) => {
 
     })
 })
+
+router.put('/getUsersByIds', (req, res) => {
+    const ids = req.body.ids;
+    if (ids.length > 0) {
+        UserModel.find({_id: {$in: ids}}, (err, users) => {
+            if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting users");
+            return res.status(HttpStatus.OK).json(users);
+        })
+    }
+})
+
 
 router.put('/getTournamentsByIds', (req, res) => {
     const ids = req.body.ids;
@@ -75,7 +87,6 @@ router.put('/getTournamentsByIds', (req, res) => {
 
 router.put('/getTeamsByIds', (req, res) => {
     const ids = req.body.ids;
-    console.log(req.body)
     if (ids.length > 0) {
         TeamModel.find({_id: {$in: ids}}, (err, teams) => {
             if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
@@ -102,7 +113,7 @@ router.get('/searchTournament', (req, res) => {
     })
 })
 
-router.get('/searchTeam', (req, res) => {
+router.get('/searchTeams', (req, res) => {
     
     const { name, lowestRank, highestRank } = req.query;
     let filters = {}
@@ -113,6 +124,15 @@ router.get('/searchTeam', (req, res) => {
     TeamModel.find(filters, 'name averageRank', (err, teams) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
         return res.status(HttpStatus.OK).json(teams);
+    })
+})
+
+router.get('/getTeamById', (req, res) => {
+    const id = req.query.id;
+    console.log(id)
+    TeamModel.findById(id, (err, team) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+        return res.status(HttpStatus.OK).json(team);
     })
 })
 

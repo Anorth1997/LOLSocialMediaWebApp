@@ -4,17 +4,18 @@ import axios from 'axios';
 
 // ####################### User methods #######################
 
-export function getAllUsers() {
+export function getAllUsers(ids) {
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const result = users;
+    const req = axios.put(`${backendRootLink}/getUsersByIds`, {
+        ids: ids
+    })
 
-    //return this object
-    return {
-        type: 'GET_ALL_USERS',
-        payload: result
-    }
+    return req.then(res => {
+        return {
+            type: 'GET_USERS_BY_IDS',
+            payload: res.data
+        }
+    });
 }
 
 export function getUserByUsername(username) {
@@ -104,26 +105,44 @@ export function logOut() {
     }
 }
 
-export function changePassword(id, password) {
+export function changePassword(_id, password, newPassword) {
     // Password will be changed here after we programmed our backend
+    const req = axios.put(`${backendRootLink}/modify/user/password`, {
+        _id: _id,
+        password,
+        newPassword
+    })
+    return req.then(res => {
+        alert('Successfully changed password');
+        return {
+            type: 'CHANGE_PASSWORD',
+            payload: undefined
+        }
+    }).catch(err => {
+        alert('Error changing password. Old password is incorrect.');
+        return {
+            type: 'CHANGE_PASSWORD',
+            payload: undefined
+        }
+    })
     
-
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'CHANGE_PASSWORD',
-        payload: undefined
-    }
 }
 
-export function changeEmail(id, email) {
+export function changeEmail(_id, newEmail) {
     // email will be changed here after we programmed our backend
-    
+    const req = axios.put(`${backendRootLink}/modify/user/info`, {
+        _id: _id,
+        newEmail
+    })
 
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'CHANGE_EMAIL',
-        payload: undefined
-    }
+    return req.then(res => {
+        return {
+            type: 'CHANGE_EMAIL',
+            payload: undefined
+        }
+    })
+    
+    
 }
 
 export function tryLoggingIn(username, password) {
@@ -152,11 +171,6 @@ export function tryLoggingIn(username, password) {
  * @param {Array of ids} ids 
  */
 export function getAllTournaments(ids) {
-
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    // fetch({})
-
 
 
     const req = axios.put(`${backendRootLink}/getTournamentsByIds`, {
@@ -213,15 +227,15 @@ export function getTeamById(id) {
 
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
-    const team = teams.find( (item) => {
-        return item.id === id;
-    })
+    const req = axios.get(`${backendRootLink}/getTeamById?id=${id}`)
 
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'GET_TEAM_BY_ID',
-        payload: team
-    }
+    return req.then(res => {
+        console.log(res)
+        return {
+            type: 'GET_TEAM_BY_ID',
+            payload: res.data
+        }
+    })
 }
 
 
