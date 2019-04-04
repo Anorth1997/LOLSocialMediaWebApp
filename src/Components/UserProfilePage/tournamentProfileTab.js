@@ -12,15 +12,21 @@ import TournamentInfo from '../../hoc/TournamentInfoContainer/tournInfo';
 
 class TournamentUserProfileTab extends Component {
 
-
+    state = {
+        loadedTournaments: false
+    }
     
     componentWillMount() {
 
         /*const tourns_participated_ids = this.props.tournaments_participated.map( (item) => {
             return item.tournament_id;
         })*/
+        console.log(this.props)
+        console.log(this.props.tournaments.currTournaments)
         if (this.props.tournaments.currTournaments.length > 0) {
+            console.log('here')
             this.props.getAllTournaments(this.props.tournaments.currTournaments);
+            
         }
         
         /*this.props.getAllTournaments(tourns_participated_ids, 'participating');*/
@@ -28,12 +34,14 @@ class TournamentUserProfileTab extends Component {
     
 
 
-    renderTournaments = (type) => {
+    renderTournaments = (loadedTournaments) => {
 
         let tourn_to_render = null;
-        if (type === 'participating') {
+        console.log(this.props.server_response.currTournaments)
+        if (loadedTournaments) {
             tourn_to_render = this.props.server_response.currTournaments;
         }
+        console.log(loadedTournaments)
         console.log(tourn_to_render)
         if (tourn_to_render) {
             return (
@@ -55,7 +63,7 @@ class TournamentUserProfileTab extends Component {
         return (
             <div className={styles.tournamentTab}>
                 <div className={cx(styles.tournamentsParticipating)}>
-                    {this.renderTournaments('participating')}
+                    {this.renderTournaments(this.state.loadedTournaments)}
                 </div>
 
                 {/* <div className={styles.tournamentsParticipated}>
@@ -67,7 +75,7 @@ class TournamentUserProfileTab extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.tournaments)
+    // console.log(state.tournaments)
     return {
         server_response: {
             currTournaments: state.tournaments.currTournaments
