@@ -5,6 +5,7 @@ import  { Route, Switch } from 'react-router-dom';
 // route imports
 import MainLandingPage from './Components/MainLandingPage/main_landing_page';
 import LoginPage from './Components/LoginPortal/login';
+import RegisterPage from './Components/RegisterPortal/register';
 import UserProfilePage from './Components/UserProfilePage/user_profile_page';
 import Find from './Components/FindOthersPage/findOthers';
 import TournamentPage from './Components/TournamentsPage/tournament_page';
@@ -21,6 +22,7 @@ class Routes extends Component {
                 <Layout>
                     <Switch>
                         <Route path="/login" exact component={LoginPage}/>
+                        <Route path="/register" exact component={RegisterPage}/>
                         <Route path="/" exact component={MainLandingPage}/>
                         <Route path="/profile/:id" exact component={UserProfilePage}/>
                         <Route path="/find" exact component={Find}/>
