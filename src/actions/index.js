@@ -164,6 +164,7 @@ export function getAllTournaments(ids) {
 
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
+<<<<<<< HEAD
     const req = axios.get(`${backendRootLink}/getTournamentsByIds`, {
         params: {
             ids: ids
@@ -171,6 +172,11 @@ export function getAllTournaments(ids) {
     })
 
     console.log(ids)
+=======
+    const req = axios.put(`${backendRootLink}/getTournamentsByIds`,{ 
+        ids
+    })
+>>>>>>> 78d4c2ec68ec3cc83f2ddd5b5a607bd21dab4c8f
 
     return req.then(res => {
         return {

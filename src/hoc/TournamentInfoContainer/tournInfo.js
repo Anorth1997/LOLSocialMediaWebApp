@@ -15,20 +15,20 @@ const TournamentInfo = (props) => {
         <div className={cx("container-fluid", styles.tournInfo)}>
             <div className="row">
                 <div className="col-6">
-                    {props.tournament.tourn_name}
+                    {props.tournament.name}
 
                     <div>
                         <FontAwesomeIcon
                             className={styles.numTeamsParticipating}
                             icon={faUserFriends}
-                        /> {props.tournament.num_teams}
+                        /> {props.tournament.participants.currParticipants.length}
                     </div>
                 </div>
                 <div className="col-6">
                     <FontAwesomeIcon
                             className={styles.numTeamsParticipating}
                             icon={faCalendarAlt}
-                        /> {props.tournament.date_starting}
+                        /> {new Date(props.tournament.dateStarting).toDateString()}
                     <div>  
                         <button type="button" className={cx("btn btn-dark", styles.detailsButton)}>Details</button>
                     </div>
