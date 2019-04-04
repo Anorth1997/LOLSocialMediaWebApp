@@ -3,11 +3,13 @@ const HttpStatus = require('http-status-codes')
 const express = require('express');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-
+const { createConvoId } = require('../firebase-methods/index');
 // models
 let UserModel = require('../models/user.model');
 let TournamentModel = require('../models/tournament.model');
 let TeamModel = require('../models/team.model');
+
+
 // let TournamentModel = require('../models/tournament.model');
 
 const router = express.Router();
@@ -87,14 +89,14 @@ router.put('/modify/user/addFriend', (req, res) => {
                     if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Could not find user requested to add")
                 })
                     .then(userAdded => {
-
+                        const convoIdShared = createConvoId();
                         user.friends.currFriends.push({
                             friendId: _friendId,
-                            convoId: 0
+                            convoId: convoIdShared
                         })
                         userAdded.friends.currFriends.push({
                             friendId: _id,
-                            convoId: 0
+                            convoId: convoIdShared
                         })
 
                         user.friends.incomingRequests = removeItemFromList(user.friends.incomingRequests, _friendId, false)
@@ -235,6 +237,70 @@ router.put('/modify/user/requestToJoinTeam', (req, res) => {
     })
 })
 
+
+router.put('/modify/user/requestToJoinTournament', (req, res) => {
+
+    const { _id, _tournamentId } = req.body;
+
+    TournamentModel.findById({_id: _tournamentId}, (err, tournament) => {
+        if (err || !tournament) return res.status(HttpStatus.NOT_FOUND).send("Tournament could not be found")
+        // check if the player is already on team or has an outgoing request to him
+        // if on team, dont do anything
+        if (tournament.tournamentType === 'Team') return res.status(HttpStatus.BAD_REQUEST).send("The user must be on a team to join this tournament")
+
+        if (listContains(tournament.participants.currParticipants, _id, false)) return res.status(HttpStatus.BAD_REQUEST).send("The user is already in the tournament")
+        
+        UserModel.findById(_id, (err, user) => {
+            if (err || !user) return res.status(HttpStatus.NOT_FOUND).send("Could not find the user")
+            // if the team has an outgoing request to him, add him to the team
+            if (listContains(tournament.participants.outGoingParticipants, _id, false)) {
+                tournament.participants.outGoingParticipants = removeItemFromList(tournament.participants.outGoingParticipants, _id, false)
+                user.tournaments.incomingTournamentRequests = removeItemFromList(user.tournaments.incomingTournamentRequests, _tournamentId, false)
+                tournament.participants.currParticipants.push(_id);
+                user.tournaments.currTournaments.push(_tournamentId);
+                return saveBothUsers(tournament, user, res, "THe user has been added to the tournament successfully")
+            } else {
+                // else send a request to the team to join it
+                tournament.participants.incomingParticipants.push(_id);
+                user.tournaments.outgoingTournamentRequests.push(_tournamentId);
+                return saveBothUsers(tournament, user, res, "THe user has requested to join the tournament successfully")
+            }
+        })
+    })
+})
+
+router.put('/modify/user/leaveTournament', (req, res) => {
+
+    const { _id, _tournamentId } = req.body;
+
+    TournamentModel.findById({_id: _tournamentId}, (err, tournament) => {
+        if (err || !tournament) return res.status(HttpStatus.NOT_FOUND).send("Tournament could not be found")
+        // check if the player is already on team or has an outgoing request to him
+        // if on team, dont do anything
+
+        if (listContains(tournament.participants.currParticipants, _id, false) ||
+            listContains(tournament.participants.incomingParticipants, _id, false) || 
+            listContains(tournament.participants.outGoingParticipants, _id, false)) {
+                UserModel.findById(_id, (err, user) => {
+                    if (err || !user) return res.status(HttpStatus.NOT_FOUND).send("Could not find the user")
+                    // if the team has an outgoing request to him, add him to the team
+                    tournament.participants.currParticipants = removeItemFromList(team.players.currPlayers, _id, false);
+                    tournament.participants.incomingParticipants = removeItemFromList(team.privileges.nothing, _id, false);
+                    tournament.participants.outGoingParticipants = removeItemFromList(team.privileges.recruiter, _id, false);
+                    user.tournaments.currTournaments = removeItemFromList(user.tournaments.currTournaments, _tournamentId, false);
+                    user.tournaments.outgoingTournamentRequests = removeItemFromList(user.tournaments.outgoingTournamentRequests, _tournamentId, false);
+                    user.tournaments.incomingTournamentRequests = removeItemFromList(user.tournaments.incomingTournamentRequests, _tournamentId, false);
+
+                    return saveBothUsers(tournament, user, res, "User has successfully left the team") 
+                })
+        } else {
+            return res.status(HttpStatus.BAD_REQUEST).send("The user is not in the tournament")
+        }
+    })
+})
+
+
+
 router.put('/modify/user/leaveTeam', (req, res) => {
 
     const { _id, _teamId } = req.body;
@@ -248,22 +314,30 @@ router.put('/modify/user/leaveTeam', (req, res) => {
             return res.status(HttpStatus.BAD_REQUEST).send("Please pass ownership to someone else before leaving the team")
         }
 
-        if (listContains(team.players.currPlayers, _id, false)) {
+        if (listContains(team.players.currPlayers, _id, false) ||
+            listContains(team.players.outgoingPlayerRequests, _id, false) ||
+            listContains(team.players.incomingPlayerRequests, _id, false)) {
 
             UserModel.findById(_id, (err, user) => {
                 if (err || !user) return res.status(HttpStatus.NOT_FOUND).send("Could not find the user")
                 // if the team has an outgoing request to him, add him to the team
                 team.players.currPlayers = removeItemFromList(team.players.currPlayers, _id, false);
+                team.players.outgoingPlayerRequests = removeItemFromList(team.players.outgoingPlayerRequests, _id, false);
+                team.players.incomingPlayerRequests = removeItemFromList(team.players.incomingPlayerRequests, _id, false);
                 team.privileges.nothing = removeItemFromList(team.privileges.nothing, _id, false);
                 team.privileges.recruiter = removeItemFromList(team.privileges.recruiter, _id, false);
                 team.privileges.admin = removeItemFromList(team.privileges.admin, _id, false);
                 user.teams.currTeams = removeItemFromList(user.teams.currTeams, _teamId, false);
-                
+                user.teams.outgoingTeamRequests = removeItemFromList(user.teams.outgoingTeamRequests, _teamId, false);
+                user.teams.incomingTeamRequests = removeItemFromList(user.teams.incomingTeamRequests, _teamId, false);
                 return saveBothUsers(team, user, res, "User has successfully left the team") 
             })
+        } else {
+            return res.status(HttpStatus.BAD_REQUEST).send("The user is not on the team or requested/requested to be on the team")
         }
     })
 })
+
 
 
 
@@ -415,6 +489,73 @@ router.put('/modify/tournament/info', (req, res) => {
         })
     })
 })
+
+
+router.put('/modify/tournament/requestUserOrTeam', (req, res) => {
+
+    const { _id, _requestedUserOrTeamId, _tournamentId } = req.body;
+
+    TournamentModel.findById({_id: _tournamentId}, (err) => {
+        if (err) return res.status(HttpStatus.NOT_FOUND).send("Could not find the tournament")
+    })
+    .then(tournament => {
+
+        if (listContains(tournament.participants.currParticipants, _requestedUserOrTeamId, false)) {
+            return res.status(HttpStatus.BAD_REQUEST).send("The team/user is already in the tournament")
+        }
+
+        if (tournament.tournamentType === 'Team') {
+            TeamModel.findById({_id: _requestedUserOrTeamId}, (err, team) => {
+                if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error finding team");
+
+                if (listContains(team.tournaments.incomingTournamentRequests, _tournamentId, false)) {
+                    // if the tournament is requesting again
+                    return res.status(HttpStatus.BAD_REQUEST).send("The team has already been invited")
+                } else if (listContains(team.tournaments.outgoingTournamentRequests, _tournamentId, false)) {
+                    // team already requested to join team
+                    team.tournaments.outgoingTournamentRequests = removeItemFromList(team.tournaments.outgoingTournamentRequests, _tournamentId, false)
+                    tournament.participants.incomingParticipants = removeItemFromList(tournament.participants.incomingParticipants, _requestedUserId, false)
+                    team.tournaments.currTournaments.push(_tournamentId);
+                    tournament.participants.currParticipants.push(_requestedUserOrTeamId);
+
+                    return saveBothUsers(tournament, team, res, "requested team has been accepted to the tournament")
+                } else {
+                    // outgoing request from tournament, incoming request for team
+                    tournament.participants.outGoingParticipants.push(_requestedUserOrTeamId);
+                    team.tournaments.incomingTournamentRequests.push(_tournamentId);
+
+                    return saveBothUsers(tournament, team, res, "requested team has been requested to join the team")
+                }
+            })
+        } else {
+            UserModel.findById({_id: _requestedUserOrTeamId}, (err, user) => {
+                if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error finding team");
+
+                if (listContains(user.tournaments.incomingTournamentRequests, _tournamentId, false)) {
+                    // if the tournament is requesting again
+                    return res.status(HttpStatus.BAD_REQUEST).send("The user has already been invited")
+                } else if (listContains(team.tournaments.outgoingTournamentRequests, _tournamentId, false)) {
+                    // team already requested to join team
+                    user.tournaments.outgoingTournamentRequests = removeItemFromList(user.tournaments.outgoingTournamentRequests, _tournamentId, false)
+                    tournament.participants.incomingParticipants = removeItemFromList(tournament.participants.incomingParticipants, _requestedUserId, false)
+                    user.tournaments.currTournaments.push(_tournamentId);
+                    tournament.participants.currParticipants.push(_requestedUserOrTeamId);
+
+                    return saveBothUsers(tournament, user, res, "requested team has been accepted to the tournament")
+                } else {
+                    // outgoing request from tournament, incoming request for team
+                    tournament.participants.outGoingParticipants.push(_requestedUserOrTeamId);
+                    user.tournaments.incomingTournamentRequests.push(_tournamentId);
+
+                    return saveBothUsers(tournament, user, res, "requested team has been requested to join the team")
+                }
+            })
+        }
+    })
+})
+
+
+// router.put('/modify/tournament/removePlayerOrTeam', )
 
 
 // ##################### End of Tournament modify routes #####################

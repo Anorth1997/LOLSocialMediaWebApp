@@ -34,6 +34,23 @@ let TeamSchema = new mongoose.Schema({
             ref: 'User'
         }]
     },
+    tournaments: {
+        currTournaments: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }],
+        outgoingTournamentRequests: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }],
+        incomingTournamentRequests: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament',
+            default: []
+        }]
+    },
     hostId: {
         type: mongoose.Types.ObjectId,
         required: true,
