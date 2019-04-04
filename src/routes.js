@@ -7,6 +7,7 @@ import MainLandingPage from './Components/MainLandingPage/main_landing_page';
 import LoginPage from './Components/LoginPortal/login';
 import RegisterPage from './Components/RegisterPortal/register';
 import UserProfilePage from './Components/UserProfilePage/user_profile_page';
+import TeamProfilePage from './Components/TeamProfilePage/team_profile_page.js';
 import Find from './Components/FindOthersPage/findOthers';
 import TournamentPage from './Components/TournamentsPage/tournament_page';
 // import Login from './Components/LoginPage/login';
@@ -28,6 +29,7 @@ class Routes extends Component {
                         <Route path="/find" exact component={Find}/>
                         <Route path="/tournaments" exact component={TournamentPage}/>
                         <Route path="/adminportal" exact component={AdminPortal}/>
+                        <Route path="/team/:id" exact component={TeamProfilePage}/>
                     </Switch>
                 </Layout>
             </div>
@@ -36,3 +38,4 @@ class Routes extends Component {
 }
 
 export default Routes;
+//sss

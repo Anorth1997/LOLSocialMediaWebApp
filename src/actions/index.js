@@ -4,17 +4,18 @@ import axios from 'axios';
 
 // ####################### User methods #######################
 
-export function getAllUsers() {
+export function getAllUsers(ids) {
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const result = users;
+    const req = axios.put(`${backendRootLink}/getUsersByIds`, {
+        ids: ids
+    })
 
-    //return this object
-    return {
-        type: 'GET_ALL_USERS',
-        payload: result
-    }
+    return req.then(res => {
+        return {
+            type: 'GET_USERS_BY_IDS',
+            payload: res.data
+        }
+    });
 }
 
 export function getUserByUsername(username) {
@@ -171,11 +172,6 @@ export function tryLoggingIn(username, password) {
  */
 export function getAllTournaments(ids) {
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    // fetch({})
-
-
 
     const req = axios.put(`${backendRootLink}/getTournamentsByIds`, {
         ids: ids
@@ -231,15 +227,15 @@ export function getTeamById(id) {
 
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
-    const team = teams.find( (item) => {
-        return item.id === id;
-    })
+    const req = axios.get(`${backendRootLink}/getTeamById?id=${id}`)
 
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'GET_TEAM_BY_ID',
-        payload: team
-    }
+    return req.then(res => {
+        console.log(res)
+        return {
+            type: 'GET_TEAM_BY_ID',
+            payload: res.data
+        }
+    })
 }
 
 
