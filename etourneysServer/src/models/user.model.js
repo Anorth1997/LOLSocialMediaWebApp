@@ -7,7 +7,6 @@ const riotApiConstants = require("../internal-lol-api/constants");
 
 const mongoose = require('mongoose');
 const idValidator = require('mongoose-id-validator');
-const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
 
 
@@ -38,11 +37,7 @@ let UserSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        default: undefined,
-        validate: {
-            validator: (value) => {return emailRegex.test(value)}, 
-            message: 'Invalid email'
-        }
+        default: undefined
     },
     leagueUsername: {
         type: String,
@@ -164,15 +159,15 @@ UserSchema.methods.getLeaguePlayerInfo = function(leagueUsername) {
     //     "id": "tv1ee-F-AEcqTNqC9jkB3hK_R2Od3C6Az9ofPCqwUniWwxw",
     //     "revisionDate": 1553653980000
     // },
-    console.log('here')
-    console.log(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${leagueUsername}?api_key=${apiKey}`)
+    // console.log('here')
+    // console.log(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${leagueUsername}?api_key=${apiKey}`)
     return axios.get(`${riotApiConstants.rootRiotApiLink}/lol/summoner/v4/summoners/by-name/${leagueUsername}?api_key=${apiKey}`)
     
 }
 
 
 UserSchema.methods.updatePlayerRank = (leagueUsername) => {
-    console.log('in here')
+    // console.log('in here')
     if (Date.now() - this.lastUpdated < 1000*60) return null;
     else return axios.get(`${riotApiConstants.rootRiotApiLink}/lol/league/v4/positions/by-summoner/${leagueUsername}?api_key=${apiKey}`)    
 }
