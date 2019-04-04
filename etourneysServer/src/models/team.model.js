@@ -139,10 +139,10 @@ TeamSchema.methods.playerAuthorizedToRecruit = function(playerId, callback) {
     }
 }
 
-TeamSchema.methods.playerAuthorizedToAccept = playerAuthorizedToAccept = (playerId, callback) => {
-    if (this.privileges.admin.find((item) => {
+TeamSchema.methods.playerAuthorizedToAccept = playerAuthorizedToAccept = (playerId, team, callback) => {
+    if (team.privileges.admin.find((item) => {
         return item.toString() === playerId
-    }) || this.privileges.owner.find((item) => {
+    }) || team.privileges.owner.find((item) => {
         return item.toString() === playerId
     })) {
         return callback(true)

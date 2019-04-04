@@ -244,10 +244,32 @@ export function getTeamById(id) {
     const req = axios.get(`${backendRootLink}/getTeamById?id=${id}`)
 
     return req.then(res => {
-        console.log(res)
         return {
             type: 'GET_TEAM_BY_ID',
             payload: res.data
+        }
+    })
+}
+
+export function teamAcceptIncomingRequest(_userAcceptingId, _userToAcceptId, _teamId) {
+
+    const req = axios.put(`${backendRootLink}/modify/team/acceptIncomingRequest`, {
+        _userAcceptingId,
+        _userToAcceptId,
+        _teamId
+    })
+
+    return req.then(res => {
+        alert("Successfully accept player");
+        return {
+            type: 'TEAM_ACCEPT_PLAYER',
+            payload: undefined
+        }
+    }).catch(err => {
+        alert('Error accepting player')
+        return {
+            type: 'TEAM_ACCEPT_PLAYER',
+            payload: undefined
         }
     })
 }

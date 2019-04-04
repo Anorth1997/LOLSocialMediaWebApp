@@ -435,12 +435,11 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
         if (err) return res.status(HttpStatus.NOT_FOUND).send("Could not find the team requested")
     })
     .then((team) => {
-
         if (!listContains(team.players.incomingPlayerRequests, _userToAcceptId, false)) {
-            return res.status(Http.BAD_REQUEST).send("This user has never requested to join the team")
+            return res.status(HttpStatus.BAD_REQUEST).send("This user has never requested to join the team")
         }
 
-        team.playerAuthorizedToAccept(_userAcceptingId, (isAuthorized) => {
+        team.playerAuthorizedToAccept(_userAcceptingId, team, (isAuthorized) => {
             if (!isAuthorized) return res.status(HttpStatus.FORBIDDEN).send("User is not authorized to accept players")
 
             UserModel.findById({_id: _userToAcceptId}, (err) => {
@@ -453,7 +452,7 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
                 team.players.incomingPlayerRequests = 
                     removeItemFromList(team.players.incomingPlayerRequests, _userToAcceptId, false)        
                 team.players.currPlayers.push(_userToAcceptId)
-                
+                team.totalRank += userToAccept.lolInfo.currentRank;
                 return saveBothUsers(userToAccept, team, res, "requested user has been accepted to the team")
             })
 

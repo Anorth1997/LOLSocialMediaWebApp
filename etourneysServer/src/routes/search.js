@@ -36,6 +36,7 @@ router.put('/searchUser', (req, res) => {
     if (username) filters.username = { "$regex": username, "$options": "i"};
     UserModel.findOne(filters, (err, user) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for user with criteria")
+        if (!user) return res.status(HttpStatus.NOT_FOUND).send("User not found")
         // console.log(user)
         user.updatePlayerRank(user.lolInfo.id, (rank) => {
             console.log(rank)
