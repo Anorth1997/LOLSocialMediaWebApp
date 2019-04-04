@@ -18,6 +18,20 @@ export function getAllUsers(ids) {
     });
 }
 
+export function getAllIncomingUsers(ids) {
+
+    const req = axios.put(`${backendRootLink}/getUsersByIds`, {
+        ids: ids
+    })
+
+    return req.then(res => {
+        return {
+            type: 'GET_INCOMING_USERS_BY_IDS',
+            payload: res.data
+        }
+    });
+}
+
 export function getUserByUsername(username) {
 
     

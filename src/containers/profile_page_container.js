@@ -103,38 +103,7 @@ class ProfilePageContainer extends Component {
                         rank={this.props.user.lolInfo.currentRank}
                         showInfo={true}
                         
-                    />
-
-
-                    <div className={cx("container-fluid", styles.tournamentOutcomes)}>
-                        <div className={cx("row", styles.tournamentOutcomes)}>
-                            <div className="col-xs-4">
-                                <span className={styles.tournOutcome}>
-                                    <FontAwesomeIcon
-                                        className={styles.goldTrophy}
-                                        icon={faMedal}
-                                    />
-                                    20
-                                </span>
-                                <span className={styles.tournOutcome}>
-                                    <FontAwesomeIcon
-                                        className={styles.silverTrophy}
-                                        icon={faMedal}
-                                    />
-                                    40
-                                </span>
-                                <span className={styles.tournOutcome}>
-                                    <FontAwesomeIcon
-                                        className={styles.medal}
-                                        icon={faAward}
-                                    />
-                                    15
-                                </span>
-
-                            </div>
-                        </div>
-
-                    </div>           
+                    />         
                 </div>
             );}
         }

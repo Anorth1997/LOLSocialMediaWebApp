@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 //import TournamentUserProfileTab from '../../Components/UserProfilePage/tournamentProfileTab';
 import UsersTeamProfileTab from '../../Components/TeamProfilePage/usersProfileTab';
+import IncomingUsersTeamProfileTab from '../../Components/TeamProfilePage/incomingUsersProfileTab';
 import SettingsContainer from './../settings_container';
 
 class UserProfileTabContentContainer extends Component {
@@ -19,9 +20,24 @@ class UserProfileTabContentContainer extends Component {
         if (this.props.currUser) {
 
 
-            if (this.props.currUser.username === this.props.user.username) {
+            if (this.props.currUser._id === this.props.team.hostId) {
                 return (<Tab eventKey="settings" title="Settings">
-                    <SettingsContainer {...this.props}/>
+                    {/* <SettingsContainer {...this.props}/> */}
+                    wow you did it
+                </Tab>)
+            }
+
+        }
+    }
+
+    renderIncomingRequests = () => {
+        if (this.props.currUser) {
+
+
+            if (this.props.currUser._id === this.props.team.hostId) {
+                return (<Tab eventKey="incomingRequests" title="Incoming Requests">
+                    {/* <SettingsContainer {...this.props}/> */}
+                    <IncomingUsersTeamProfileTab {...this.props.team}/>
                 </Tab>)
             }
 
@@ -47,6 +63,7 @@ class UserProfileTabContentContainer extends Component {
                       <Tab eventKey="Members" title="Members">
                         <UsersTeamProfileTab {...this.props.team}/>
                     </Tab>   
+                    {this.renderIncomingRequests()}
                     {this.renderSettings()}
                     
                 </Tabs>

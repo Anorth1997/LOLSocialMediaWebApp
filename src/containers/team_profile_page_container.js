@@ -36,12 +36,44 @@ class ProfilePageContainer extends Component {
                 <div className={styles.username}>
                     {this.props.team.name}
                 </div>
-
+                <br/>
+                <br/>
+                Average Rank
                 <RankImage 
                     rank={this.props.team.averageRank}
                     showInfo={true}
                     
-                />        
+                />
+
+                <div className={cx("container-fluid", styles.tournamentOutcomes)}>
+                        <div className={cx("row", styles.tournamentOutcomes)}>
+                            <div className="col-xs-4">
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.goldTrophy}
+                                        icon={faMedal}
+                                    />
+                                    {this.props.team.score.gold}
+                                </span>
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.silverTrophy}
+                                        icon={faMedal}
+                                    />
+                                    {this.props.team.score.silver}
+                                </span>
+                                <span className={styles.tournOutcome}>
+                                    <FontAwesomeIcon
+                                        className={styles.medal}
+                                        icon={faAward}
+                                    />
+                                    {this.props.team.score.bronze}
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div> 
             </div>
         );}
         
