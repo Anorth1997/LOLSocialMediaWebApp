@@ -138,8 +138,8 @@ export function tryLoggingIn(username, password) {
     
     return req.then(res => {
         return {
-        type: 'GET_USER_BY_USERNAME_AND_PASSWORD',
-        payload: res.data
+            type: 'GET_USER_BY_USERNAME_AND_PASSWORD',
+            payload: res.data
         }
     });
 }
@@ -155,17 +155,22 @@ export function getAllTournaments(ids) {
 
     // this will only be used for the front-end part of the project
     // since we cannot send requests to an external server
-    const req = axios.put(`${backendRootLink}/getTournamentsByIds`,{ 
-        ids
+    // fetch({})
+
+
+
+    const req = axios.put(`${backendRootLink}/getTournamentsByIds`, {
+        ids: ids
     })
 
+    console.log(ids)
+
     return req.then(res => {
-        console.log(res)
         return {
-        type: 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS',
-        payload: res.data
+            type: 'GET_TOURNAMENTS_PARTICIPATING_BY_IDS',
+            payload: res.data
         }
-    })
+    });
 }
 
 export function getTournamentById(id) {
