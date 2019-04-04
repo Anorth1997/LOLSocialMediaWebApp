@@ -93,16 +93,29 @@ class MessageBox extends Component {
                 console.log('in brunt')
                 console.log(messages)
 
-                const foundVal = this.state.allMessages.find((item) => {
+                console.log('looking at allMessages')
+                const foundIndex = this.state.allMessages.findIndex((item) => {
                     return item.convoId === friend.convoId
                 })
-                if (foundVal) {
+                console.log('index found:', foundIndex)
+                // const newMessages = this.state.allMessages[foundIndex].messages = [];
+                // const newMessages = this.state.allMessages.splice(foundIndex, 1);
+                // const foundVal = this.state.allMessages.find((item) => {
+                    // console.log(item)
+                    // return item.convoId === friend.convoId
+                // })
+
+                if (foundIndex >= 0) {
                     console.log('found the value')
-                    console.log(foundVal)
-                    foundVal.messages = messages
+                    // console.log(foundVal)
+                    console.log(this.state.allMessages[foundIndex])
+                    this.state.allMessages[foundIndex].messages = messages;
+                    this.state.messages = messages;
                     this.forceUpdate();
+                    // foundVal.messages = messages
+                    // this.forceUpdate();
                     // this.setState({
-                    //     allMessages: [...this.state.allMessages, foundVal]
+                    //     allMessages: this.state.allMessages [...this.state.allMessages, foundVal]
                     // })
                 } else {
                     console.log('didnt find the value')

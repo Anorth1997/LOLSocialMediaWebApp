@@ -1,0 +1,20 @@
+
+.friendContainer {
+    background: black;
+}
+
+.profilePic {
+    border-radius: 50%;
+    margin-right: 5%;
+    height: 50%;
+}
+
+.eachFriend {
+    // text-align: center;
+    padding: 20px;
+
+    &:hover {
+        background: rgb(44, 44, 44);
+        cursor: pointer;
+    }
+}
