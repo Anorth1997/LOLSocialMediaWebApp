@@ -21,9 +21,9 @@ router.get('/searchUsers', (req, res) => {
     if (username) filters.username = { "$regex": username, "$options": "i"};
     if (leagueUsername) filters.leagueUsername = { "$regex": leagueUsername, "$options": "i"};
     if (mainRole) filters.mainRole = mainRole;
-    if (highestRank && lowestRank) filters.currentRank = {"$gte": lowestRank, "$lte": highestRank} 
+    if (highestRank && lowestRank) filters.currentRank = {"$gte": lowestRank, "$lte": highestRank}
     
-    UserModel.find(filters, 'username leagueUsername mainRole currentRank isOnline', (err, users) => {
+    UserModel.find(filters, 'username leagueUsername mainRole currentRank isOnline lolInfo', (err, users) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for users with criteria")
         return res.status(HttpStatus.OK).json(users);
     })
