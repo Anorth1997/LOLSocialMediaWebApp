@@ -99,13 +99,13 @@ let TournamentSchema = new mongoose.Schema({
         default: false
     }
 }, { versionKey: false})
-TournamentSchema.pre('save', function(next) {
-    this.participants.currParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
-    this.participants.incomingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
-    this.participants.outGoingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
-    // console.log(this.participants.currParticipants.ref)
-    next();
-})
+// TournamentSchema.pre('save', function(next) {
+//     this.participants.currParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+//     this.participants.incomingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+//     this.participants.outGoingParticipants.ref = this.tournamentType === 'Single' ? 'User' : 'Team';
+//     // console.log(this.participants.currParticipants.ref)
+//     next();
+// })
 TournamentSchema.plugin(idValidator);
 
 // TournamentSchema.index({name: 1})
