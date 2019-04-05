@@ -108,7 +108,7 @@ router.get('/searchTournament', (req, res) => {
     if (tournamentType) filters.hostType = tournamentType;
     if (fromDate && toDate) filters.dateStarting = {"$gte": lowestRank, "$lte": highestRank} 
     
-    TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting', (err, tournaments) => {
+    TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting dateCreated amountOfTeams', (err, tournaments) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
         return res.status(HttpStatus.OK).json(tournaments);
     })

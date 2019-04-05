@@ -64,16 +64,16 @@ class TournamentsContainer extends Component {
         )
     }
 
-    renderTournaments(search) {
-        const all_tour = tournaments.map((tournament, i) => {
+    renderTournaments(results) {
+        const all_tour = results.map((tournament, i) => {
             return (
                 <div key={i} className = {styles.tournamentBox}>
                     <div className = {styles.tournamentInfoSection}>
-                        <p>{tournament.id}</p>
-                        <p>Teams: {tournament.num_teams}</p>
-                        <p>Date created: {tournament.date_created}</p>
-                        <p>Date starting: {tournament.date_starting}</p>
-                        <p>Date finish: {tournament.date_finished == null ? 'ongoing' : tournament.date_finished}</p>
+                        <p>{tournament.name}</p>
+                        <p>Teams: {tournament.amountOfTeams}</p>
+                        <p>Date created: {new Date(tournament.dateCreated).toString()}</p>
+                        <p>Date starting: {new Date(tournament.dateStarting).toString()}</p>
+                        <p>Date finish: {tournament.dateFinished == null ? 'ongoing' : tournament.date_finished}</p>
                     </div>
                 </div>
             )
@@ -100,10 +100,12 @@ class TournamentsContainer extends Component {
         const toDate = document.getElementById("toDate").value
 
         const data_to_submit = { TournamentName, hostType, hasStarted, tournamentType, fromDate, toDate}
-        console.log(data_to_submit)
-
 
         this.request_to_backend(data_to_submit).then((results) => {
+            this.setState({
+                searchresults: results.data,
+                searchTournaments: true
+            })
             console.log(results.data)
             
         }).catch((error) => {
@@ -117,13 +119,12 @@ class TournamentsContainer extends Component {
  
 
     render() {
-
         return (
             <div className={styles.bg}>
                 <div className = {cx("container-fluid", styles.container_frame)}>
                     <div className = "row">
                         <div className = {"col-4"}> {this.renderSearchTournamentPanel()} </div>
-                        <div className = {"col-7"}> {this.renderTournaments(this.state.searchTournaments)} </div>
+                        <div className = {"col-7"}> {this.renderTournaments(this.state.searchresults)} </div>
                     </div>
                 </div>
             </div>
