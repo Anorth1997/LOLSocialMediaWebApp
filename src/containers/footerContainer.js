@@ -20,6 +20,7 @@ import ChatPickerContainer from '../Components/FooterBoxes/ChatPickerContainer';
 
 // import FontAwesome from 'react-fontawesome';
 import FriendsBox from './../Components/FooterBoxes/FriendsBox';
+import TournamentsBox from './../Components/FooterBoxes/TournamentsBox';
 
 
 class Footer extends Component {
@@ -85,7 +86,9 @@ class Footer extends Component {
                         display: this.state.showTournaments ? 'block' : 'none'
                     }}
                 >
-                    This is the popup for tournaments
+                    <TournamentsBox 
+                        currUser={this.props.currUser}
+                    />
                 </div>
                 <div 
                     className={cx(styles.popup)} 
