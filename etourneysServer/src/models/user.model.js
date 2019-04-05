@@ -44,11 +44,11 @@ let UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    currentRank: {
+        type: Number,
+        default: 0,
+    },
     lolInfo: {
-        currentRank: {
-            type: Number,
-            default: 0,
-        },
         lastUpdated: {
             type: Number
         },
