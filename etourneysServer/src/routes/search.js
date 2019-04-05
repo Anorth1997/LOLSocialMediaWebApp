@@ -12,7 +12,6 @@ const router = express.Router();
 const BCRYPT_SALT_ROUNDS = 11;
 
 
-
 router.get('/searchUsers', (req, res) => {
     
     const { username, leagueUsername, lowestRank, highestRank, mainRole } = req.query;
