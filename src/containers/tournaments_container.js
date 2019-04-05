@@ -5,6 +5,10 @@ import { tournaments } from '../dummy_hardcoded_data';
 import styles from '../scss-modules/tournaments-container/tournaments-container.module.scss';
 
 import cx from 'classnames';
+
+
+import { backendRootLink } from '../secret/config';
+import axios from 'axios';
 // import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -13,14 +17,49 @@ class TournamentsContainer extends Component {
 
     state = {
         searchTournaments: false,
+        searchresults: []
     }
 
-    renderTournamentOptionPanel() {
+    renderSearchTournamentPanel() {
         return (
-            <div className = {styles.OptionPanel}>
-                <h3>Join a tournament</h3><br/>
-                <button>Alone</button><br/>
-                <h4>Invite friends</h4>
+            <div className = {styles.SearchPanel}>
+                <h3>Find a tournament</h3><br/>
+                <form className = {styles.SearchForm}>
+                    <label>
+                        TournamentName: 
+                        <input type="text" name="name" id="TournamentName"/>
+                    </label>
+                    <label>
+                        hostType:
+                        <select name="hostType" id="hostType">
+                            <option value="Organization">Organization</option>
+                            <option value="Personal">Personal</option>
+                        </select>
+                    </label>
+                    <label>
+                        hasStarted:
+                        <select name="hasStarted" id="hasStarted">
+                            <option value= {true}>yes</option>
+                            <option value= {false}>no</option>
+                        </select>
+                    </label>
+                    <label>
+                        tournamentType:
+                        <select name="tournamentType" id="tournamentType">
+                            <option value="Team">Team</option>
+                            <option value="Single">Single</option>
+                        </select>
+                    </label>
+                    <label>
+                        fromDate:
+                        <input type="date" name="fromDate" id="fromDate"/>
+                    </label>
+                    <label>
+                        toDate:
+                        <input type="date" name="toDate" id="toDate"/>
+                    </label>
+                </form>
+                <button onClick={this.searchTournaments}>Search</button><br/>
             </div>
         )
     }
@@ -41,8 +80,7 @@ class TournamentsContainer extends Component {
         })
 
 
-
-        return search ?
+        return this.state.searchTournaments ?
         (<div className = {styles.tournamentDisplayPannel}>
                 {all_tour}
         </div>) 
@@ -50,6 +88,31 @@ class TournamentsContainer extends Component {
         (<div className = {styles.tournamentDisplayPannel}>
                 {all_tour}
         </div>) 
+    }
+
+    searchTournaments = (event) => {
+        event.preventDefault();
+        const TournamentName = document.getElementById("TournamentName").value
+        const hostType = document.getElementById("hostType").value
+        const hasStarted = document.getElementById("hasStarted").value
+        const tournamentType = document.getElementById("tournamentType").value
+        const fromDate = document.getElementById("fromDate").value
+        const toDate = document.getElementById("toDate").value
+
+        const data_to_submit = { TournamentName, hostType, hasStarted, tournamentType, fromDate, toDate}
+        console.log(data_to_submit)
+
+
+        this.request_to_backend(data_to_submit).then((results) => {
+            console.log(results.data)
+            
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
+    request_to_backend = (data_to_submit) => {
+        return axios.get(`${backendRootLink}/searchTournament`, data_to_submit)
     }
  
 
@@ -59,7 +122,7 @@ class TournamentsContainer extends Component {
             <div className={styles.bg}>
                 <div className = {cx("container-fluid", styles.container_frame)}>
                     <div className = "row">
-                        <div className = {"col-4"}> {this.renderTournamentOptionPanel()} </div>
+                        <div className = {"col-4"}> {this.renderSearchTournamentPanel()} </div>
                         <div className = {"col-7"}> {this.renderTournaments(this.state.searchTournaments)} </div>
                     </div>
                 </div>
