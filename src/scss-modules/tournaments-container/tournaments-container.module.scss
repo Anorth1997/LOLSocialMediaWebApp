@@ -11,7 +11,7 @@
     height: 700px;
 }
 
-.OptionPanel {
+.SearchPanel {
     font-family: 'Sanson', 'Bebas', sans-serif;
     margin-top: 20px;
     border: 2px solid #ffc107;
@@ -26,11 +26,21 @@
         display: block; 
         margin: auto;
     }
+}
 
-    h4 {
+.SearchForm {
+    label {
         color: white;
-        margin: auto;
-        text-align: center;
+        margin-top: 5px;
+        margin-left: 10px;
+        text-align: left;
+        display: block  
+    }
+    select {
+        margin-left: 10px;
+    }
+    input {
+        margin-left: 10px;
     }
 }
 

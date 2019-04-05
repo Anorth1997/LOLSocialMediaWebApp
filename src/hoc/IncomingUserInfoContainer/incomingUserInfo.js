@@ -5,7 +5,7 @@ import styles from '../../scss-modules/others/team_info.module.scss';
 
 import { Link, Redirect } from 'react-router-dom';
 import RankImage from './../../Components/OtherComponents/rankImage';
-import { teamAcceptIncomingRequest } from './../../actions/index';
+import { teamAcceptIncomingRequest, teamRejectIncomingRequest } from './../../actions/index';
 
 class IncomingUserInfo extends Component  {
 
@@ -40,20 +40,33 @@ class IncomingUserInfo extends Component  {
                     </div>
                     
                 </div>
+                
                 <div className="row">
-                    <div className={cx("col-6", styles.detailButton)}>
+                    <div className={cx("col-4", styles.teamName)}>
+                    </div>
+                    <div className={cx("col-2", styles.detailButton)}>
                         <button type="button" onClick={this.acceptRequest.bind(this)} className={cx("btn btn-dark")}>Accept</button>
                     </div>
-                    <div className={cx("col-6", styles.detailButton)}>
-                        <button type="button" className={cx("btn btn-dark")}>Reject</button>
+                    <div className={cx("col-2", styles.detailButton)}>
+                        <button type="button" onClick={this.rejectRequest.bind(this)} className={cx("btn btn-dark")}>Reject</button>
+                    </div>
+                    <div className={cx("col-4", styles.teamName)}>
                     </div>
                 </div>
+                <br/>
             </div>
         );
     }
     
     acceptRequest = () => {
         teamAcceptIncomingRequest(this.props.hostId, this.props.user._id, this.props.teamId)
+        this.setState({
+            redirect: true
+        })
+    }
+
+    rejectRequest = () => {
+        teamRejectIncomingRequest(this.props.hostId, this.props.user._id, this.props.teamId)
         this.setState({
             redirect: true
         })

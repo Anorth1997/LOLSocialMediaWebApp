@@ -274,6 +274,29 @@ export function teamAcceptIncomingRequest(_userAcceptingId, _userToAcceptId, _te
     })
 }
 
+export function teamRejectIncomingRequest(_userRejectingId, _userToRejectId, _teamId) {
+
+    const req = axios.put(`${backendRootLink}/modify/team/rejectIncomingRequest`, {
+        _userRejectingId,
+        _userToRejectId,
+        _teamId
+    })
+//
+    return req.then(res => {
+        alert("Successfully reject player");
+        return {
+            type: 'TEAM_REJECT_PLAYER',
+            payload: undefined
+        }
+    }).catch(err => {
+        alert('Error rejecting player')
+        return {
+            type: 'TEAM_REJECT_PLAYER',
+            payload: undefined
+        }
+    })
+}
+
 
 // ####################### Brackets methods #######################
 
