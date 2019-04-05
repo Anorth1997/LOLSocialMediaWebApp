@@ -82,13 +82,13 @@ let TournamentSchema = new mongoose.Schema({
     dateStarting: {
         type: Number,
         required: true,
-        validate: {
-            validator: date => {
-                const timeDelta = date - Date.now(); 
-                console.log(`time delta: ${timeDelta}`)
-                return timeDelta > 10001 && timeDelta < 2678400000 //31 days
-            }, message: "Tournament must start at a minimum in 10 minutes and maximum of 31 days."
-        }
+        // validate: {
+        //     validator: date => {
+        //         const timeDelta = date - Date.now(); 
+        //         console.log(`time delta: ${timeDelta}`)
+        //         return timeDelta > 10001 && timeDelta < 2678400000 //31 days
+        //     }, message: "Tournament must start at a minimum in 10 minutes and maximum of 31 days."
+        // }
     },
     dateFinished: {
         type: Number,

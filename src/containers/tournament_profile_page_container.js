@@ -28,7 +28,6 @@ class TournamentProfilePageContainer extends Component {
     
 
     renderProfile = () => {
-        console.log(this.props)
         if (this.props.tournament) {
             console.log(this.props)
             return (

@@ -20,15 +20,16 @@ class TournamentProfileTabContentContainer extends Component {
     }
 
     leaveTournament = () => {
-        axios.put(`${backendRootLink}/modify/user/leaveTeam`, {
+        axios.put(`${backendRootLink}/modify/user/leaveTournament`, {
             _id: this.props.currUser._id,
-            _teamId: this.props.team._id
+            _tournamentId: this.props.tournament._id
         })
         .then(res => {
-            alert('Successfully left team')
+            console.log(res.data)
+            alert('Successfully left tournament')
         })
         .catch(err => {
-            alert('Error leaving team. The user might be the owner of this team')
+            alert('Error leaving tournament.')
         })
     }
 

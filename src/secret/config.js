@@ -1,6 +1,6 @@
 module.exports = { 
 
-    riotApiKey: 'RGAPI-5326c8f7-4203-4e4c-9212-fc36c97fde45',
+    riotApiKey: 'RGAPI-1556a5fe-8d53-4782-971b-01df1484ffef',
     rootRiotApiLink: 'https://na1.api.riotgames.com',
     backendRootLink: 'http://localhost:3543',
     firebaseConfig: {

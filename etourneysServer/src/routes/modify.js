@@ -288,14 +288,13 @@ router.put('/modify/user/leaveTournament', (req, res) => {
                 UserModel.findById(_id, (err, user) => {
                     if (err || !user) return res.status(HttpStatus.NOT_FOUND).send("Could not find the user")
                     // if the team has an outgoing request to him, add him to the team
-                    tournament.participants.currParticipants = removeItemFromList(team.players.currPlayers, _id, false);
-                    tournament.participants.incomingParticipants = removeItemFromList(team.privileges.nothing, _id, false);
-                    tournament.participants.outGoingParticipants = removeItemFromList(team.privileges.recruiter, _id, false);
+                    tournament.participants.currParticipants = removeItemFromList(tournament.participants.currParticipants, _id, false);
+                    tournament.participants.incomingParticipants = removeItemFromList(tournament.participants.incomingParticipants, _id, false);
+                    tournament.participants.outGoingParticipants = removeItemFromList(tournament.participants.outGoingParticipants, _id, false);
                     user.tournaments.currTournaments = removeItemFromList(user.tournaments.currTournaments, _tournamentId, false);
                     user.tournaments.outgoingTournamentRequests = removeItemFromList(user.tournaments.outgoingTournamentRequests, _tournamentId, false);
                     user.tournaments.incomingTournamentRequests = removeItemFromList(user.tournaments.incomingTournamentRequests, _tournamentId, false);
-
-                    return saveBothUsers(tournament, user, res, "User has successfully left the team") 
+                    return saveBothUsers(tournament, user, res, "User has successfully left the tournament") 
                 })
         } else {
             return res.status(HttpStatus.BAD_REQUEST).send("The user is not in the tournament")

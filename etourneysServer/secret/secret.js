@@ -5,7 +5,7 @@ const secretConfig = {
         etournamentCluster: 'etourneys'
     },
     port: 3543,
-    riotApiKey: 'RGAPI-5326c8f7-4203-4e4c-9212-fc36c97fde45',
+    riotApiKey: 'RGAPI-1556a5fe-8d53-4782-971b-01df1484ffef',
     firebaseConfig: {
         apiKey: "AIzaSyD2z0-nTO3G8_M868q9Z1HCOD4YFCj6r_8",
         authDomain: "chat-app-4c1df.firebaseapp.com",
