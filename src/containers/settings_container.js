@@ -14,38 +14,38 @@ import { changePassword, changeEmail } from '../actions/index';
 
 class SettingsContainer extends Component {
     state = {
-        displayGeneral: true,
+        //displayGeneral: true,
         displayPassword: false,
         displayEmail: false
     }
-    renderGeneral() {
-        if (this.state.displayGeneral) {
-            return (
-                <div className={styles.displayPanel}>
-                    <ul className={styles.linkAcc}>
-                        <li>Linked Account: {this.props.league_name}</li>
-                        <li><button>Edit</button></li>
-                    </ul>
-                    <ul className={styles.linkAcc}>
-                        <li>Dark Mode: </li>
-                        <li>  
-                            <input type="checkbox"></input>
-                        </li>
-                    </ul>
-                    <ul className={styles.linkAcc}>
-                        <li>Discord: </li>
-                        <li>Something</li>
-                    </ul>
-                    <ul className={styles.linkAcc}>
-                        <li>Allow Tournaments Notification: </li>
-                        <li>
-                            <input type="checkbox"></input>
-                        </li>
-                    </ul>
-                </div>
-            )
-        }
-    }
+    // renderGeneral() {
+    //     if (this.state.displayGeneral) {
+    //         return (
+    //             <div className={styles.displayPanel}>
+    //                 <ul className={styles.linkAcc}>
+    //                     <li>Linked Account: {this.props.league_name}</li>
+    //                     <li><button>Edit</button></li>
+    //                 </ul>
+    //                 <ul className={styles.linkAcc}>
+    //                     <li>Dark Mode: </li>
+    //                     <li>  
+    //                         <input type="checkbox"></input>
+    //                     </li>
+    //                 </ul>
+    //                 <ul className={styles.linkAcc}>
+    //                     <li>Discord: </li>
+    //                     <li>Something</li>
+    //                 </ul>
+    //                 <ul className={styles.linkAcc}>
+    //                     <li>Allow Tournaments Notification: </li>
+    //                     <li>
+    //                         <input type="checkbox"></input>
+    //                     </li>
+    //                 </ul>
+    //             </div>
+    //         )
+    //     }
+    // }
 
     renderPassword() {
         if (this.state.displayPassword){
@@ -91,7 +91,7 @@ class SettingsContainer extends Component {
     renderTabs() {
         return(
             <div className={styles.settingTabs}>
-                <button onClick={this.DisplayGeneral}>General</button>
+                {/* <button onClick={this.DisplayGeneral}>General</button> */}
                 <button onClick={this.DisplayPassword}>Password</button>
                 <button onClick={this.DisplayEmail}>Link e-mail</button>
                 <button onClick={() => {
@@ -110,7 +110,7 @@ class SettingsContainer extends Component {
                     <div className = "row">
                         <div className = {"col-3"}> {this.renderTabs()} </div>
                         <div className = {"col-7"}>
-                            {this.renderGeneral()}
+                            {/* {this.renderGeneral()} */}
                             {this.renderPassword()}
                             {this.renderEmail()}
                         </div>
@@ -120,19 +120,19 @@ class SettingsContainer extends Component {
         );
     }
 
-    DisplayGeneral = (event) => {
-        event.preventDefault();
-        this.setState({
-            displayGeneral: true,
-            displayPassword: false,
-            displayEmail: false
-        })
-    }
+    // DisplayGeneral = (event) => {
+    //     event.preventDefault();
+    //     this.setState({
+    //         displayGeneral: true,
+    //         displayPassword: false,
+    //         displayEmail: false
+    //     })
+    // }
 
     DisplayPassword = (event) => {
         event.preventDefault();
         this.setState({
-            displayGeneral: false,
+            // displayGeneral: false,
             displayPassword: true,
             displayEmail: false
         })
@@ -141,7 +141,7 @@ class SettingsContainer extends Component {
     DisplayEmail = (event) => {
         event.preventDefault();
         this.setState({
-            displayGeneral: false,
+            // displayGeneral: false,
             displayPassword: false,
             displayEmail: true
         })
@@ -154,7 +154,7 @@ class SettingsContainer extends Component {
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // New password doesn't match
+        // New password doesn't matchs
         if (newPassword !== confirmPassword) {
             alert('new password and comfirm password does not match');
         }
@@ -187,7 +187,7 @@ class SettingsContainer extends Component {
         }
         
 
-    } 
+    } //
 
 }
 

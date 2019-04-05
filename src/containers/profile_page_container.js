@@ -98,7 +98,7 @@ class ProfilePageContainer extends Component {
                 </div>
 
                 <RankImage 
-                    rank={this.props.user.lolInfo.currentRank}
+                    rank={this.props.user.currentRank}
                     showInfo={true}
                     
                 />         

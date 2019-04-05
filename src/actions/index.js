@@ -203,20 +203,14 @@ export function getAllTournaments(ids) {
 
 export function getTournamentById(id) {
 
-    // console.log('in action')
+    const req = axios.get(`${backendRootLink}/getTournamentById?id=${id}`)
 
-    // this will only be used for the front-end part of the project
-    // since we cannot send requests to an external server
-    const tournament = tournaments.find( (item) => {
-        // console.log(`item.id: ${item.id}, id given: ${id}`);
-        return item.id === id;
+    return req.then(res => {
+        return {
+            type: 'GET_TOURNAMENT_BY_ID',
+            payload: res.data
+        }
     })
-
-    //a request will be made to the server right here when we program our backend
-    return {
-        type: 'GET_TOURNAMENT_BY_ID',
-        payload: tournament
-    }
 }
 
 
