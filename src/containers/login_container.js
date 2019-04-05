@@ -32,7 +32,6 @@ class LoginContainer extends Component {
         mainLoginForm: 'signIn',
         loginStatus: false,
         showDiffPasswd: false,
-        showShortPasswd: false,
         showInvalidEmail: false,
         showLeagueUserNotExist: false,
         showSuccessSignUpMessage: false,
@@ -313,13 +312,7 @@ class LoginContainer extends Component {
                         error={true}
                         show={this.state.showInvalidEmail}
                         message='The email address is invalid'
-                    />
-
-                    <ErrorMessage
-                        error={true}
-                        show={this.state.showShortPasswd}
-                        message='Password must be at least 8 characters long with one numeric value'
-                    />          
+                    />        
                     
                     <ErrorMessage
                         error={true}
@@ -405,7 +398,6 @@ class LoginContainer extends Component {
             signupFormData: newState,
             showWarning: false,
             showDiffPasswd: false,
-            showShortPasswd: false,
             showLeagueUserNotExist: false,
             showInvalidEmail: false,
             showFailedSignup: false,
@@ -443,10 +435,10 @@ class LoginContainer extends Component {
         console.log(dataToSubmit);
 
         const samePasswd = dataToSubmit.password === dataToSubmit.rePassword;
-        // password validation
-        const passwdRegex = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/;
-        // if this is not null, then we can continue
-        const passwdValidate = dataToSubmit.password.match(passwdRegex)
+        // // password validation
+        // const passwdRegex = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/;
+        // // if this is not null, then we can continue
+        // const passwdValidate = dataToSubmit.password.match(passwdRegex)
         const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         const emailValidate = dataToSubmit.email.match(emailRegex)
 
@@ -458,11 +450,8 @@ class LoginContainer extends Component {
             this.setState({
                 showDiffPasswd: true
             })
-        } else if (passwdValidate === null) {
-            this.setState({
-                showShortPasswd: true
-            })
-        } else if (emailValidate === null) {
+        } 
+        else if (emailValidate === null) {
             this.setState({
                 showInvalidEmail: true
             })

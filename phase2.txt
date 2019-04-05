@@ -1,0 +1,72 @@
+This is the instruction for the phase 2 of our League of Legends social app.
+---------------------Install npm and start the website----------------------
+
+---------------------Login credentials--------------------------
+Users:
+    username: user 
+    password: user
+
+
+Admin:
+ username: admin; 
+    password: admin;
+
+---------------------General instructions------------------------
+The bar at the top contains a drop-down menu explore (to be implemented later), three tabs that directs the user to the home page: the "find others"
+page and "tournaments" page, and a button that directs the user to the login page.
+
+The bar at the bottom shows the users' upcoming tournament, private messages and friends. These are to be implemented later.
+
+If not logged in, the home page will show a welcome page which redirects the  user to the login page when button at the bottom is clicked.
+
+The "find others" page let the user to find other users based on ranks. There are only front-end part done here so after pressing "search" button all of the users
+will appear.
+
+The "tounaments" page let the user to find and join a tournament. There are only front-end part done here so all of the hardcoded tournament will be shown.
+
+The login page will let the user to login by inputting username and password. It also has the "forgot username/password" function but it does not do anything.
+If the username and password combination is incorrect, an error message is shown. Otherwise, the user is logged in the website redirect user to the home page.
+
+--------------------User specific instructions---------------------------
+After logging in, the login button at the right of the top bar is replaced by the icon and username of the user. Clicking on it will lead the user to their profile page.
+The profile page shows an enlarged icon, the username, the league account name, the rank, and the tournament achievements to the left.
+To the right, there are four tabs: games, tournaments, teams, and settings.
+ - The games tab will grab the user's game data from League of Legends API, and this will be implemented later.
+ - The tournaments tab will showcase all the tournaments the user has joined. There are also buttons to go to the detail page of each tournament (to be implemented later).
+ - The teams tab will showcase all the teams the user has joined. There are also buttons to go to the detail page of each team (to be implemented later).
+ - If the currently logged in user is the same as the user of the profile page, the settings tab will appear. Inside the settings tab there are "general", "password",
+    "link e-mail" and "Log out":
+    ~ The "general" tab contains some general settings, such as allow notification and change user's linked account. It has not functional by now.
+    ~ The "password" tab can let user change their password. It checks if the old password is correct, or if the new password is the same as the comfirm password.
+        It does not actually change the password right now, and it shows alerts only, but there is a call to the function that will change the user's password when the backend
+        is implemented.
+    ~ The "link email" tab can let user change their linked email. It does not actually changed the email right now, only showing alerts, but there is a call to the function that
+        will change the user's password when the backend is implemented.
+    ~ The "log out" tab signs out the user when clicked. After signing out, the user can log in with the same or another account.
+
+------------------Admin Specific Instructions----------------------------
+After an admin logging in, the top bar will show another tab that directs to the admin portal. The admin portal can be also typed in the address bar, but if the current user
+is not an admin, the "access denied" alert will be shown and the user is redirected to the home page.
+In the admin portal, the admin can change each user's username, password and email. They can also change the tournaments and teams. A function call related to the
+changes of user profile/tournament info/team info will be made, but there will not be any changes made until we programmed the backend.
+
+
+----------------------- General Routes when surfing the page ---------------------------------------------
+All of these routes go after the http://localhost:3000 (or whatever port number you are using instead of 3000)
+    route: / <- Main landing page route
+    route: /profile/:id <- Profile of a user. For example, typing in /profile/CoolGuy28 will direct you to CoolGuy28's profile whether or not you are logged in
+    route: /login <- The login page route that allows the user to log in
+    route: /find <- the find page to find other users and invite them
+    route: /tournaments <- the tournaments page to find tournaments and join them
+    route: /adminportal <- the admin portal route to access all of the user's information and change them
+
+
+
+
+
+
+
+
+
+
+

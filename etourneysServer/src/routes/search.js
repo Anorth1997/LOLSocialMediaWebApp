@@ -11,6 +11,16 @@ let TeamModel = require('../models/team.model');
 const router = express.Router();
 const BCRYPT_SALT_ROUNDS = 11;
 
+router.get('/getEveryUser', (req, res) => {
+    
+    const { username, leagueUsername, lowestRank, highestRank, mainRole } = req.query;
+    let filters = {}
+    
+    UserModel.find( (err, users) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for users with criteria")
+        return res.status(HttpStatus.OK).json(users);
+    })
+})
 
 
 router.get('/searchUsers', (req, res) => {

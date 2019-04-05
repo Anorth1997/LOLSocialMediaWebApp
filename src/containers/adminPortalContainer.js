@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getAllUsers } from '../actions/index';
+import { getEveryUser } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import cx from 'classnames';
@@ -15,7 +15,7 @@ class AdminPortalContainer extends Component {
 
 
     componentWillMount() {
-        this.props.getAllUsers();
+        this.props.getEveryUser();
     }
 
     renderTabs = () => {
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getAllUsers}, dispatch);
+    return bindActionCreators({getEveryUser}, dispatch);
 }
 
 

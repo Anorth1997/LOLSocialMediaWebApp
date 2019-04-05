@@ -54,11 +54,11 @@ class TournamentProfileTabContentContainer extends Component {
         if (this.props.currUser) {
 
 
-            if (this.props.currUser._id === this.props.tournament.hostId) {
-                return (<Tab eventKey="incomingRequests" title="Incoming Requests">
-                    {/* <IncomingUsersTeamProfileTab {...this.props.team}/> */}
-                </Tab>)
-            }
+            // if (this.props.currUser._id === this.props.tournament.hostId) {
+            //     return (<Tab eventKey="incomingRequests" title="Incoming Requests">
+            //         {/* <IncomingUsersTeamProfileTab {...this.props.team}/> */}
+            //     </Tab>)
+            // }
 
         }
     }
