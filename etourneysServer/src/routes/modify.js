@@ -334,6 +334,7 @@ router.put('/modify/user/leaveTeam', (req, res) => {
                 user.teams.currTeams = removeItemFromList(user.teams.currTeams, _teamId, false);
                 user.teams.outgoingTeamRequests = removeItemFromList(user.teams.outgoingTeamRequests, _teamId, false);
                 user.teams.incomingTeamRequests = removeItemFromList(user.teams.incomingTeamRequests, _teamId, false);
+                team.totalRank -= user.lolInfo.currentRank;
                 return saveBothUsers(team, user, res, "User has successfully left the team") 
             })
         } else {
@@ -435,12 +436,11 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
         if (err) return res.status(HttpStatus.NOT_FOUND).send("Could not find the team requested")
     })
     .then((team) => {
-
         if (!listContains(team.players.incomingPlayerRequests, _userToAcceptId, false)) {
-            return res.status(Http.BAD_REQUEST).send("This user has never requested to join the team")
+            return res.status(HttpStatus.BAD_REQUEST).send("This user has never requested to join the team")
         }
 
-        team.playerAuthorizedToAccept(_userAcceptingId, (isAuthorized) => {
+        team.playerAuthorizedToAccept(_userAcceptingId, team, (isAuthorized) => {
             if (!isAuthorized) return res.status(HttpStatus.FORBIDDEN).send("User is not authorized to accept players")
 
             UserModel.findById({_id: _userToAcceptId}, (err) => {
@@ -453,8 +453,40 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
                 team.players.incomingPlayerRequests = 
                     removeItemFromList(team.players.incomingPlayerRequests, _userToAcceptId, false)        
                 team.players.currPlayers.push(_userToAcceptId)
-                
+                team.totalRank += userToAccept.lolInfo.currentRank;
                 return saveBothUsers(userToAccept, team, res, "requested user has been accepted to the team")
+            })
+
+
+        })
+    })
+
+})
+
+router.put('/modify/team/rejectIncomingRequest', (req, res) => {
+
+    const { _userRejectingId, _userToRejectId, _teamId } = req.body;
+
+    TeamModel.findById({_id: _teamId}, (err) => {
+        if (err) return res.status(HttpStatus.NOT_FOUND).send("Could not find the team requested")
+    })
+    .then((team) => {
+        if (!listContains(team.players.incomingPlayerRequests, _userToRejectId, false)) {
+            return res.status(HttpStatus.BAD_REQUEST).send("This user has never requested to join the team")
+        }
+
+        team.playerAuthorizedToAccept(_userRejectingId, team, (isAuthorized) => {
+            if (!isAuthorized) return res.status(HttpStatus.FORBIDDEN).send("User is not authorized to reject players")
+
+            UserModel.findById({_id: _userToRejectId}, (err) => {
+                if (err) return res.status(HttpStatus.NOT_FOUND).send("Could not find the user to reject into the team")
+            })
+            .then((userToReject) => {
+                userToReject.teams.outgoingTeamRequests = 
+                    removeItemFromList(userToReject.teams.outgoingTeamRequests, _teamId, false)
+                team.players.incomingPlayerRequests = 
+                    removeItemFromList(team.players.incomingPlayerRequests, _userToRejectId, false)
+                return saveBothUsers(userToReject, team, res, "requested user has been rejected")
             })
 
 

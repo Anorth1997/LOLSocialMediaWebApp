@@ -30,7 +30,6 @@ const ChatPickerContainer = (props) => {
                         console.log(`clicked chat button for user ${friend.friendId}`)
                     }}
                     key={i}>
-                    {console.log(friend.friendUsername)}
                     {friend.friendUsername}
                     <FontAwesomeIcon 
                         className={styles.closeButton}

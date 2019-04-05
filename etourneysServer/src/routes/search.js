@@ -36,6 +36,7 @@ router.put('/searchUser', (req, res) => {
     if (username) filters.username = { "$regex": username, "$options": "i"};
     UserModel.findOne(filters, (err, user) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for user with criteria")
+        if (!user) return res.status(HttpStatus.NOT_FOUND).send("User not found")
         // console.log(user)
         user.updatePlayerRank(user.lolInfo.id, (rank) => {
             console.log(rank)
@@ -107,7 +108,7 @@ router.get('/searchTournament', (req, res) => {
     if (tournamentType) filters.hostType = tournamentType;
     if (fromDate && toDate) filters.dateStarting = {"$gte": lowestRank, "$lte": highestRank} 
     
-    TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting', (err, tournaments) => {
+    TournamentModel.find(filters, 'name hostType hasStarted tournamentType dateStarting dateCreated amountOfTeams', (err, tournaments) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error querying for teams with criteria")
         return res.status(HttpStatus.OK).json(tournaments);
     })
@@ -129,10 +130,19 @@ router.get('/searchTeams', (req, res) => {
 
 router.get('/getTeamById', (req, res) => {
     const id = req.query.id;
-    console.log(id)
+   // console.log(id)
     TeamModel.findById(id, (err, team) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
         return res.status(HttpStatus.OK).json(team);
+    })
+})
+
+router.get('/getTournamentById', (req, res) => {
+    const id = req.query.id;
+    //console.log(id)
+    TournamentModel.findById(id, (err, tourn) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+        return res.status(HttpStatus.OK).json(tourn);
     })
 })
 

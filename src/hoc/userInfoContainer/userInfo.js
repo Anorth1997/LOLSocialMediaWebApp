@@ -13,13 +13,13 @@ const UserInfo = (props) => {
     return (
         <div className={cx("container-fluid", styles.teamInfo)}>
             <div className="row">
-                <div className="col-2">
+                <div className="col-1">
                     {/* <img className={styles.teamIcon} src={require(`../../assets/images/${props.team.icon}`)} alt=""/> */}
                 </div>
-                <div className={cx("col-4", styles.teamName)}>
+                <div className={cx("col-3", styles.teamName)}>
                     {props.user.username}
                 </div>
-                <div className={cx("col-4", styles.rankImageStyles)}>
+                <div className={cx("col-6", styles.rankImageStyles)}>
                     Current Rank
                     <RankImage 
                         rank={props.user.lolInfo.currentRank}

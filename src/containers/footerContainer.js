@@ -13,11 +13,14 @@ import styles from '../scss-modules/footer/footer.module.scss';
 
 import MessageBox from '../Components/FooterBoxes/MessageBox';
 import ChatPickerContainer from '../Components/FooterBoxes/ChatPickerContainer';
+
 // import { bindActionCreators } from 'redux';
 // import ChatPickerContainer from '../';
 // import ChatPickerContainer from './../Widgets/ChatPickerContainer';
 
 // import FontAwesome from 'react-fontawesome';
+import FriendsBox from './../Components/FooterBoxes/FriendsBox';
+import TournamentsBox from './../Components/FooterBoxes/TournamentsBox';
 
 
 class Footer extends Component {
@@ -73,7 +76,9 @@ class Footer extends Component {
                         display: this.state.showFriends ? 'block' : 'none'
                     }}
                 >
-                    This is the popup for friends
+                    <FriendsBox 
+                        currUser={this.props.currUser}
+                    />
                 </div>
                 <div 
                     className={cx(styles.popup)} 
@@ -81,7 +86,9 @@ class Footer extends Component {
                         display: this.state.showTournaments ? 'block' : 'none'
                     }}
                 >
-                    This is the popup for tournaments
+                    <TournamentsBox 
+                        currUser={this.props.currUser}
+                    />
                 </div>
                 <div 
                     className={cx(styles.popup)} 
