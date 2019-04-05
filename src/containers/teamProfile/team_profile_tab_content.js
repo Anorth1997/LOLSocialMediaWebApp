@@ -73,12 +73,12 @@ class UserProfileTabContentContainer extends Component {
             <div>
 
                 <Tabs defaultActiveKey="games" id="uncontrolled-tab-example">
-                    <Tab eventKey="aaa" title="aaa">
+                    {/* <Tab eventKey="aaa" title="aaa">
                         <div>
                             info about the team?
                         </div>
 
-                    </Tab>
+                    </Tab> */}
                       <Tab eventKey="Members" title="Members">
                         <UsersTeamProfileTab {...this.props.team}/>
                     </Tab>   
