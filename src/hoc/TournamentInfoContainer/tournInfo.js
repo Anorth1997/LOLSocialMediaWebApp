@@ -4,7 +4,7 @@ import styles from '../../scss-modules/others/tournament_info.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 const TournamentInfo = (props) => {
@@ -30,7 +30,9 @@ const TournamentInfo = (props) => {
                             icon={faCalendarAlt}
                         /> {new Date(props.tournament.dateStarting).toDateString()}
                     <div>  
-                        <button type="button" className={cx("btn btn-dark", styles.detailsButton)}>Details</button>
+                        <Link to={`/tournament/${props.tournament._id}`}>
+                        <button type="button" className={cx("btn btn-dark")}>Details</button>
+                    </Link>
                     </div>
                 </div>
             </div>

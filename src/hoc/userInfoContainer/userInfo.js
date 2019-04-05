@@ -22,7 +22,7 @@ const UserInfo = (props) => {
                 <div className={cx("col-6", styles.rankImageStyles)}>
                     Current Rank
                     <RankImage 
-                        rank={props.user.lolInfo.currentRank}
+                        rank={props.user.currentRank}
                         showInfo={true}
                     />
                 </div>
