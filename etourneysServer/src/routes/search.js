@@ -40,7 +40,7 @@ router.put('/searchUser', (req, res) => {
         // console.log(user)
         user.updatePlayerRank(user.lolInfo.id, (rank) => {
             console.log(rank)
-            user.lolInfo.currentRank = rank;
+            // user.lolInfo.currentRank = rank;
             user.save().then((doc)=> {
                 return res.status(HttpStatus.OK).json({
                     _id: doc._id,
@@ -52,6 +52,7 @@ router.put('/searchUser', (req, res) => {
                     profile_pic: doc.profile_pic,
                     tournaments: doc.tournaments,
                     teams: doc.teams,
+                    currentRank: rank,
                     lolInfo: doc.lolInfo,
                     email: doc.email
                 })

@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const httpStatus = require('http-status-codes');
 const cors = require('cors');
+const sc = require('../secret/secret')
 // let bodyParser = require('');
 
 // routers
@@ -47,7 +48,8 @@ app.use((err, req, res, next) => {
 
 // const PORT = process.env.PORT || 3001;
 // const PORT = require('../secret/secret').port;
-const PORT = 3543;
+const PORT = sc.port;
+// console.log(sc.port)
 app.listen(PORT, () => {
     console.info(`Server is currently running`)
 })

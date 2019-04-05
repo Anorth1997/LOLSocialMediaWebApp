@@ -40,7 +40,8 @@ router.post('/register/user', (req, res) => {
             model.lolInfo.lastUpdated = currDate;
             
             model.updatePlayerRank(model.lolInfo.id, (rank) => {
-                model.lolInfo.currentRank = rank;
+                // model.lolInfo.currentRank = rank;
+                model.currentRank = rank;
                 model.save()
                 .then((doc) => {
                     if (!doc || doc.length === 0) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(doc);
