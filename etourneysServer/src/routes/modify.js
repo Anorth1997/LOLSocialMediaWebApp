@@ -334,7 +334,7 @@ router.put('/modify/user/leaveTeam', (req, res) => {
                 user.teams.currTeams = removeItemFromList(user.teams.currTeams, _teamId, false);
                 user.teams.outgoingTeamRequests = removeItemFromList(user.teams.outgoingTeamRequests, _teamId, false);
                 user.teams.incomingTeamRequests = removeItemFromList(user.teams.incomingTeamRequests, _teamId, false);
-                team.totalRank -= user.lolInfo.currentRank;
+                team.totalRank -= user.currentRank;
                 return saveBothUsers(team, user, res, "User has successfully left the team") 
             })
         } else {
@@ -406,7 +406,7 @@ router.put('/modify/team/requestUser', (req, res) => {
                         
                         team.players.currPlayers.push(_requestedUserId)
                         team.privileges.nothing.push(_requestedUserId)
-                        team.totalRank += requestedUser.lolInfo.currentRank;
+                        team.totalRank += requestedUser.currentRank;
 
                         return saveBothUsers(requestedUser, team, res, "requested user has joined the team!")
                     } else {
@@ -453,7 +453,7 @@ router.put('/modify/team/acceptIncomingRequest', (req, res) => {
                 team.players.incomingPlayerRequests = 
                     removeItemFromList(team.players.incomingPlayerRequests, _userToAcceptId, false)        
                 team.players.currPlayers.push(_userToAcceptId)
-                team.totalRank += userToAccept.lolInfo.currentRank;
+                team.totalRank += userToAccept.currentRank;
                 return saveBothUsers(userToAccept, team, res, "requested user has been accepted to the team")
             })
 
