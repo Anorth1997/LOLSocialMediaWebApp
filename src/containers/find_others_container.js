@@ -15,11 +15,17 @@ class FindContainer extends Component{
     }
 
     renderPlayers(show) {
-        const players = this.state.searched_players.map((i) => {
+        const ranks = ['unranked', 'bronze V', 'bronze IV', 'bronze III', 'bronze II', 'bronze I',
+        'silver V', 'silver IV', 'silver III', 'silver II', 'silver I', 
+        'gold V', 'gold IV', 'gold III', 'gold II', 'gold I',
+        'platinum V', 'platinum IV', 'platinum III', 'platinum II', 'platinum I',
+        'diamond V', 'diamond IV', 'diamond III', 'diamond II', 'diamond I',
+        'master', 'challenger']
+        const players = this.state.searched_players.map((i, key) => {
             return (
-                    <ul className={styles.playerBox}>
+                    <ul key={key} className={styles.playerBox}>
                         <li className={styles.playerIconContainer}>
-                            <img className={styles.playerIcon} src={i.profile_pic} alt="profile pic"></img>
+                            <img className={styles.playerIcon} src={require(`../assets/images/${i.profile_pic}`)} alt="profile pic"></img>
 
                         </li>
                         <li className={styles.playerNameSection}>
@@ -28,7 +34,7 @@ class FindContainer extends Component{
                         </li>
                         <li className={styles.inviteSection}>
                             <button className={styles.inviteButton}>Invite</button>
-                            <p>Rank: PlatinumVI</p>
+                            <p>Rank: {ranks[i.currentRank]}</p>
                         </li>
                     </ul>
             )
@@ -92,9 +98,7 @@ class FindContainer extends Component{
     buildquery = (queries) => {
         let temp = ''
         let first = true
-        console.log(queries)
         queries.forEach(item => {
-            console.log(item.key)
             if (first){
                 temp = temp.concat(`?${item.key}=${item.value}`)
                 first = false
@@ -102,7 +106,6 @@ class FindContainer extends Component{
                 temp = temp.concat(`&${item.key}=${item.value}`)
             }
         })
-        console.log(temp)
         return temp
     }
 
