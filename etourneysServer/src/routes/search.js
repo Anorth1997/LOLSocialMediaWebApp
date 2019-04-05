@@ -130,10 +130,19 @@ router.get('/searchTeams', (req, res) => {
 
 router.get('/getTeamById', (req, res) => {
     const id = req.query.id;
-    console.log(id)
+   // console.log(id)
     TeamModel.findById(id, (err, team) => {
         if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
         return res.status(HttpStatus.OK).json(team);
+    })
+})
+
+router.get('/getTournamentById', (req, res) => {
+    const id = req.query.id;
+    //console.log(id)
+    TournamentModel.findById(id, (err, tourn) => {
+        if (err) return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Error getting teams");
+        return res.status(HttpStatus.OK).json(tourn);
     })
 })
 
