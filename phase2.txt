@@ -34,7 +34,8 @@ However, there isn't any other interaction implemented.
 ------------------Admin Specific Instructions----------------------------
 The admin can see all the users currently in the database, however we havn't implemented any way to change any credential.
 
-
+frontend: https://etourneys-front.herokuapp.com/
+backend: https://etourneys-example.herokuapp.com/
 
 
 
