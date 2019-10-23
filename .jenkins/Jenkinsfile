@@ -1,0 +1,20 @@
+node {
+    stage('build') {
+        withCredentials([usernameColonPassword(credentialsId: 'Github', variable: 'git')]) {
+            sh '''
+            git clone https://"git"@github.com/Anorth1997/LOLSocialMediaWebApp.git
+            '''
+            sh "cd LOLSocialMediaWebApp"
+            sh "npm install"
+            sh "npm run build"
+        }
+    }
+
+    stage('Stagging approval') {
+        input "Push to stagging?"
+    }
+
+    stage('Stagging') {
+        echo "stagging"
+    }
+}
