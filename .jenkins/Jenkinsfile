@@ -8,9 +8,10 @@ node {
     }
 
     stage('build') {
-        sh("ls")
-        sh("cd LOLSocialMediaWebApp")
-        sh("ls")
+        dir("LOLSocialMediaWebApp") {
+            sh "pwd"
+        }
+        sh "ls"
     }
 
     stage('Stagging approval') {
