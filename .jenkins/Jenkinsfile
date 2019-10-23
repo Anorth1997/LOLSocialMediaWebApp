@@ -6,6 +6,7 @@ node {
             '''
             sh "cd LOLSocialMediaWebApp"
             sh "ls"
+            sh "cd LOLSocialMediaWebApp"
             sh "npm install"
             sh "npm run build"
         }
