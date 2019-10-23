@@ -1,8 +1,6 @@
 node {
     stage('git clone source code') {
         withCredentials([usernameColonPassword(credentialsId: 'Github', variable: 'git')]) {
-            sh "pwd"
-            sh "ls"
             sh '''
             git clone https://"git"@github.com/Anorth1997/LOLSocialMediaWebApp.git
             '''
@@ -10,9 +8,9 @@ node {
     }
 
     stage('build') {
-        ls
-        cd LOLSocialMediaWebApp
-        ls
+        sh("ls")
+        sh("cd LOLSocialMediaWebApp")
+        sh("ls")
     }
 
     stage('Stagging approval') {
