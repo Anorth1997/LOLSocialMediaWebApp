@@ -7,13 +7,6 @@ node {
         }
     }
 
-    stage('build') {
-        dir("LOLSocialMediaWebApp") {
-            sh "pwd"
-        }
-        sh "ls"
-    }
-
     stage('Stagging approval') {
         input "Push to stagging?"
     }
