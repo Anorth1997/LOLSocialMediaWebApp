@@ -6,6 +6,10 @@ node {
             '''
         }
     }
+    
+    stage('build') {
+        sh 'ls'
+    }
 
     stage('Stagging approval') {
         input "Push to stagging?"
