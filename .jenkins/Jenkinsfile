@@ -13,7 +13,7 @@ node {
     }
     
     stage('build') {
-        dir('LOLSocialMediaWebApp) {
+        dir('LOLSocialMediaWebApp') {
             sh 'pwd'
             sh 'ls'
             sh '''
