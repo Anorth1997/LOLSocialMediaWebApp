@@ -13,7 +13,13 @@ node {
     }
     
     stage('build') {
-        sh 'ls'
+        dir('LOLSocialMediaWebApp) {
+            sh 'pwd'
+            sh 'ls'
+            sh '''
+                git pull
+            '''
+        }
     }
 
     stage('Stagging approval') {
