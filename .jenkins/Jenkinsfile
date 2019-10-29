@@ -14,10 +14,10 @@ node {
     
     stage('build') {
         dir('LOLSocialMediaWebApp') {
-            sh 'pwd'
-            sh 'ls'
             sh '''
                 git pull
+                npm -v
+                node -v
             '''
         }
     }
