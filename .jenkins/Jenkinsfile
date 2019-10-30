@@ -15,7 +15,7 @@ node {
     stage('build') {
         dir('LOLSocialMediaWebApp') {
             sh '''
-                checkout master
+                git checkout master
                 git pull
             '''
         }
