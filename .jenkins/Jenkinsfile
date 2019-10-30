@@ -12,12 +12,12 @@ node {
         }
     }
     
+    checkout scm
+    
     stage('build') {
         dir('LOLSocialMediaWebApp') {
             sh '''
                 git pull
-                npm -v
-                node -v
             '''
         }
     }
