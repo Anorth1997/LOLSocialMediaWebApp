@@ -11,9 +11,7 @@ node {
             '''
         }
     }
-    
-    checkout scm
-    
+        
     stage('build') {
         dir('LOLSocialMediaWebApp') {
             sh '''
