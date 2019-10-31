@@ -3,7 +3,7 @@ pipeline {
     triggers {
         GenericTrigger(
              genericVariables: [
-              [key: 'ref', value: '$.ref', regexpFilter: 'master']
+              [key: 'ref', value: '$.ref']
              ],
              genericRequestVariables: [
               [key: 'X-GitHub-Event', regexpFilter: 'pull-request'],
@@ -29,7 +29,6 @@ pipeline {
             steps {
                 echo "$ref"
                 echo "$x_github_event"
-                echo "hei"
             }
         }
 
