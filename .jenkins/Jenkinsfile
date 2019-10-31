@@ -6,7 +6,7 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericHeaderVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push', value: '$.x_github_event'],
+              [key: 'X-Github-Event', regexpFilter: 'push'],
               [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
 
@@ -27,6 +27,7 @@ pipeline {
             steps {
                 echo "$ref"
                 echo "$headerWithNumber"
+                echo "$X-Github-Event"
             }
         }
 
