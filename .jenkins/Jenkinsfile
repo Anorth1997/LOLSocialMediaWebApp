@@ -6,7 +6,7 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericHeaderVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push']
+              [key: 'X-Github-Event', regexpFilter: 'push', value: '$.x_github_event']
              ],
 
              causeString: 'Triggered on the branch $ref',
@@ -33,6 +33,7 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node --version'
+                sh 'npm i'
                 sh 'ls'
             }
         }
