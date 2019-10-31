@@ -21,6 +21,18 @@ pipeline {
                 echo "stagging"
             }
         }
+        
+        stage('Production approval') {
+            steps {
+                input "Push to production?"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo "Deploying"
+            }
+        }    
     }
     post {
         success {
