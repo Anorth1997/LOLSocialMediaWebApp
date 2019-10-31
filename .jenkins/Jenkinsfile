@@ -4,6 +4,7 @@ pipeline {
         GenericTrigger(
              genericVariables: [
               [key: 'ref', value: '$.ref']
+              [key: 'pr_branch', value: '$.pull_request.head.ref']
              ],
              genericRequestVariables: [
               [key: 'X-GitHub-Event'],
