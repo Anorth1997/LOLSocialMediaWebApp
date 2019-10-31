@@ -39,6 +39,7 @@ pipeline {
             steps {
                 echo "stagging"
                 echo "cool"
+                echo "ge"
             }
         }
         
