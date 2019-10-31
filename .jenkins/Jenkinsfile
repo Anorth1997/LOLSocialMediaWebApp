@@ -4,7 +4,6 @@ pipeline {
         stage('git clone source code') {
             agent any
             steps {
-                checkout scm
                 sh 'ls'
             }
         }
