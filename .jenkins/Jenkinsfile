@@ -6,8 +6,7 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node --version'
-                sh 'npm i'
-                sh 'npm run lint'
+                sh 'ls'
             }
         }
 
@@ -20,6 +19,18 @@ pipeline {
         stage('Stagging') {
             steps {
                 echo "stagging"
+            }
+        }
+        post {
+            always {
+                echo 'Finished Job, delete workspace directories'
+                deleteDir()
+            }
+            success {
+                echo 'Job Succeed'
+            }
+            failure {
+                echo 'Job Failure'
             }
         }
     }
