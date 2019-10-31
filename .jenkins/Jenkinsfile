@@ -30,7 +30,6 @@ pipeline {
         stage('check trigger vars') {
             steps {
                 echo "$ref"
-                echo "$X-Github-Event"
             }
         }
 
