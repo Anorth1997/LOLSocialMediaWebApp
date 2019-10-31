@@ -6,11 +6,11 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericRequestVariables: [
-              [key: 'x_github_event', regexpFilter: 'pull-request'],
+              [key: 'X-GitHub-Event', regexpFilter: 'pull-request'],
               [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
              genericHeaderVariables: [
-              [key: 'x_github_event', regexpFilter: 'pull-request'],
+              [key: 'X-GitHub-Event', regexpFilter: 'pull-request'],
               [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
 
