@@ -1,1 +1,11 @@
 test1
+                withCredentials([usernameColonPassword(credentialsId: 'ZiyaoTest', variable: 'git')]) {
+                    sh '''
+                    if [ ! -d "LOLSocialMediaWebApp" ]
+                    then
+                        git clone https://"git"@github.com/Anorth1997/LOLSocialMediaWebApp.git
+                    else
+                        echo "repo already exists"
+                    fi
+                    '''
+                }
