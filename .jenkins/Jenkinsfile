@@ -6,10 +6,12 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericRequestVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push'],
+              [key: 'X-Github-Event', regexpFilter: ''],
+              [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
              genericHeaderVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push'],
+              [key: 'X-Github-Event', regexpFilter: ''],
+              [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
 
              causeString: 'Triggered on the branch $ref',
@@ -28,7 +30,6 @@ pipeline {
         stage('check trigger vars') {
             steps {
                 echo "$ref"
-                echo "$x_github_event"
             }
         }
 
