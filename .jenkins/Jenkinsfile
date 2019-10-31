@@ -28,7 +28,7 @@ pipeline {
         stage('check trigger vars') {
             steps {
                 echo "$ref"
-                echo "j"
+                echo "$x_github_event"
             }
         }
 
