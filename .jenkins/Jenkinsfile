@@ -20,9 +20,10 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node --version'
-                sh 'ls'
                 dir('LOLSocialMediaWebApp') {
                     sh '''
+                        ls
+                        git -v
                         git checkout master
                         git pull
                     '''
