@@ -31,15 +31,13 @@ pipeline {
 
         stage('Stagging approval') {
             steps {
-                input "Push to stagging??"
+                input "Push to staging??"
             }
         }
 
-        stage('Stagging') {
+        stage('Staging') {
             steps {
-                echo "stagging"
-                echo "cool"
-                echo "ge"
+                echo "staging"
             }
         }
         
