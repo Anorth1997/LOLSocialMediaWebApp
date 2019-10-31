@@ -4,7 +4,6 @@ pipeline {
         GenericTrigger(
              genericVariables: [
               [key: 'ref', value: '$.ref']
-              [key: 'pr_branch', value: '$.pull_request.head.ref']
              ],
              genericRequestVariables: [
               [key: 'X-GitHub-Event'],
@@ -30,7 +29,6 @@ pipeline {
             steps {
                 echo "$ref"
                 echo "$x_github_event"
-                echo "$pr_branch"
             }
         }
 
