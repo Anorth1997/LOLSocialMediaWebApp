@@ -26,7 +26,6 @@ pipeline {
                 sh 'node --version'
                 sh 'ls'
                 sh "echo $ref"
-                sh "echo $x_github_event"
             }
         }
 
