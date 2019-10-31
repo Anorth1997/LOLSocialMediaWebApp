@@ -6,7 +6,7 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericHeaderVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push'],
+              [key: 'X-Github-Event', regexpFilter: 'pull-request'],
               [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
 
@@ -26,8 +26,6 @@ pipeline {
         stage('check trigger vars') {
             steps {
                 echo "$ref"
-                echo "$headerWithNumber"
-                echo "$X-Github-Event"
             }
         }
 
