@@ -16,7 +16,6 @@ pipeline {
              silentResponse: false,
 
              regexpFilterText: '$ref',
-             regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
         )
     }
     stages {
@@ -27,21 +26,18 @@ pipeline {
                 sh 'node --version'
                 sh 'ls'
                 sh "echo $ref"
-                sh "echo $x_github_event"
-                sh "echo BRANCH_NAME"
             }
         }
 
         stage('Stagging approval') {
             steps {
-                input "Push to stagging?"
+                input "Push to staging??"
             }
         }
 
-        stage('Stagging') {
+        stage('Staging') {
             steps {
-                echo "stagging"
-                echo "cool"
+                echo "staging"
             }
         }
         
