@@ -21,17 +21,17 @@ pipeline {
                 echo "stagging"
             }
         }
-        post {
-            always {
-                echo 'Finished Job, delete workspace directories'
-                deleteDir()
-            }
-            success {
-                echo 'Job Succeed'
-            }
-            failure {
-                echo 'Job Failure'
-            }
+    }
+    post {
+        always {
+            echo 'Finished Job, delete workspace directories'
+            deleteDir()
+        }
+        success {
+            echo 'Job Succeed'
+        }
+        failure {
+            echo 'Job Failure'
         }
     }
 }
