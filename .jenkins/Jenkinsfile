@@ -19,6 +19,7 @@ pipeline {
         stage('Stagging') {
             steps {
                 echo "stagging"
+                echo "cool"
             }
         }
         
