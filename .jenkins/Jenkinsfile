@@ -6,7 +6,8 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericHeaderVariables: [
-              [key: 'X-Github-Event', regexpFilter: 'push', value: '$.x_github_event']
+              [key: 'X-Github-Event', regexpFilter: 'push', value: '$.x_github_event'],
+              [key: 'headerWithNumber', regexpFilter: '[^0-9]'],
              ],
 
              causeString: 'Triggered on the branch $ref',
@@ -25,6 +26,7 @@ pipeline {
         stage('check trigger vars') {
             steps {
                 echo "$ref"
+                echo "$headerWithNumber"
             }
         }
 
@@ -33,7 +35,6 @@ pipeline {
             steps {
                 sh 'npm --version'
                 sh 'node --version'
-                sh 'npm i'
                 sh 'ls'
             }
         }
