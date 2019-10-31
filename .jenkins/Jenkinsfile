@@ -1,20 +1,12 @@
 pipeline {
     agent none
     stages {
-        stage('check') {
-            steps {
-                sh 'ls'
-            }
-        }
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
                 sh 'npm --version'
                 sh 'node --version'
                 sh 'ls'
-                dir('LOLSocialMediaWebApp') {
-                    sh 'ls'
-                }
             }
         }
 
