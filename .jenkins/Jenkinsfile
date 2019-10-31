@@ -6,10 +6,10 @@ pipeline {
               [key: 'ref', value: '$.ref']
              ],
              genericRequestVariables: [
-              [key: 'X-GitHub-Event', regexpFilter: 'pull-request'],
+              [key: 'X-GitHub-Event'],
              ],
              genericHeaderVariables: [
-              [key: 'X-GitHub-Event', regexpFilter: 'pull-request'],
+              [key: 'X-GitHub-Event'],
              ],
 
              causeString: 'Triggered on the branch $ref with $x_github_event',
