@@ -24,7 +24,7 @@ pipeline {
     stages {
         stage('check trigger vars') {
             steps {
-                sh 'echo $ref'
+                echo "$ref"
             }
         }
 
