@@ -32,7 +32,7 @@ pipeline {
 
         stage('Stagging approval') {
             steps {
-                input "Push to stagging?"
+                input "Push to stagging??"
             }
         }
 
