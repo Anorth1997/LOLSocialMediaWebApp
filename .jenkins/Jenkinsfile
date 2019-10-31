@@ -1,8 +1,10 @@
 pipeline {
-    agent { docker { image 'node:12.13.0-alpine' } }
+    agent none
     stages {
         stage('git clone source code') {
-            steps {               
+            agent any
+            steps {
+                checkout scm
                 withCredentials([usernameColonPassword(credentialsId: 'ZiyaoTest', variable: 'git')]) {
                     sh '''
                     if [ ! -d "LOLSocialMediaWebApp" ] 
@@ -17,13 +19,13 @@ pipeline {
         }
 
         stage('build') {
+            agent { docker { image 'node:12.13.0-alpine' } }
             steps {
                 sh 'npm --version'
                 sh 'node --version'
                 dir('LOLSocialMediaWebApp') {
                     sh '''
                         ls
-                        git -v
                         git checkout master
                         git pull
                     '''
