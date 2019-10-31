@@ -1,13 +1,6 @@
 pipeline {
     agent none
     stages {
-        stage('git clone source code') {
-            agent any
-            steps {
-                sh 'ls'
-            }
-        }
-
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
