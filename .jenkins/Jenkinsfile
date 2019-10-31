@@ -5,6 +5,9 @@ pipeline {
              genericVariables: [
               [key: 'ref', value: '$.ref']
              ],
+             genericHeaderVariables: [
+              [key: 'X-Github-Event', regexpFilter: 'push']
+             ],
 
              causeString: 'Triggered on the branch $ref',
 
@@ -19,13 +22,16 @@ pipeline {
         )
     }
     stages {
+        stage('check trigger vars') {
+            sh 'echo $ref'
+        }
+
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
                 sh 'npm --version'
                 sh 'node --version'
                 sh 'ls'
-                sh "echo $ref"
             }
         }
 
@@ -49,7 +55,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                echo "Deploying"
+                echo "Deploying"l
             }
         }    
     }
