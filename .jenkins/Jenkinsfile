@@ -1,34 +1,33 @@
-node {
-    stage('git clone source code') {
-        withCredentials([usernameColonPassword(credentialsId: 'ZiyaoTest', variable: 'git')]) {
-            sh '''
-            if [ ! -d "LOLSocialMediaWebApp" ] 
-            then 
-                git clone https://"git"@github.com/Anorth1997/LOLSocialMediaWebApp.git
-            else 
-                echo "repo already exists"
-            fi
-            '''
+pipeline {
+    stages {
+        stage('git clone source code') {
+            withCredentials([usernameColonPassword(credentialsId: 'ZiyaoTest', variable: 'git')]) {
+                sh '''
+                if [ ! -d "LOLSocialMediaWebApp" ] 
+                then 
+                    git clone https://"git"@github.com/Anorth1997/LOLSocialMediaWebApp.git
+                else 
+                    echo "repo already exists"
+                fi
+                '''
+            }
         }
-    }
-        
-    stage('build') {
-        docker.image('node:12.13.0-alpine') {
-            sh 'node -v'
-        }
-        dir('LOLSocialMediaWebApp') {
-            sh '''
-                git checkout master
-                git pull
-            '''
-        }
-    }
 
-    stage('Stagging approval') {
-        input "Push to stagging?"
-    }
+        stage('build') {
+            dir('LOLSocialMediaWebApp') {
+                sh '''
+                    git checkout master
+                    git pull
+                '''
+            }
+        }
 
-    stage('Stagging') {
-        echo "stagging"
+        stage('Stagging approval') {
+            input "Push to stagging?"
+        }
+
+        stage('Stagging') {
+            echo "stagging"
+        }
     }
 }
