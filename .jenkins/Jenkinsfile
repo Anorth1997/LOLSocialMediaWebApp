@@ -29,6 +29,7 @@ pipeline {
             steps {
                 echo "$ref"
                 echo "$x_github_event"
+                echo "hei"
             }
         }
 
