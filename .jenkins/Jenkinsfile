@@ -23,6 +23,7 @@ pipeline {
         }
     }
     post {
+        agent any
         always {
             echo 'Finished Job, delete workspace directories'
             deleteDir()
