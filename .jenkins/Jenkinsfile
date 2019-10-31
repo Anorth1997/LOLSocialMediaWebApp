@@ -18,6 +18,9 @@ node {
                 git checkout master
                 git pull
             '''
+            docker.image('node:12.13.0-alpine') {
+                sh 'node -v'
+            }
         }
     }
 
