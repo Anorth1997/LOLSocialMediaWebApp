@@ -22,7 +22,7 @@ pipeline {
              silentResponse: false,
 
              regexpFilterText: '$ref',
-             regexpFilterExpression: '^(refs/heads/webhook)$'
+             regexpFilterExpression: '^(refs/heads/master)$'
         )
     }
     stages {
