@@ -26,13 +26,6 @@ pipeline {
         )
     }
     stages {
-        stage('check trigger vars') {
-            steps {
-                echo "$ref"
-                echo "$x_github_event"
-            }
-        }
-
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
