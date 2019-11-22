@@ -29,7 +29,6 @@ pipeline {
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
-                echo "${currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)}"
                 echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}"
                 echo "${currentBuild.buildCauses}"
                 echo sh(returnStdout: true, script: 'env')
