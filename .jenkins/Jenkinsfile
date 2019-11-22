@@ -33,6 +33,7 @@ pipeline {
                 echo "${currentBuild.getBuildCauses('jenkins.branch.BranchEventCause')}"
                 echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}"
                 echo "${currentBuild.buildCauses}"
+                echo sh(returnStdout: true, script: 'currentBuild')
                 echo sh(returnStdout: true, script: 'env')
                 sh 'npm --version'
                 sh 'node --version'
