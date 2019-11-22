@@ -30,10 +30,7 @@ pipeline {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
                 echo "${currentBuild}"
-                echo "${currentBuild.getBuildCauses('jenkins.branch.BranchEventCause')}"
-                echo "${currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause')}"
-                echo "${currentBuild.buildCauses}"
-                echo sh(returnStdout: true, script: 'currentBuild')
+                echo "${currentBuild.buildCauses[0].shortDescription}"
                 echo sh(returnStdout: true, script: 'env')
                 sh 'npm --version'
                 sh 'node --version'
