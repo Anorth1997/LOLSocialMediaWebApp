@@ -26,13 +26,13 @@ pipeline {
         )
     }
     stages {
-        when {
-            expression {
-                currentBuild.buildCauses[0].shortDescription != "Branch indexing"
-            }
-        }
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 echo "${currentBuild.buildCauses[0].shortDescription}"
                 echo sh(returnStdout: true, script: 'env')
