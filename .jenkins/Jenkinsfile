@@ -26,6 +26,11 @@ pipeline {
         )
     }
     stages {
+        when {
+            expression {
+                currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+            }
+        }
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
