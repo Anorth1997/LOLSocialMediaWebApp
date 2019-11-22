@@ -29,6 +29,7 @@ pipeline {
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
             steps {
+                echo sh(returnStdout: true, script: 'env')
                 sh 'npm --version'
                 sh 'node --version'
                 sh 'ls'
