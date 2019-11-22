@@ -28,6 +28,11 @@ pipeline {
     stages {
         stage('build') {
             agent { docker { image 'node:12.13.0-alpine' } }
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 echo "${currentBuild.buildCauses[0].shortDescription}"
                 echo sh(returnStdout: true, script: 'env')
@@ -38,24 +43,44 @@ pipeline {
         }
 
         stage('Staging approval') {
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 input "Push to staging??"
             }
         }
 
         stage('Staging') {
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 echo "staging"
             }
         }
         
         stage('Production approval') {
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 input "Push to production?"
             }
         }
         
         stage('Deploy') {
+            when {
+                expression {
+                    currentBuild.buildCauses[0].shortDescription != "Branch indexing"
+                }
+            }
             steps {
                 echo "Deploying"
             }
